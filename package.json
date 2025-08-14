@@ -1,0 +1,16 @@
+{
+  "name": "personal-web",
+  "version": "1.0.0",
+  "description": "Yue's Personal Homepage - Pixel Art RPG Style",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2"
+  },
+  "keywords": ["personal", "homepage", "pixel-art", "rpg"],
+  "author": "Yue",
+  "license": "MIT"
+} 

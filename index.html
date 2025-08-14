@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yue's Homepage</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div id="star-bg"></div>
+  <div id="loading-overlay">
+    <div class="loading-content">
+      <div class="loading-icon">⚡</div>
+      <div class="loading-text">Loading...</div>
+    </div>
+  </div>
+  <div id="main">
+    <div id="left">
+      <img src="assets/cake.png" id="cake" alt="Pixel Cake">
+    </div>
+    <div id="right">
+      <div id="intro-dialog" class="pixel-dialog">
+        <!-- <span id="intro-text">Hi! I am Yue.</span> -->
+        <span id="intro-text"></span><span class="blinking-cursor">|</span>
+        <button id="intro-arrow" style="position:absolute;right:12px;bottom:8px;background:transparent;border:none;cursor:pointer;font-size:1.2em;font-weight:bold;"><b>&#8595;</b></button>
+      </div>
+      <div id="menu-panel" class="pixel-menu">
+        <button data-page="education">&#9654; Education</button>
+        <button data-page="projects">&#9654; Project Experience</button>
+        <button data-page="professional">&#9654; Professional Experience</button>
+        <button data-page="skills">&#9654; Skills</button>
+        <button data-page="contact">&#9654; Contact</button>
+      </div>
+    </div>
+  </div>
+  <section id="education" class="page-section hidden">
+    <div class="edu-title-pixel">EDUCATION</div>
+    <div class="edu-inventory">
+      <div class="edu-inventory-grid edu-inventory-flow">
+        <div class="edu-inventory-item" data-key="tongji" title="Tongji University"><img src="assets/logo_tju.png" alt="TJU Logo" class="edu-inventory-logo"><div class="edu-inventory-label">TJU</div></div>
+        <div class="edu-arrow-pixel"></div>
+        <div class="edu-ku-marker">
+          <div class="ku-marker-label">I am here!</div>
+          <div class="ku-marker-arrow"></div>
+          <div class="edu-inventory-item" data-key="cph" title="University of Copenhagen"><img src="assets/logo_ku.png" alt="KU Logo" class="edu-inventory-logo"><div class="edu-inventory-label">KU/UCPH</div></div>
+        </div>
+        <div class="edu-arrow-pixel"></div>
+        <div class="edu-inventory-item" data-key="mystery" title="???">?<div class="edu-inventory-label">???</div></div>
+      </div>
+    </div>
+    <div id="edu-detail-tongji" class="edu-detail-modal">
+      <button class="edu-detail-close">×</button>
+      <div class="edu-detail-header-left">
+        <div class="edu-card-title">Tongji University</div>
+        <div class="edu-card-sub">B.Sc. in Information Management and Information System<br>(09/2019 – 07/2023)</div>
+      </div>
+      <div class="edu-card-desc"><br><b>Thesis:</b> Video Conference User Needs Analysis via Text Mining<br><br><b>Projects:</b> Skincare Recommendation System, MRP System<br><br><b>Highlights:</b> Solid foundation in information systems, data analysis, and software engineering.</div>
+    </div>
+    <div id="edu-detail-cph" class="edu-detail-modal">
+      <button class="edu-detail-close">×</button>
+      <div class="edu-detail-header-left">
+        <div class="edu-card-title">University of Copenhagen</div>
+        <div class="edu-card-sub">M.Sc. in Computer Science<br>(09/2023 – Present)</div>
+      </div>
+      <div class="edu-card-desc"><br><b>Thesis:</b> Not Alone, Just Apart: Designing PurrPost to Mitigate Pet-Owner Separation Anxiety<br><br><b>Courses:</b> Advanced Topics in Human-Centered Computing, Designing Collaborative Technologies, Critical Making, Machine Learning A, Deep Learning<br><br><b>Highlights:</b> Focus on HCI, collaborative systems, and AI. Engaged in research-driven coursework and group projects.</div>
+    </div>
+    <div id="edu-detail-mystery" class="edu-detail-modal">
+      <button class="edu-detail-close">×</button>
+      <div class="edu-detail-header-left">
+        <div class="edu-card-title">???</div>
+        <div class="edu-card-sub">???</div>
+      </div>
+      <div class="edu-card-desc">???</div>
+    </div>
+  </section>
+  <section id="projects" class="page-section hidden">
+    <div class="edu-title-pixel">PROJECT EXPERIENCE</div>
+    <div class="project-lab-bg"></div>
+    <div class="project-inventory">
+      <div class="project-icons">
+        <div class="project-icon" data-project="purrpost" title="PurrPost"><img src="assets/icon_cat.png" alt="Cat Icon" class="project-icon-img"><div class="project-label">PurrPost</div></div>
+        <div class="project-icon" data-project="maskingball" title="Masking Ball">
+          🎭<div class="project-label">Masking Ball</div>
+        </div>
+        <div class="project-icon" data-project="turnband" title="Turn-Taking Band">
+          🎸<div class="project-label">Turn-Taking Band</div>
+        </div>
+        <div class="project-icon" data-project="makiwara" title="Makiwara DB/Device">
+          💾<div class="project-label">Makiwara</div>
+        </div>
+      </div>
+      <div class="project-detail-panel" id="project-detail-panel">
+        <div class="project-detail-placeholder">Click a project icon to view details</div>
+      </div>
+    </div>
+  </section>
+  <section id="skills" class="page-section hidden">
+    <div class="edu-title-pixel">SKILLS</div>
+    <div class="skills-room-bg"></div>
+    <div class="skills-content">
+      <div class="skills-lang-block">
+        <div class="edu-card-title skills-lang-title">Languages</div>
+        <div class="skills-lang-bars">
+          <div class="skill-lang-row">English <span class="skill-bar">
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+          </span></div>
+          <div class="skill-lang-row">Chinese <span class="skill-bar">
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+          </span></div>
+          <div class="skill-lang-row">Danish <span class="skill-bar">
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+          </span></div>
+          <div class="skill-lang-row">Japanese <span class="skill-bar">
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+          </span></div>
+        </div>
+      </div>
+      <div class="skills-icons">
+        <div class="skill-icon" data-skill="python">🐍<span class="skill-tooltip">Python: Expert</span></div>
+        <div class="skill-icon" data-skill="java">☕️<span class="skill-tooltip">Java: Advanced</span></div>
+        <div class="skill-icon" data-skill="cpp">💻<span class="skill-tooltip">C++: Advanced</span></div>
+        <div class="skill-icon" data-skill="js">🌐<span class="skill-tooltip">JavaScript: Advanced</span></div>
+        <div class="skill-icon" data-skill="arduino">🤖<span class="skill-tooltip">Arduino: Intermediate</span></div>
+      </div>
+    </div>
+    <div id="skill-modal-python" class="skill-modal">
+      <button class="skill-modal-close">×</button>
+      <div class="edu-card-title">Python</div>
+      <div class="edu-card-desc">Expert in data analysis, web development, automation, and AI prototyping. Used in most academic and personal projects.</div>
+    </div>
+    <div id="skill-modal-java" class="skill-modal">
+      <button class="skill-modal-close">×</button>
+      <div class="edu-card-title">Java</div>
+      <div class="edu-card-desc">Advanced in OOP, backend development, and Android. Used in university and enterprise projects.</div>
+    </div>
+    <div id="skill-modal-cpp" class="skill-modal">
+      <button class="skill-modal-close">×</button>
+      <div class="edu-card-title">C++</div>
+      <div class="edu-card-desc">Advanced in algorithms, data structures, and embedded systems. Used for performance-critical tasks.</div>
+    </div>
+    <div id="skill-modal-js" class="skill-modal">
+      <button class="skill-modal-close">×</button>
+      <div class="edu-card-title">JavaScript</div>
+      <div class="edu-card-desc">Advanced in web development, interactive UI, and creative coding. Used for personal web and HCI projects.</div>
+    </div>
+    <div id="skill-modal-arduino" class="skill-modal">
+      <button class="skill-modal-close">×</button>
+      <div class="edu-card-title">Arduino</div>
+      <div class="edu-card-desc">Intermediate in hardware prototyping, sensors, and IoT. Used in creative and research projects.</div>
+    </div>
+  </section>
+  <section id="contact" class="page-section hidden">
+    <div class="edu-title-pixel">CONTACT</div>
+    <div class="contact-subtitle-pixel">Feel free to reach out to me!</div>
+    <div class="contact-room-bg"></div>
+    <div class="contact-content">
+      <div class="contact-icons">
+        <div class="contact-icon" id="contact-mail" title="Write Email">📧 <div class="contact-label">Email</div></div>
+        <a class="contact-icon" id="contact-linkedin" title="LinkedIn" href="https://linkedin.com/in/yueshi0101" target="_blank">🌐 <div class="contact-label">LinkedIn</div></a>
+      </div>
+      <div class="contact-info">
+        <div><b>📧 Email:</b> <a href="mailto:shiyue0101@outlook.com">shiyue0101@outlook.com</a></div>
+        <div><b>📞 Phone:</b> <a href="tel:+4591817770">+45 
+          91817770</a></div>
+        <div><b>🌐 LinkedIn:</b> <a href="https://linkedin.com/in/yueshi0101" target="_blank">linkedin.com/in/yueshi0101</a></div>
+      </div>
+    </div>
+    <div id="contact-modal-mail" class="contact-modal">
+      <button class="contact-modal-close">×</button>
+      <div class="edu-card-title">Write to Yue</div>
+      <form class="contact-mail-form" onsubmit="return false;">
+        <input type="text" placeholder="Your Name" required>
+        <input type="email" placeholder="Your Email" required>
+        <textarea rows="4" placeholder="Message" required></textarea>
+        <button type="submit">Send (Simulated)</button>
+      </form>
+      <div class="edu-card-desc" style="margin-top:10px;color:#888;">* This is a simulated RPG mail window. Please use the real email above to contact Yue.</div>
+    </div>
+  </section>
+  <section id="professional" class="page-section hidden">
+    <div class="edu-title-pixel">PROFESSIONAL EXPERIENCE</div>
+    <div class="prof-container">
+      <div class="prof-list">
+        <div class="prof-list-item selected" data-key="cph">University of Copenhagen<br><span class="prof-list-sub">Teaching Assistant</span></div>
+        <div class="prof-list-item" data-key="bili">Shanghai Bilibili Technology Ltd<br><span class="prof-list-sub">Front-end Intern</span></div>
+        <div class="prof-list-item" data-key="tongji">Tongji University Art Centre<br><span class="prof-list-sub">Art Centre Assistant</span></div>
+      </div>
+      <div class="prof-detail-panel" id="prof-detail-panel">
+        <div class="prof-detail-title">University of Copenhagen, Department of Computer Science<br><span class="prof-detail-date">02/2025 – 04/2025</span></div>
+        <div class="prof-detail-role">Part-Time, Teaching Assistant for Advanced Topics in Human-Centered Computing</div>
+        <ul class="prof-detail-desc">
+          <li>Supported students by discussing course topics and answering questions during class sessions and office hours</li>
+          <li>Co-graded and provided detailed feedback on 4 assignments for 43 students in collaboration with another teaching assistant</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <div id="crt-flash" class="hidden"></div>
+  <button id="back-btn" class="pixel-btn">&#8592;</button>
+  <button id="gear-btn" class="pixel-btn">&#9881;</button>
+  <script src="main.js"></script>
+  <div id="typewriter-tip">Tip: Press Ctrl (⌃) to instantly show all text.</div>
+</body>
+</html> 
