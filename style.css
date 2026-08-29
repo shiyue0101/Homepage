@@ -224,35 +224,6 @@ body {
   z-index: 20;
   overflow-y: auto;
 }
-.edu-classroom-bg, .edu-blackboard, .edu-projector, .edu-desk-row, .edu-chair {
-  display: none !important;
-}
-.edu-content {
-  position: relative;
-  z-index: 3;
-  margin-top: 120px;
-  display: flex;
-  flex-direction: column;
-  gap: 40px;
-  align-items: center;
-}
-.edu-card {
-  background: #fffbe8;
-  border: 3px solid #222;
-  border-radius: 10px;
-  box-shadow: 0 0 0 4px #e6d8b8, 0 0 8px #0004;
-  padding: 28px 36px;
-  min-width: 320px;
-  max-width: 420px;
-  font-size: 1rem;
-  cursor: pointer;
-  transition: box-shadow 0.2s, background 0.2s;
-  position: relative;
-}
-.edu-card:hover {
-  background: #ffe066;
-  box-shadow: 0 0 16px #ff0a;
-}
 .edu-card-title {
   font-weight: bold;
   font-size: 1.1rem;
@@ -290,61 +261,12 @@ body {
   display: block;
   animation: fadeIn 0.4s;
 }
-.edu-detail-header {
-  margin-top: 24px;
-  margin-bottom: 8px;
-  position: relative;
-  display: flex;
-  flex-direction: row;
-  align-items: flex-start;
-  justify-content: space-between;
-}
 .edu-detail-header-left {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   flex: 1 1 auto;
   min-width: 0;
-}
-.edu-detail-header .edu-card-title {
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin-bottom: 2px;
-  margin-right: 0;
-  line-height: 1.2;
-  overflow: hidden;
-  word-break: break-word;
-}
-.edu-detail-header .edu-card-sub {
-  font-size: 1rem;
-  color: #444;
-  margin-bottom: 0;
-  margin-top: 0;
-  line-height: 1.2;
-  word-break: break-word;
-}
-.edu-detail-header .edu-detail-logo {
-  width: 56px;
-  height: 56px;
-  object-fit: contain;
-  margin-left: 18px;
-  margin-bottom: 0;
-  background: none;
-  display: block;
-  flex-shrink: 0;
-}
-.edu-detail-header .edu-detail-logo[style] {
-  font-size: 48px !important;
-  width: 56px;
-  height: 56px;
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-}
-.edu-detail-header::after {
-  content: "";
-  display: table;
-  clear: both;
 }
 .edu-detail-modal .edu-card-title {
   color: #222;
@@ -373,26 +295,11 @@ body {
 .edu-detail-close:hover {
   background: #ffb700;
 }
-.edu-detail-logo {
-  width: 80px;
-  height: 80px;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto 18px auto;
-  /* border-radius: 12px; */
-  /* background: #fffbe8; */
-}
-.edu-detail-modal .edu-detail-logo {
-  text-align: center;
-}
 @media (max-width: 600px) {
-  .edu-card, .edu-detail-modal {
+  .edu-detail-modal {
     min-width: 90vw;
     padding: 16px 8px;
     font-size: 0.9rem;
-  }
-  .edu-content {
-    margin-top: 40px;
   }
 }
 #projects.page-section {
@@ -405,12 +312,6 @@ body {
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: 20;
   overflow-y: auto;
-}
-.project-lab-bg {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 1;
-  pointer-events: none;
 }
 .project-icons {
   flex: 1.5;
@@ -476,53 +377,6 @@ body {
 .project-icon:hover .project-label {
   opacity: 1;
 }
-.project-modal {
-  position: fixed;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%,-50%);
-  background: #fff;
-  border: 4px solid #222;
-  border-radius: 12px;
-  box-shadow: 0 0 0 6px #e6d8b8, 0 0 24px #000a;
-  z-index: 1001;
-  min-width: 320px;
-  max-width: 520px;
-  width: 520px;
-  padding: 32px 36px 24px 36px;
-  font-size: 1rem;
-  display: none;
-  color: #222;
-}
-.project-modal.active {
-  display: block;
-  animation: fadeIn 0.4s;
-}
-.project-modal-close {
-  position: absolute;
-  top: 12px;
-  right: 18px;
-  background: #ffe066;
-  border: 2px solid #222;
-  border-radius: 50%;
-  width: 32px;
-  height: 32px;
-  font-size: 1.1rem;
-  cursor: pointer;
-  box-shadow: 1px 1px 0 #888;
-}
-.project-modal-close:hover {
-  background: #ffb700;
-}
-.project-modal .edu-card-title {
-  color: #222;
-}
-.project-modal .edu-card-sub {
-  color: #444;
-}
-.project-modal .edu-card-desc {
-  color: #555;
-}
 @media (max-width: 600px) {
   .project-icons {
     gap: 18px;
@@ -538,11 +392,6 @@ body {
     padding: 2px 8px;
     bottom: -24px;
   }
-  .project-modal {
-    min-width: 90vw;
-    padding: 16px 8px;
-    font-size: 0.9rem;
-  }
 }
 #skills.page-section {
   background: transparent;
@@ -554,12 +403,6 @@ body {
   top: 0; left: 0; right: 0; bottom: 0;
   z-index: 20;
   overflow-y: auto;
-}
-.skills-room-bg {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 1;
-  pointer-events: none;
 }
 .skills-content {
   position: relative;
@@ -608,29 +451,6 @@ body {
 .skill-bar {
   display: flex;
   gap: 2px;
-}
-.skill-star {
-  font-size: 1.2em;
-  color: #ffe066;
-  filter: drop-shadow(0 0 2px #fff8);
-}
-.skill-star.empty {
-  color: #888;
-  filter: none;
-}
-.skill-star.half {
-  position: relative;
-  display: inline-block;
-  color: #ffe066;
-}
-.skill-star.half::after {
-  content: '★';
-  color: #888;
-  position: absolute;
-  left: 50%;
-  width: 50%;
-  overflow: hidden;
-  top: 0;
 }
 .skills-icons {
   display: flex;
@@ -755,12 +575,6 @@ body {
   z-index: 20;
   overflow-y: auto;
 }
-.contact-room-bg {
-  position: absolute;
-  top: 0; left: 0; right: 0; bottom: 0;
-  z-index: 1;
-  pointer-events: none;
-}
 .contact-content {
   position: relative;
   z-index: 2;
@@ -824,7 +638,7 @@ body {
   color: #ffe066;
   text-decoration: underline;
 }
-.contact-modal, .contact-easter {
+.contact-modal {
   position: fixed;
   left: 50%;
   top: 50%;
@@ -840,11 +654,11 @@ body {
   font-size: 1rem;
   display: none;
 }
-.contact-modal.active, .contact-easter.active {
+.contact-modal.active {
   display: block;
   animation: fadeIn 0.4s;
 }
-.contact-modal-close, .contact-easter-close {
+.contact-modal-close {
   position: absolute;
   top: 12px;
   right: 18px;
@@ -857,7 +671,7 @@ body {
   cursor: pointer;
   box-shadow: 1px 1px 0 #888;
 }
-.contact-modal-close:hover, .contact-easter-close:hover {
+.contact-modal-close:hover {
   background: #ffb700;
 }
 .contact-mail-form {
@@ -905,7 +719,7 @@ body {
     font-size: 0.95rem;
     min-width: 90vw;
   }
-  .contact-modal, .contact-easter {
+  .contact-modal {
     min-width: 90vw;
     padding: 16px 8px;
     font-size: 0.9rem;
@@ -931,7 +745,7 @@ body {
   background: none;
   gap: 40px;
 }
-.edu-inventory-grid, .edu-detail-panel {
+.edu-inventory-grid {
   min-width: 320px;
   max-width: 340px;
   width: 340px;
@@ -951,34 +765,6 @@ body {
   padding: 0;
   min-height: 320px;
   margin-right: 0;
-}
-.edu-detail-panel {
-  flex: 1.2;
-  background: #23243a;
-  border: 3px solid #fff;
-  border-radius: 14px;
-  box-shadow: 0 0 0 4px #333, 0 0 8px #0008;
-  margin-right: 32px;
-  padding: 36px 32px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  min-height: 320px;
-  color: #e6e6e6;
-  font-size: 1.05rem;
-  position: relative;
-  min-width: 420px;
-  max-width: 480px;
-  max-height: 340px;
-  box-sizing: border-box;
-  overflow-y: auto;
-}
-.edu-detail-placeholder {
-  color: #bbb;
-  font-size: 1.05rem;
-  text-align: center;
-  margin-top: 40px;
 }
 .edu-inventory-item {
   background: #fffbe8;
@@ -1032,7 +818,7 @@ body {
     align-items: center;
     height: auto;
   }
-  .edu-detail-panel, .edu-inventory-grid {
+  .edu-inventory-grid {
     margin: 0 0 18px 0;
     min-width: 90vw;
     max-width: 98vw;
@@ -1445,29 +1231,6 @@ body {
   left: 0;
   filter: drop-shadow(1px 0 #222);
 }
-.edu-inventory-mystery {
-  cursor: default !important;
-  pointer-events: none;
-  background: #fff;
-  color: #222;
-  border-style: dashed;
-}
-.edu-inventory-mystery .edu-inventory-label {
-  color: #888;
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.edu-inventory-mystery:hover .edu-inventory-label {
-  opacity: 1;
-  color: #ffe066;
-}
-.edu-inventory-mystery.selected .edu-inventory-label {
-  opacity: 1;
-}
-.edu-inventory-mystery:hover {
-  background: #fffbe8;
-  box-shadow: 0 0 8px #8884;
-}
 .edu-inventory-logo {
   width: 80px;
   height: 80px;
@@ -1506,11 +1269,6 @@ body {
   margin-bottom: 0;
   text-shadow: 1px 1px 0 #222, 2px 2px 0 #0008;
   letter-spacing: 1px;
-  animation: ku-blink 1.2s steps(1) infinite;
-}
-@keyframes ku-blink {
-  0%, 60% { opacity: 1; }
-  70%, 100% { opacity: 0.25; }
 }
 .ku-marker-arrow {
   top: -45px;
