@@ -199,11 +199,8 @@ function showSection(page, push = false) {
     } else if (page === 'projects') {
       // 进入Project Experience页面时重置选中状态和详情面板
       const projectIcons = document.querySelectorAll('.project-icon');
-      const projectPanel = document.getElementById('project-detail-panel');
       projectIcons.forEach(i => i.classList.remove('selected'));
-      if (projectPanel) {
-        projectPanel.innerHTML = '<div class="project-detail-placeholder">Click a project icon to view details</div>';
-      }
+      resetProjectPanel();
     }
 
     crtFlash.classList.remove('active');
@@ -336,14 +333,29 @@ const projectDetails = {
 };
 const projectIcons = document.querySelectorAll('.project-icon');
 const projectPanel = document.getElementById('project-detail-panel');
+
+function updateProjectScrollbar() {
+  if (!projectPanel) return;
+
+  projectPanel.scrollTop = 0;
+  projectPanel.classList.remove('is-scrollable');
+  projectPanel.classList.toggle('is-scrollable', projectPanel.scrollHeight > projectPanel.clientHeight);
+}
+
+function resetProjectPanel() {
+  if (!projectPanel) return;
+
+  projectPanel.innerHTML = '<div class="project-detail-placeholder">Click a project icon to view details</div>';
+  updateProjectScrollbar();
+}
+
 if (projectIcons.length && projectPanel) {
   projectIcons.forEach(icon => {
     icon.addEventListener('click', () => {
       const isSelected = icon.classList.contains('selected');
       projectIcons.forEach(i => i.classList.remove('selected'));
       if (isSelected) {
-        // Deselect and clear panel
-        projectPanel.innerHTML = '<div class="project-detail-placeholder">Click a project icon to view details</div>';
+        resetProjectPanel();
       } else {
         icon.classList.add('selected');
         const key = icon.getAttribute('data-project');
@@ -353,6 +365,7 @@ if (projectIcons.length && projectPanel) {
             `<div class='project-detail-title'>${d.title}</div>` +
             `<div class='project-detail-sub'>${d.sub}</div>` +
             `<div class='project-detail-desc'>${d.desc}</div>`;
+          updateProjectScrollbar();
         }
       }
     });
