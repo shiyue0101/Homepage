@@ -1384,8 +1384,10 @@ body {
 }
 .site-brand {
   flex-shrink: 0;
-  font-size: 1.4rem;
-  font-weight: bold;
+  font-family: Georgia, 'Times New Roman', serif;
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: normal;
   color: var(--accent);
   text-decoration: none;
 }
