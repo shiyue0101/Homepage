@@ -136,7 +136,29 @@ function hideLoading(delay = 0) {
   }, delay);
 }
 
+function updateNavigation(page) {
+  document.querySelectorAll('[data-nav-page]').forEach(link => {
+    if (link.dataset.navPage === page) {
+      link.setAttribute('aria-current', 'page');
+    } else {
+      link.removeAttribute('aria-current');
+    }
+  });
+}
+
+document.querySelector('.site-header').addEventListener('click', event => {
+  const link = event.target.closest('a[data-nav-page]');
+  if (!link || event.button !== 0 || event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+  event.preventDefault();
+  if (link.dataset.navPage === 'home') {
+    showHome({ push: true, transition: true });
+  } else {
+    showSection(link.dataset.navPage, true);
+  }
+});
+
 function applyHomeState() {
+  updateNavigation('home');
   document.getElementById('main').style.display = 'flex';
   Object.values(sections).forEach(section => {
     section.classList.remove('active');
@@ -191,6 +213,8 @@ function showSection(page, push = false) {
       sec.classList.remove('active');
       sec.classList.add('hidden');
     });
+    updateNavigation(page);
+    document.getElementById('main').style.display = 'none';
     sections[page].classList.add('active');
     sections[page].classList.remove('hidden');
     document.getElementById('typewriter-tip').style.display = 'none';
@@ -260,7 +284,7 @@ document.getElementById('gear-btn').addEventListener('click', () => {
 
 // 像素星星样式
 const style = document.createElement('style');
-style.innerHTML = `.star {position: absolute; background: #fff; border-radius: 50%; opacity: .8;}`;
+style.innerHTML = `.star {position: absolute; background: var(--accent); border-radius: 50%; opacity: .22;}`;
 document.head.appendChild(style);
 
 // Education 弹窗交互：只在页面初始化时绑定一次
