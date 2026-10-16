@@ -297,7 +297,7 @@ const professionalDetails = {
   cph: {
     title: 'University of Copenhagen, Department of Computer Science',
     date: '02/2025 – 04/2025',
-    role: 'Part-Time, Teaching Assistant for Advanced Topics in Human-Centered Computing',
+    role: 'Teaching Assistant for Advanced Topics in Human-Centered Computing',
     desc: [
       'Supported students by discussing course topics and answering questions during class sessions and office hours',
       'Co-graded and provided detailed feedback on 4 assignments for 43 students in collaboration with another teaching assistant'
