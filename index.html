@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yue's Homepage</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="/style.css">
 </head>
 <body>
   <header class="site-header">
@@ -26,7 +26,7 @@
   </div>
   <div id="main">
     <div id="left">
-      <img src="assets/cake.png" id="cake" alt="Pixel Cake">
+      <img src="/assets/cake.png" id="cake" alt="Pixel Cake">
     </div>
     <div id="right">
       <div id="intro-dialog" class="pixel-dialog">
@@ -47,10 +47,10 @@
     <div class="edu-title-pixel">EDUCATION</div>
     <div class="edu-inventory">
       <div class="edu-inventory-grid edu-inventory-flow">
-        <div class="edu-inventory-item" data-key="tongji" title="Tongji University"><img src="assets/logo_tju.png" alt="TJU Logo" class="edu-inventory-logo"><div class="edu-inventory-label">TJU</div></div>
+        <div class="edu-inventory-item" data-key="tongji" title="Tongji University"><img src="/assets/logo_tju.png" alt="TJU Logo" class="edu-inventory-logo"><div class="edu-inventory-label">TJU</div></div>
         <div class="edu-arrow-pixel"></div>
         <div class="edu-ku-marker">
-          <div class="edu-inventory-item" data-key="cph" title="University of Copenhagen"><img src="assets/logo_ku.png" alt="KU Logo" class="edu-inventory-logo"><div class="edu-inventory-label">KU/UCPH</div></div>
+          <div class="edu-inventory-item" data-key="cph" title="University of Copenhagen"><img src="/assets/logo_ku.png" alt="KU Logo" class="edu-inventory-logo"><div class="edu-inventory-label">KU/UCPH</div></div>
         </div>
         <div class="edu-arrow-pixel edu-current-arrow">
           <div class="ku-marker-label">I am here!</div>
@@ -84,24 +84,16 @@
       <div class="edu-card-desc">???</div>
     </div>
   </section>
-  <section id="projects" class="page-section hidden">
-    <div class="edu-title-pixel">PROJECT EXPERIENCE</div>
-    <div class="project-inventory">
-      <div class="project-icons">
-        <div class="project-icon" data-project="purrpost" title="PurrPost"><img src="assets/icon_cat.png" alt="Cat Icon" class="project-icon-img"><div class="project-label">PurrPost</div></div>
-        <div class="project-icon" data-project="maskingball" title="Masking Ball">
-          🎭<div class="project-label">Masking Ball</div>
+  <section id="projects" class="page-section hidden" aria-label="Projects">
+    <div class="projects-grid">
+      <a class="project-card" href="/projects/purrpost.html" aria-label="Not Alone, Just Apart — View the PurrPost project">
+        <img src="/assets/purrpost-cover.jpg" alt="PurrPost concept sketch showing voice messages between a phone and a connected cat bed" width="1600" height="1600">
+        <div class="project-card-overlay">
+          <h2>Not Alone, Just Apart</h2>
+          <p class="project-card-subtitle">Designing PurrPost to Mitigate Pet-Owner Separation Anxiety</p>
+          <p class="project-card-duration">01/2025 – 06/2025</p>
         </div>
-        <div class="project-icon" data-project="turnband" title="Turn-Taking Band">
-          🎸<div class="project-label">Turn-Taking Band</div>
-        </div>
-        <div class="project-icon" data-project="makiwara" title="Makiwara DB/Device">
-          💾<div class="project-label">Makiwara</div>
-        </div>
-      </div>
-      <div class="project-detail-panel" id="project-detail-panel">
-        <div class="project-detail-placeholder">Click a project icon to view details</div>
-      </div>
+      </a>
     </div>
   </section>
   <section id="skills" class="page-section hidden">
@@ -226,7 +218,7 @@
   <div id="crt-flash" class="hidden"></div>
   <button id="back-btn" class="pixel-btn">&#8592;</button>
   <button id="gear-btn" class="pixel-btn">&#9881;</button>
-  <script src="main.js"></script>
+  <script src="/main.js"></script>
   <div id="typewriter-tip">Tip: Press Ctrl (⌃) to instantly show all text.</div>
 </body>
 </html>

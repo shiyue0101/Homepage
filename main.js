@@ -220,11 +220,7 @@ function showSection(page, push = false) {
     document.getElementById('typewriter-tip').style.display = 'none';
     if (page === 'professional') {
       updateProfessionalScrollbar();
-    } else if (page === 'projects') {
-      // 进入Project Experience页面时重置选中状态和详情面板
-      const projectIcons = document.querySelectorAll('.project-icon');
-      projectIcons.forEach(i => i.classList.remove('selected'));
-      resetProjectPanel();
+
     }
 
     crtFlash.classList.remove('active');
@@ -256,7 +252,7 @@ backBtn.addEventListener('click', () => {
 
 // 路由处理
 function handleRoute() {
-  const path = window.location.pathname;
+  const path = window.location.pathname.replace(/\/+$/, '') || '/';
   const page = pathToPage[path] || 'home';
 
   if (page === 'home') {
@@ -284,7 +280,7 @@ document.getElementById('gear-btn').addEventListener('click', () => {
 
 // 像素星星样式
 const style = document.createElement('style');
-style.innerHTML = `.star {position: absolute; background: var(--accent); border-radius: 50%; opacity: .22;}`;
+style.innerHTML = `.star {position: absolute; background: #fff; border-radius: 50%; opacity: .8;}`;
 document.head.appendChild(style);
 
 // Education 弹窗交互：只在页面初始化时绑定一次
@@ -329,70 +325,6 @@ function setupEducation() {
     if (event.target.classList?.contains('edu-detail-modal')) {
       closeEducationModals();
     }
-  });
-}
-
-// Project Experience左右分栏交互
-const projectDetails = {
-  purrpost: {
-    title: 'PurrPost (Remote Pet Interaction)',
-    sub: '2023',
-    desc: 'A system for remote pet interaction, featuring a smart device and playful interface. <br><b>Fun:</b> Click the cat for a meow!'
-  },
-  maskingball: {
-    title: 'Masking Ball',
-    sub: '2022',
-    desc: 'An interactive installation simulating neurodiversity and presence using masks and sensors.<br><b>Fun:</b> Click the mask to spin!'
-  },
-  turnband: {
-    title: 'Turn-Taking Band',
-    sub: '2022',
-    desc: 'A wearable for supporting communication in hybrid work, visualizing turn-taking cues.<br><b>Fun:</b> Click the guitar for a riff!'
-  },
-  makiwara: {
-    title: 'Makiwara DB & Device',
-    sub: '2021',
-    desc: 'Database and hardware improvements for martial arts training devices.<br><b>Fun:</b> Click the disk for a bounce!'
-  }
-};
-const projectIcons = document.querySelectorAll('.project-icon');
-const projectPanel = document.getElementById('project-detail-panel');
-
-function updateProjectScrollbar() {
-  if (!projectPanel) return;
-
-  projectPanel.scrollTop = 0;
-  projectPanel.classList.remove('is-scrollable');
-  projectPanel.classList.toggle('is-scrollable', projectPanel.scrollHeight > projectPanel.clientHeight);
-}
-
-function resetProjectPanel() {
-  if (!projectPanel) return;
-
-  projectPanel.innerHTML = '<div class="project-detail-placeholder">Click a project icon to view details</div>';
-  updateProjectScrollbar();
-}
-
-if (projectIcons.length && projectPanel) {
-  projectIcons.forEach(icon => {
-    icon.addEventListener('click', () => {
-      const isSelected = icon.classList.contains('selected');
-      projectIcons.forEach(i => i.classList.remove('selected'));
-      if (isSelected) {
-        resetProjectPanel();
-      } else {
-        icon.classList.add('selected');
-        const key = icon.getAttribute('data-project');
-        const d = projectDetails[key];
-        if (d) {
-          projectPanel.innerHTML =
-            `<div class='project-detail-title'>${d.title}</div>` +
-            `<div class='project-detail-sub'>${d.sub}</div>` +
-            `<div class='project-detail-desc'>${d.desc}</div>`;
-          updateProjectScrollbar();
-        }
-      }
-    });
   });
 }
 
