@@ -14,13 +14,18 @@ createStars();
 
 // A single greeting; page navigation is handled by the header.
 document.addEventListener('DOMContentLoaded', () => {
-  const text = 'Hi! I am Yue.';
+  const text = [
+    'Hi :)',
+    'I am a master’s graduate in Computer Science from the University of Copenhagen, with a focus on Human-Computer Interaction.',
+    'My interests include critical making, social computing, physical prototyping, and animal-computer interaction.',
+    'I am particularly interested in how interactive systems shape people’s understanding, experiences, and relationships in everyday settings, and I enjoy combining empirical studies with design and prototyping.'
+  ].join('\n\n');
   const introText = document.getElementById('intro-text');
   let position = 0;
   const timer = setInterval(() => {
     introText.textContent = text.slice(0, ++position);
     if (position >= text.length) finish();
-  }, 50);
+  }, 15);
   function finish() {
     clearInterval(timer);
     introText.textContent = text;
@@ -38,6 +43,7 @@ const sections = {
   skills: document.getElementById('skills'),
   contact: document.getElementById('contact'),
   professional: document.getElementById('professional'),
+  life: document.getElementById('life'),
 };
 const crtFlash = document.getElementById('crt-flash');
 const backBtn = document.getElementById('back-btn');
@@ -50,6 +56,7 @@ const pathToPage = {
   '/skills': 'skills',
   '/contact': 'contact',
   '/professional': 'professional',
+  '/life': 'life',
 };
 
 function showLoading() {
@@ -141,7 +148,7 @@ function showSection(page, push = false) {
     }
 
     crtFlash.classList.remove('active');
-    backBtn.classList.toggle('visible', !['projects', 'professional', 'contact'].includes(page));
+    backBtn.classList.toggle('visible', !['projects', 'professional', 'contact', 'life'].includes(page));
     document.getElementById('intro-dialog').style.display = 'none';
     document.getElementById('cake').style.display = 'none';
     document.getElementById('typewriter-tip').style.display = 'none';
