@@ -12,98 +12,26 @@ function createStars(num = 120) {
 }
 createStars();
 
-document.addEventListener('DOMContentLoaded', function () {
-  const introBrief = "Hi! I am Yue.";
-  const introDetail = "I am currently a master's student at University of Copenhagen, studying Computer Science. I am particularly interested in human-computer interaction.\n\nWhat do you want to know about me?";
+// A single greeting; page navigation is handled by the header.
+document.addEventListener('DOMContentLoaded', () => {
+  const text = 'Hi! I am Yue.';
   const introText = document.getElementById('intro-text');
-  const introArrow = document.getElementById('intro-arrow');
-  let introState = 0;
-  let typingTimeouts = [];
-  let skipTypewriter = false;
-
-  // 打字机函数，支持 \n -> <br>
-  function typeWriter(text, callback) {
-    clearTypewriter();
-    introText.innerHTML = "";
-    skipTypewriter = false;
-    introArrow.style.visibility = 'hidden';
-
-    const tokens = text.replace(/\n/g, "<br>").match(/<br>|./g);
-
-    function showAll() {
-      clearTypewriter();
-      introText.innerHTML = tokens.join("");
-      introArrow.style.visibility = 'visible';
-      if (callback) callback();
-    }
-
-    // 监听Ctrl键
-    function onKeyDown(e) {
-      if (e.ctrlKey) {
-        skipTypewriter = true;
-        showAll();
-        window.removeEventListener('keydown', onKeyDown);
-      }
-    }
-    window.addEventListener('keydown', onKeyDown);
-
-    tokens.forEach((token, i) => {
-      const timeout = setTimeout(() => {
-        if (skipTypewriter) return;
-        introText.innerHTML += token;
-        if (i === tokens.length - 1 && callback) {
-          window.removeEventListener('keydown', onKeyDown);
-          introArrow.style.visibility = 'visible';
-          callback();
-        }
-      }, i * 50);
-      typingTimeouts.push(timeout);
-    });
+  let position = 0;
+  const timer = setInterval(() => {
+    introText.textContent = text.slice(0, ++position);
+    if (position >= text.length) finish();
+  }, 50);
+  function finish() {
+    clearInterval(timer);
+    introText.textContent = text;
+    window.removeEventListener('keydown', skip);
   }
-
-  function clearTypewriter() {
-    typingTimeouts.forEach(t => clearTimeout(t));
-    typingTimeouts = [];
+  function skip(event) {
+    if (event.ctrlKey) finish();
   }
-
-  // 初始打字显示
-  menuPanel.style.display = 'none';
-  typeWriter(introBrief, () => {
-    introArrow.style.visibility = 'visible';
-    // 不显示菜单（只有在 introDetail 阶段才显示）
-  });
-
-  // 点击箭头切换
-  introArrow.addEventListener('click', () => {
-    if (introState === 0) {
-      menuPanel.style.display = 'none';
-      typeWriter(introDetail, () => {
-        const dialog = document.getElementById('intro-dialog');
-        dialog.classList.add('move-up');
-        setTimeout(() => {
-          menuPanel.style.display = '';
-          dialog.classList.remove('move-up');
-        }, 500);
-        introArrow.style.visibility = 'visible';
-      });
-      introArrow.innerHTML = '<b>&#8593;</b>';
-      introArrow.removeAttribute('title');
-      introState = 1;
-    } else {
-      menuPanel.style.display = 'none';
-      typeWriter(introBrief, () => {
-        introArrow.style.visibility = 'visible';
-        // 不显示菜单
-      });
-      introArrow.innerHTML = '<b>&#8595;</b>';
-      introArrow.removeAttribute('title');
-      introState = 0;
-    }
-  });
+  window.addEventListener('keydown', skip);
 });
 
-// 菜单切换逻辑
-const menuPanel = document.getElementById('menu-panel');
 const sections = {
   education: document.getElementById('education'),
   projects: document.getElementById('projects'),
@@ -166,17 +94,6 @@ function applyHomeState() {
   });
   backBtn.classList.remove('visible');
 
-  const introText = document.getElementById('intro-text');
-  const currentText = introText.textContent || introText.innerText;
-  const isDetailedContent = currentText.includes("currently a master's student") ||
-    currentText.includes('What do you want to know');
-
-  if (isDetailedContent) {
-    menuPanel.style.removeProperty('display');
-  } else {
-    menuPanel.style.display = 'none';
-  }
-
   document.getElementById('intro-dialog').style.removeProperty('display');
   document.getElementById('cake').style.removeProperty('display');
   document.getElementById('typewriter-tip').style.removeProperty('display');
@@ -224,8 +141,7 @@ function showSection(page, push = false) {
     }
 
     crtFlash.classList.remove('active');
-    backBtn.classList.add('visible');
-    menuPanel.style.display = 'none';
+    backBtn.classList.toggle('visible', !['projects', 'professional', 'contact'].includes(page));
     document.getElementById('intro-dialog').style.display = 'none';
     document.getElementById('cake').style.display = 'none';
     document.getElementById('typewriter-tip').style.display = 'none';
@@ -236,15 +152,6 @@ function showSection(page, push = false) {
     hideLoading(300);
   }, 200);
 }
-
-menuPanel.addEventListener('click', e => {
-  if (e.target.tagName === 'BUTTON') {
-    const page = e.target.getAttribute('data-page');
-    if (sections[page]) {
-      showSection(page, true);
-    }
-  }
-});
 
 backBtn.addEventListener('click', () => {
   showHome({ push: true, transition: true });

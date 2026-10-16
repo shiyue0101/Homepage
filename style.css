@@ -1465,7 +1465,7 @@ a { color: var(--accent); }
 body #projects.page-section {
   display: block;
   top: var(--header-height);
-  padding: 88px 3vw 48px;
+  padding: 40px 3vw 48px;
   box-sizing: border-box;
 }
 .projects-grid {
@@ -1533,7 +1533,7 @@ body #projects.page-section {
   .projects-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 24px; }
 }
 @media (max-width: 600px) {
-  body #projects.page-section { padding: 76px 20px 32px; }
+  body #projects.page-section { padding: 28px 20px 32px; }
   .projects-grid { grid-template-columns: 1fr; }
 }
 @media (hover: none) {
@@ -1591,3 +1591,15 @@ body #projects.page-section {
 button, input, textarea, select { font-family: inherit; }
 
 .case-study .case-caption { font-size: 13px; color: var(--muted); margin-top: 10px; }
+
+/* Rebalance pages after removing their back buttons. */
+body #professional.page-section,
+body #contact.page-section {
+  box-sizing: border-box;
+  padding: 24px 0 104px;
+  justify-content: safe center;
+}
+@media (max-width: 600px) {
+  body #professional.page-section,
+  body #contact.page-section { padding: 20px 0 68px; }
+}
