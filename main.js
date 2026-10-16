@@ -284,6 +284,15 @@ window.addEventListener('click', e => {
 
 // Professional Experience 列表交互
 const professionalDetails = {
+    itu: {
+        title: 'IT University of Copenhagen',
+        date: '08/2025 – 12/2025',
+        role: 'Teaching Assistant for Distributed Systems',
+        desc: [
+            'Guided students through weekly exercises and live coding sessions, helping them understand technical concepts and complete programming assignments',
+            'Participated in weekly teaching team meetings to coordinate teaching activities, share observations from grading, and adjust support strategies for students'
+        ]
+    },
   cph: {
     title: 'University of Copenhagen, Department of Computer Science',
     date: '02/2025 – 04/2025',

@@ -1759,3 +1759,105 @@ body #life.page-section {
   #main { padding: calc(var(--header-height) + 28px) 18px 44px; }
   #main #intro-dialog.pixel-dialog { padding: 22px 20px; line-height: 1.65; }
 }
+
+/* EXPERIENCE PAGE REFINEMENT — BEGIN */
+/* 只作用于 Experience 页面，不改动主页/Life 和通用样式 */
+#professional.page-section.active {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  padding: clamp(100px, 14vh, 145px) 28px 55px;
+  box-sizing: border-box;
+  overflow-y: auto;
+}
+
+#professional .prof-container {
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  display: flex;
+  align-items: stretch;
+  gap: 28px;
+}
+
+#professional .prof-list,
+#professional .prof-detail-panel {
+  background: rgba(246, 221, 218, 0.68);
+  border: 1px solid rgba(137, 82, 88, 0.24);
+  border-radius: 18px;
+  box-shadow: 0 9px 26px rgba(91, 49, 57, 0.08);
+  min-height: 390px;
+  max-height: none;
+  height: auto;
+  box-sizing: border-box;
+}
+
+#professional .prof-list {
+  flex: 0 0 330px;
+  width: 330px;
+  padding: 20px 0;
+  margin-right: 0;
+  gap: 12px;
+}
+
+#professional .prof-list-item {
+  padding: 19px 22px;
+  line-height: 1.5;
+}
+
+#professional .prof-detail-panel {
+  flex: 1 1 0;
+  width: auto;
+  min-width: 0;
+  max-width: none;
+  padding: 34px 38px;
+  gap: 20px;
+  overflow-y: visible;
+  line-height: 1.6;
+}
+
+@media (max-width: 760px) {
+  #professional.page-section.active {
+    padding: 96px 18px 38px;
+  }
+  #professional .prof-container {
+    flex-direction: column;
+    gap: 18px;
+  }
+  #professional .prof-list,
+  #professional .prof-detail-panel {
+    width: 100%;
+    min-height: 0;
+  }
+  #professional .prof-list {
+    flex: none;
+    padding: 14px 0;
+  }
+  #professional .prof-detail-panel {
+    flex: none;
+    padding: 26px 24px;
+  }
+}
+/* EXPERIENCE PAGE REFINEMENT — END */
+
+/* EXPERIENCE_GROUPING_LAYOUT_ONLY_START */
+/* Only grouping layout; inherit the site's original color scheme. */
+#professional .prof-list {
+  gap: 5px;
+}
+#professional .prof-group-heading {
+  font-family: inherit;
+  font-size: .85rem;
+  font-weight: 700;
+  letter-spacing: .06em;
+  color: inherit;
+  opacity: .72;
+  padding: 10px 20px 6px;
+}
+#professional .prof-group-heading-next {
+  margin-top: 18px;
+  padding-top: 18px;
+  border-top: 1px solid currentColor;
+  border-top-color: inherit;
+}
+/* EXPERIENCE_GROUPING_LAYOUT_ONLY_END */
