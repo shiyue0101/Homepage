@@ -68,6 +68,7 @@ function hideLoading(delay = 0) {
   clearTimeout(loadingHideTimer);
   loadingHideTimer = setTimeout(() => {
     loadingOverlay?.classList.add('hidden');
+    document.documentElement.classList.add('site-ready');
   }, delay);
 }
 

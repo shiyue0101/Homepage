@@ -5,6 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yue's Homepage</title>
   <link rel="stylesheet" href="/style.css">
+  <style>
+    /* initial-route-loading-guard */
+    html:not(.site-ready) #loading-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      background: var(--background, #e8c6c1);
+    }
+  </style>
 </head>
 <body>
   <header class="site-header">
