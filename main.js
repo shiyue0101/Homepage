@@ -102,12 +102,12 @@ function applyHomeState() {
   backBtn.classList.remove('visible');
 
   document.getElementById('intro-dialog').style.removeProperty('display');
-  document.getElementById('cake').style.removeProperty('display');
+
   document.getElementById('typewriter-tip').style.removeProperty('display');
 }
 
 function showHome({ push = false, transition = false } = {}) {
-  showLoading();
+  hideLoading();
 
   const finish = () => {
     applyHomeState();
@@ -150,7 +150,7 @@ function showSection(page, push = false) {
     crtFlash.classList.remove('active');
     backBtn.classList.toggle('visible', !['projects', 'professional', 'contact', 'life'].includes(page));
     document.getElementById('intro-dialog').style.display = 'none';
-    document.getElementById('cake').style.display = 'none';
+
     document.getElementById('typewriter-tip').style.display = 'none';
     if (push) {
       history.pushState({ page }, '', '/' + page);
