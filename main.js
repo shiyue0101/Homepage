@@ -38,7 +38,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 const sections = {
-  education: document.getElementById('education'),
   projects: document.getElementById('projects'),
   skills: document.getElementById('skills'),
   contact: document.getElementById('contact'),
@@ -51,7 +50,6 @@ const loadingOverlay = document.getElementById('loading-overlay');
 let loadingHideTimer;
 
 const pathToPage = {
-  '/education': 'education',
   '/projects': 'projects',
   '/skills': 'skills',
   '/contact': 'contact',
@@ -180,7 +178,6 @@ function handleRoute() {
 
 // 页面加载完成后的初始化
 document.addEventListener('DOMContentLoaded', function () {
-  setupEducation();
   setupProfessionalList();
   handleRoute();
 });
@@ -197,51 +194,6 @@ document.getElementById('gear-btn').addEventListener('click', () => {
 const style = document.createElement('style');
 style.innerHTML = `.star {position: absolute; background: #fff; border-radius: 50%; opacity: .8;}`;
 document.head.appendChild(style);
-
-// Education 弹窗交互：只在页面初始化时绑定一次
-function setupEducation() {
-  const inventory = document.querySelector('.edu-inventory-grid');
-  if (!inventory) return;
-
-  const closeEducationModals = () => {
-    document.querySelectorAll('.edu-detail-modal').forEach(modal => {
-      modal.classList.remove('active');
-    });
-    inventory.querySelectorAll('.edu-inventory-item').forEach(item => {
-      item.classList.remove('selected');
-    });
-  };
-
-  inventory.addEventListener('click', event => {
-    const item = event.target.closest('.edu-inventory-item');
-    if (!item || !inventory.contains(item)) return;
-
-    const key = item.dataset.key;
-    const isSelected = item.classList.contains('selected');
-    closeEducationModals();
-
-    if (key === 'mystery') {
-      item.classList.add('selected');
-      setTimeout(() => item.classList.remove('selected'), 120);
-      return;
-    }
-
-    if (isSelected) return;
-
-    item.classList.add('selected');
-    document.getElementById(`edu-detail-${key}`)?.classList.add('active');
-  });
-
-  document.querySelectorAll('.edu-detail-close').forEach(button => {
-    button.addEventListener('click', closeEducationModals);
-  });
-
-  window.addEventListener('click', event => {
-    if (event.target.classList?.contains('edu-detail-modal')) {
-      closeEducationModals();
-    }
-  });
-}
 
 // 技能弹窗交互
 const skillIcons = document.querySelectorAll('.skill-icon');
