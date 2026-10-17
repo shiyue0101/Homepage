@@ -105,18 +105,15 @@ function applyHomeState() {
   document.getElementById('typewriter-tip').style.removeProperty('display');
 }
 
-function showHome({ push = false, transition = false } = {}) {
-  hideLoading();
-
+// loading-policy: initial-navigation-only
+// The HTML/CSS loading guard covers the first paint of each full document load.
+// In-page navigation must never show the loading overlay again.
+function showHome({ push = false, transition = false, initial = false } = {}) {
   const finish = () => {
     applyHomeState();
     crtFlash.classList.remove('active');
-
-    if (push) {
-      history.pushState({}, '', '/');
-    }
-
-    hideLoading(transition ? 300 : 800);
+    if (push) history.pushState({}, '', '/');
+    if (initial) hideLoading(0);
   };
 
   if (transition) {
@@ -127,11 +124,10 @@ function showHome({ push = false, transition = false } = {}) {
   }
 }
 
-function showSection(page, push = false) {
-  showLoading();
-
-  crtFlash.classList.add('active');
-  setTimeout(() => {
+function showSection(page, push = false, { initial = false, transition = true } = {}) {
+  if (!sections[page]) return;
+  if (transition) crtFlash.classList.add('active');
+  const finish = () => {
     Object.values(sections).forEach(sec => {
       sec.classList.remove('active');
       sec.classList.add('hidden');
@@ -141,22 +137,15 @@ function showSection(page, push = false) {
     sections[page].classList.add('active');
     sections[page].classList.remove('hidden');
     document.getElementById('typewriter-tip').style.display = 'none';
-    if (page === 'professional') {
-      updateProfessionalScrollbar();
-
-    }
-
+    if (page === 'professional') updateProfessionalScrollbar();
     crtFlash.classList.remove('active');
     backBtn.classList.toggle('visible', !['projects', 'professional', 'contact', 'life'].includes(page));
     document.getElementById('intro-dialog').style.display = 'none';
-
-    document.getElementById('typewriter-tip').style.display = 'none';
-    if (push) {
-      history.pushState({ page }, '', '/' + page);
-    }
-
-    hideLoading(300);
-  }, 200);
+    if (push) history.pushState({ page }, '', '/' + page);
+    if (initial) hideLoading(0);
+  };
+  if (transition) setTimeout(finish, 200);
+  else finish();
 }
 
 backBtn.addEventListener('click', () => {
@@ -164,26 +153,24 @@ backBtn.addEventListener('click', () => {
 });
 
 // 路由处理
-function handleRoute() {
+function handleRoute({ initial = false } = {}) {
   const path = window.location.pathname.replace(/\/+$/, '') || '/';
   const page = pathToPage[path] || 'home';
-
   if (page === 'home') {
-    showHome();
+    showHome({ initial });
   } else {
-    document.getElementById('main').style.display = 'none';
-    showSection(page, false);
+    showSection(page, false, { initial, transition: false });
   }
 }
 
 // 页面加载完成后的初始化
 document.addEventListener('DOMContentLoaded', function () {
   setupProfessionalList();
-  handleRoute();
+  handleRoute({ initial: true });
 });
 
 // 监听浏览器前进后退
-window.addEventListener('popstate', handleRoute);
+window.addEventListener('popstate', () => handleRoute());
 
 // 齿轮按钮（预留功能）
 document.getElementById('gear-btn').addEventListener('click', () => {
