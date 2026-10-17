@@ -2458,7 +2458,7 @@ body .case-study {
 /* Move the entire Contact form slightly upward */
 @media (min-width: 901px) {
   #contact .contact-redesign > :last-child {
-    transform: translateY(-28px);
+    transform: translateY(-24px);
   }
 }
 
@@ -2484,3 +2484,88 @@ body .case-study {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
+
+/* BEGIN contact details footnote alignment 2026 */
+/* All three details use exactly the same font size as the location row. */
+#contact .contact-redesign-links > .contact-redesign-link {
+  font-family: inherit;
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  font-weight: 400;
+  line-height: 1.5;
+}
+#contact .contact-redesign-links > .contact-redesign-link span,
+#contact .contact-redesign-links > .contact-redesign-link .protected-contact-link,
+#contact .contact-redesign-links > .contact-redesign-link > a {
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: inherit;
+  line-height: inherit;
+}
+/* The source-protected email/phone may be anchors themselves. */
+#contact .contact-redesign-links > #protected-email,
+#contact .contact-redesign-links > #protected-phone {
+  font: inherit;
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  line-height: 1.5;
+}
+@media (min-width: 901px) {
+  /* Remove the artificial tall column that left a gap beneath the form. */
+  #contact .contact-redesign {
+    height: auto;
+    min-height: 0;
+    align-items: stretch;
+  }
+  #contact .contact-redesign-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 0;
+  }
+  #contact .contact-redesign-links {
+    margin-top: auto;
+    padding-top: 30px;
+    padding-bottom: 0;
+  }
+  /* The bottom of this note and the LinkedIn icon share the grid row bottom. */
+  #contact .contact-redesign-formarea {
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    align-self: stretch;
+  }
+  #contact .contact-redesign-footnote {
+    margin-top: auto;
+    padding-top: 15px;
+    margin-bottom: 0;
+  }
+}
+/* Keep the existing natural top-to-bottom flow on tablets and phones. */
+@media (max-width: 900px) {
+  #contact .contact-redesign-formarea { display: block; }
+}
+/* END contact details footnote alignment 2026 */
+
+/* CONTACT LINKS BELOW INTRO — START */
+/* Keep the whole left column top-aligned; do not push links to its bottom. */
+#contact .contact-redesign-intro {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+}
+/* Space between “I'd love to hear from you :D” and contact details. */
+#contact .contact-redesign-intro .contact-redesign-links {
+  margin-top: 48px;
+  margin-bottom: 0;
+  margin-left: 0;
+  position: static;
+  inset: auto;
+  transform: none;
+  align-self: flex-start;
+}
+@media (max-width: 900px) {
+  #contact .contact-redesign-intro .contact-redesign-links {
+    margin-top: 32px;
+  }
+}
+/* CONTACT LINKS BELOW INTRO — END */

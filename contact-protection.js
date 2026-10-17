@@ -12,7 +12,7 @@
     emailEl.href = 'mailto:' + email;
   }
   if (phoneEl) {
-    phoneEl.textContent = '+45 9181 7770';
+    phoneEl.textContent = '+45 91 81 77 70';
     phoneEl.href = 'tel:' + phone;
   }
   // Only the three contact-information lines. Preserve the LinkedIn icon and form.
