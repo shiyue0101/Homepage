@@ -2114,7 +2114,7 @@ body #life.page-section {
   background: rgba(63, 35, 43, .58);
   color: #fff8f5;
   font-family: inherit;
-  font-size: clamp(18px, 1.65vw, 24px);
+  font-size: clamp(16px, 1.4vw, 21px);
   font-weight: normal;
   line-height: 1.4;
   text-align: center;
@@ -2152,7 +2152,7 @@ body #life.page-section {
   object-fit: contain;
 }
 @media (hover: none) {
-  #life .life-gallery-label { font-size: 20px; }
+  #life .life-gallery-label { font-size: 17px; }
 }
 /* Match Projects touch headline */
 /* LIFE BAKING GALLERY END */
