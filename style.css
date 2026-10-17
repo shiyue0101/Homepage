@@ -2371,3 +2371,85 @@ body .case-study {
   }
 }
 /* END unified page margins and contact heading 2026 */
+
+/* BEGIN contact name fields and focus fix */
+#contact .contact-name-row {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(14px, 2vw, 28px);
+  width: 100%;
+}
+#contact .contact-name-field { min-width: 0; }
+#contact .contact-name-field label { display: block; }
+#contact .contact-name-field input { width: 100%; }
+/* Keep the site's underline focus cue; remove the browser's blue ring. */
+#contact .contact-redesign-form input:focus,
+#contact .contact-redesign-form textarea:focus,
+#contact .contact-redesign-form input:focus-visible,
+#contact .contact-redesign-form textarea:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+  border-bottom: 2px solid var(--accent) !important;
+}
+@media (max-width: 380px) {
+  #contact .contact-name-row { gap: 12px; }
+  #contact .contact-name-field input { font-size: 1rem; }
+}
+/* END contact name fields and focus fix */
+
+/* BEGIN contact details bottom-left */
+/* Desktop: keep heading near the top and move contact info to lower-left. */
+@media (min-width: 901px) {
+  #contact .contact-redesign {
+    align-items: stretch;
+    min-height: max(520px, calc(100dvh - var(--header-height, 88px) - 125px));
+  }
+  #contact .contact-redesign-intro {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    min-height: 0;
+  }
+  #contact .contact-redesign-links {
+    margin-top: auto;
+    padding-top: 48px;
+  }
+}
+/* On tablet/phone, preserve readable natural flow above the form. */
+@media (max-width: 900px) {
+  #contact .contact-redesign-intro {
+    display: block;
+  }
+  #contact .contact-redesign-links {
+    margin-top: 32px;
+    padding-top: 0;
+  }
+}
+/* END contact details bottom-left */
+
+
+/* Contact: spacing and placeholder typography */
+
+#contact .contact-redesign {
+  margin-top: 24px;
+}
+
+/* Only change placeholder text, not labels or typed values */
+#contact .contact-redesign input::placeholder,
+#contact .contact-redesign textarea::placeholder {
+  font-size: 18px;
+  font-weight: 400;
+  opacity: 0.8;
+}
+
+/* Mobile */
+@media (max-width: 600px) {
+  #contact .contact-redesign {
+    margin-top: 16px;
+  }
+
+  #contact .contact-redesign input::placeholder,
+  #contact .contact-redesign textarea::placeholder {
+    font-size: 16px;
+  }
+}

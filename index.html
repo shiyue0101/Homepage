@@ -197,8 +197,8 @@
   <section id="contact" class="page-section hidden" aria-labelledby="contact-page-heading">
   <div class="contact-redesign">
     <div class="contact-redesign-intro">
-      <h1 id="contact-page-heading">Contact me.</h1>
-      <p>I'd love to hear from you.</p>
+      <h1 id="contact-page-heading">Contact me</h1>
+      <p>I'd love to hear from you :D</p>
       <div class="contact-redesign-links" aria-label="Contact details">
         <span class="contact-redesign-link"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Copenhagen, Denmark</span></span>
         <a class="contact-redesign-link" href="mailto:shiyue0101@outlook.com"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>shiyue0101@outlook.com</span></a>
@@ -209,8 +209,16 @@
     <div class="contact-redesign-formarea">
       <p class="contact-redesign-note">Or leave me a message</p>
       <form id="contact-redesign-form" class="contact-redesign-form">
-        <label for="contact-redesign-name">Name</label>
-        <input id="contact-redesign-name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+        <div class="contact-name-row">
+          <div class="contact-name-field">
+            <label for="contact-redesign-first-name">First Name</label>
+            <input id="contact-redesign-first-name" name="firstName" type="text" placeholder="First name" autocomplete="given-name" required>
+          </div>
+          <div class="contact-name-field">
+            <label for="contact-redesign-last-name">Last Name</label>
+            <input id="contact-redesign-last-name" name="lastName" type="text" placeholder="Last name" autocomplete="family-name" required>
+          </div>
+        </div>
         <label for="contact-redesign-email">Email</label>
         <input id="contact-redesign-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
         <label for="contact-redesign-message">Message</label>
@@ -227,7 +235,7 @@
       form.addEventListener('submit', (event) => {
         event.preventDefault();
         if (!form.reportValidity()) return;
-        const name = form.elements.namedItem('name').value.trim();
+        const name = [form.elements.namedItem('firstName').value.trim(), form.elements.namedItem('lastName').value.trim()].filter(Boolean).join(' ');
         const email = form.elements.namedItem('email').value.trim();
         const message = form.elements.namedItem('message').value.trim();
         const subject = encodeURIComponent('Homepage message from ' + name);
