@@ -2901,3 +2901,264 @@ body #contact.page-section {
   }
 }
 /* TRANSLUCENT HEADER ALL PAGES — END */
+
+/* PROJECT DETAIL MARGINS FIX START */
+/* Same content width and viewport gutters as other pages. */
+body .case-study {
+  box-sizing: border-box;
+  width: calc(100% - 2 * var(--page-gutter));
+  max-width: var(--page-content-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+/* PROJECT DETAIL MARGINS FIX END */
+
+/* Hide bottom breadcrumb on all project detail pages */
+.case-study > .case-breadcrumb {
+  display: none !important;
+}
+
+/* NOTION_PROJECT_TOC_START */
+/* Reveal the side navigation only where there is genuine space next to the article. */
+.project-side-toc { display: none; }
+@media (min-width: 1500px) {
+  body.project-side-toc-ready .case-study > .case-toc { display: none; }
+  .project-side-toc {
+    display: block;
+    position: fixed;
+    z-index: 1900;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 232px;
+    max-height: min(75vh, 680px);
+    box-sizing: border-box;
+    border-radius: 14px;
+    overflow: hidden;
+    font-family: inherit;
+    font-size: 13px;
+  }
+  .project-side-toc .toc-lines {
+    position: absolute;
+    right: 8px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    gap: 7px;
+    transition: opacity .15s ease;
+    pointer-events: none;
+  }
+  .project-side-toc .toc-lines span {
+    display: block;
+    height: 2px;
+    background: var(--text);
+    opacity: .45;
+    border-radius: 2px;
+  }
+  .project-side-toc .toc-lines span.is-active {
+    opacity: 1;
+    background: var(--accent);
+  }
+  .project-side-toc .toc-panel {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    padding: 16px 14px;
+    border: 1px solid var(--border-soft);
+    border-radius: 14px;
+    background: rgba(239,217,213,.95);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    box-shadow: 0 10px 28px rgba(0,0,0,.09);
+    transition: opacity .18s ease, visibility .18s;
+  }
+  .project-side-toc:hover .toc-panel,
+  .project-side-toc:focus-within .toc-panel {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+  }
+  .project-side-toc:hover .toc-lines,
+  .project-side-toc:focus-within .toc-lines { opacity: 0; }
+  .project-side-toc .toc-label {
+    font-size: 11px;
+    letter-spacing: .09em;
+    text-transform: uppercase;
+    margin: 0 0 10px;
+    opacity: .65;
+  }
+  .project-side-toc .toc-links {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    max-height: calc(min(75vh, 680px) - 60px);
+    overflow-y: auto;
+    overscroll-behavior: contain;
+  }
+  .project-side-toc .toc-links a {
+    display: block;
+    border-radius: 5px;
+    padding: 5px 7px;
+    color: var(--text);
+    text-decoration: none;
+    line-height: 1.35;
+    overflow-wrap: anywhere;
+    opacity: .75;
+  }
+  .project-side-toc .toc-links a:hover { background: rgba(255,255,255,.35); opacity: 1; }
+  .project-side-toc .toc-links a.is-active {
+    color: var(--accent);
+    font-weight: 700;
+    opacity: 1;
+    background: rgba(255,255,255,.3);
+  }
+  .project-side-toc .toc-links a:focus-visible { outline: 2px solid var(--accent); outline-offset: -2px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .project-side-toc .toc-panel, .project-side-toc .toc-lines { transition: none; }
+}
+/* NOTION_PROJECT_TOC_END */
+
+/* PROJECT_FLOATING_TOC_V2_START */
+/* Independent floating navigation; original inline TOC stays available on small screens. */
+.project-floating-toc {
+  position: fixed;
+  z-index: 2050;
+  top: calc(var(--header-height, 76px) + 28px);
+  right: 18px;
+  width: 230px;
+  max-height: calc(100dvh - var(--header-height, 76px) - 55px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(119,53,72,.25);
+  border-radius: 14px;
+  background: rgba(255,247,242,.93);
+  box-shadow: 0 8px 24px rgba(89,48,58,.12);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  overflow: hidden;
+  font-family: inherit;
+}
+.project-floating-toc-title { padding: 14px 16px 8px; color: var(--accent); font-size: 12px; font-weight: bold; letter-spacing: .08em; }
+.project-floating-toc-links { display: flex; flex-direction: column; gap: 2px; padding: 0 9px 12px; overflow-y: auto; overscroll-behavior: contain; }
+.project-floating-toc a { display: block; padding: 7px 9px; border-left: 3px solid transparent; border-radius: 5px; color: var(--text); font-size: 13px; line-height: 1.4; text-decoration: none; overflow-wrap: anywhere; }
+.project-floating-toc a:hover { background: var(--surface-soft); }
+.project-floating-toc a[aria-current="location"] { border-left-color: var(--accent); color: var(--accent); background: rgba(233,179,184,.22); font-weight: bold; }
+.project-floating-toc-toggle { display: none; }
+.case-study section[id] { scroll-margin-top: calc(var(--header-height, 76px) + 24px); }
+@media (min-width: 1350px) {
+  .case-study > .case-toc { display: none; }
+}
+/* In narrower desktop widths, use a compact visible button instead of covering the article. */
+@media (min-width: 1050px) and (max-width: 1349px) {
+  .project-floating-toc { width: 230px; right: 14px; }
+  .project-floating-toc:not(.is-open) { width: 46px; max-height: 46px; }
+  .project-floating-toc-toggle { display: block; border: 0; background: transparent; color: var(--accent); font-size: 23px; cursor: pointer; min-height: 45px; }
+  .project-floating-toc:not(.is-open) .project-floating-toc-title,
+  .project-floating-toc:not(.is-open) .project-floating-toc-links { display: none; }
+  .project-floating-toc.is-open .project-floating-toc-toggle { align-self: flex-end; padding: 2px 13px; }
+  .project-floating-toc:not(.is-open) .project-floating-toc-toggle { width: 46px; }
+}
+@media (max-width: 1049px) { .project-floating-toc { display: none; } }
+/* PROJECT_FLOATING_TOC_V2_END */
+
+/* NOTION_TOC_HOVER_COLLAPSE_START */
+/* Fixed-size menu: revealing via clip-path avoids width/height reflow. */
+@media (min-width: 1050px) and (hover: hover) and (pointer: fine) {
+  .project-floating-toc,
+  .project-floating-toc:not(.is-open),
+  .project-floating-toc.is-open {
+    position: fixed !important;
+    top: calc(var(--header-height, 76px) + 28px) !important;
+    right: 16px !important;
+    width: 246px !important;
+    height: min(490px, calc(100dvh - var(--header-height, 76px) - 55px)) !important;
+    max-height: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(119, 53, 72, .25) !important;
+    border-radius: 12px !important;
+    background: rgba(255, 247, 242, .97) !important;
+    box-shadow: 0 8px 24px rgba(89, 48, 58, .12) !important;
+    /* Only the final 34px are visible and receive hover events. */
+    clip-path: inset(0 0 0 calc(100% - 34px) round 12px);
+    transition: clip-path .2s ease !important;
+  }
+  .project-floating-toc::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    right: 8px;
+    width: 16px;
+    height: 205px;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(119, 53, 72, .6) 0px,
+      rgba(119, 53, 72, .6) 2px,
+      transparent 2px,
+      transparent 15px
+    );
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity .12s ease;
+    z-index: 2;
+  }
+  .project-floating-toc .project-floating-toc-title,
+  .project-floating-toc .project-floating-toc-links {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .14s ease, visibility .14s ease;
+  }
+  .project-floating-toc .project-floating-toc-links {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+  .project-floating-toc .project-floating-toc-toggle {
+    display: none !important;
+  }
+  .project-floating-toc:hover,
+  .project-floating-toc:focus-within {
+    clip-path: inset(0 0 0 0 round 12px);
+  }
+  .project-floating-toc:hover::before,
+  .project-floating-toc:focus-within::before {
+    opacity: 0;
+  }
+  .project-floating-toc:hover .project-floating-toc-title,
+  .project-floating-toc:hover .project-floating-toc-links,
+  .project-floating-toc:focus-within .project-floating-toc-title,
+  .project-floating-toc:focus-within .project-floating-toc-links {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+/* NOTION_TOC_HOVER_COLLAPSE_END */
+
+/* BEGIN: transparent collapsed project TOC */
+/* 收起状态：只留目录短线，不显示底色、边框、阴影或毛玻璃。 */
+.project-floating-toc:not(:hover):not(:focus-within) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+/* END: transparent collapsed project TOC */
