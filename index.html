@@ -208,7 +208,7 @@
     </div>
     <div class="contact-redesign-formarea">
       <p class="contact-redesign-note">Or leave me a message</p>
-      <form id="contact-redesign-form" class="contact-redesign-form">
+      <form id="contact-redesign-form" class="contact-redesign-form" action="https://formspree.io/f/mbgdwrgo" method="POST">
         <div class="contact-name-row">
           <div class="contact-name-field">
             <label for="contact-redesign-first-name">First Name</label>
@@ -223,24 +223,62 @@
         <input id="contact-redesign-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
         <label for="contact-redesign-message">Message</label>
         <textarea id="contact-redesign-message" name="message" rows="4" placeholder="Write your message here..." required></textarea>
-        <button type="submit">Open email app <span aria-hidden="true">↗</span></button>
+        
+        <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
+          <label for="contact-redesign-company">Leave this field empty</label>
+          <input id="contact-redesign-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <button type="submit">Send</button>
       </form>
-      <p class="contact-redesign-footnote">Submitting opens your email app; it doesn't send a message automatically.</p>
     </div>
   </div>
   <script>
+    // contact-formspree-integration-v1
     (() => {
       const form = document.getElementById('contact-redesign-form');
-      if (!form) return;
-      form.addEventListener('submit', (event) => {
+      const status = document.getElementById('contact-form-status');
+      if (!form || !status) return;
+      const submit = form.querySelector('button[type="submit"]');
+
+      form.addEventListener('submit', async (event) => {
         event.preventDefault();
-        if (!form.reportValidity()) return;
-        const name = [form.elements.namedItem('firstName').value.trim(), form.elements.namedItem('lastName').value.trim()].filter(Boolean).join(' ');
-        const email = form.elements.namedItem('email').value.trim();
-        const message = form.elements.namedItem('message').value.trim();
-        const subject = encodeURIComponent('Homepage message from ' + name);
-        const body = encodeURIComponent(message + '\n\nFrom: ' + name + ' (' + email + ')');
-        window.location.href = 'mailto:?subject=' + subject + '&body=' + body;
+        if (!form.reportValidity() || submit.disabled) return;
+
+        // Reject simple bots filling a field which is invisible to visitors.
+        const gotcha = form.elements.namedItem('_gotcha');
+        if (gotcha && gotcha.value.trim()) return;
+
+        submit.disabled = true;
+        submit.setAttribute('aria-busy', 'true');
+        const originalText = submit.innerHTML;
+        submit.textContent = 'Sending...';
+        status.textContent = '';
+
+        try {
+          const response = await fetch(form.action, {
+            method: 'POST',
+            body: new FormData(form),
+            headers: { 'Accept': 'application/json' }
+          });
+          if (!response.ok) {
+            let message = 'Message could not be sent. Please try again.';
+            try {
+              const result = await response.json();
+              if (Array.isArray(result.errors) && result.errors.length) {
+                message = result.errors.map(error => error.message).filter(Boolean).join(' ') || message;
+              }
+            } catch (_) {}
+            throw new Error(message);
+          }
+          form.reset();
+          status.textContent = 'Thank you! Your message has been sent.';
+        } catch (error) {
+          status.textContent = error.message || 'Network error. Please try again later.';
+        } finally {
+          submit.disabled = false;
+          submit.removeAttribute('aria-busy');
+          submit.innerHTML = originalText;
+        }
       });
     })();
   </script>
