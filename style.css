@@ -1494,7 +1494,7 @@ body #life.page-section {
 
 #professional .prof-list,
 #professional .prof-detail-panel {
-  background: rgba(246, 221, 218, 0.68);
+  background: var(--surface-soft);
   border: 1px solid rgba(137, 82, 88, 0.24);
   border-radius: 18px;
   box-shadow: 0 9px 26px rgba(91, 49, 57, 0.08);
