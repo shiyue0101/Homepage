@@ -194,33 +194,49 @@
       <div class="edu-card-desc">Intermediate in hardware prototyping, sensors, and IoT. Used in creative and research projects.</div>
     </div>
   </section>
-  <section id="contact" class="page-section hidden">
-    <div class="edu-title-pixel">CONTACT</div>
-    <div class="contact-subtitle-pixel">Feel free to reach out to me!</div>
-    <div class="contact-content">
-      <div class="contact-icons">
-        <div class="contact-icon" id="contact-mail" title="Write Email">📧 <div class="contact-label">Email</div></div>
-        <a class="contact-icon" id="contact-linkedin" title="LinkedIn" href="https://linkedin.com/in/yueshi0101" target="_blank">🌐 <div class="contact-label">LinkedIn</div></a>
-      </div>
-      <div class="contact-info">
-        <div><b>📧 Email:</b> <a href="mailto:shiyue0101@outlook.com">shiyue0101@outlook.com</a></div>
-        <div><b>📞 Phone:</b> <a href="tel:+4591817770">+45 
-          91817770</a></div>
-        <div><b>🌐 LinkedIn:</b> <a href="https://linkedin.com/in/yueshi0101" target="_blank">linkedin.com/in/yueshi0101</a></div>
+  <section id="contact" class="page-section hidden" aria-labelledby="contact-page-heading">
+  <div class="contact-redesign">
+    <div class="contact-redesign-intro">
+      <h1 id="contact-page-heading">Contact me.</h1>
+      <p>I'd love to hear from you.</p>
+      <div class="contact-redesign-links" aria-label="Contact details">
+        <span class="contact-redesign-link"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Copenhagen, Denmark</span></span>
+        <a class="contact-redesign-link" href="mailto:shiyue0101@outlook.com"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg><span>shiyue0101@outlook.com</span></a>
+        <a class="contact-redesign-link" href="tel:+4591817770"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.9v3a2 2 0 0 1-2.2 2A19.8 19.8 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8L7.1 10a16 16 0 0 0 6.9 6.9l1.5-1.9a2 2 0 0 1 1.8-.6l3 .5a2 2 0 0 1 1.7 1.9Z"/></svg><span>+45 9181 7770</span></a>
+        <a class="contact-redesign-link contact-redesign-linkedin" href="https://www.linkedin.com/in/yueshi0101/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M20.45 2H3.55A1.55 1.55 0 0 0 2 3.55v16.9A1.55 1.55 0 0 0 3.55 22h16.9A1.55 1.55 0 0 0 22 20.45V3.55A1.55 1.55 0 0 0 20.45 2ZM7.93 18.64H4.97V9.12h2.96v9.52ZM6.45 7.82a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44Zm12.2 10.82H15.7v-4.63c0-1.1-.02-2.53-1.54-2.53-1.54 0-1.78 1.2-1.78 2.45v4.71H9.43V9.12h2.83v1.3h.04a3.1 3.1 0 0 1 2.79-1.54c2.98 0 3.56 1.96 3.56 4.5v5.26Z"/></svg><span class="sr-contact">LinkedIn</span></a>
       </div>
     </div>
-    <div id="contact-modal-mail" class="contact-modal">
-      <button class="contact-modal-close">×</button>
-      <div class="edu-card-title">Write to Yue</div>
-      <form class="contact-mail-form" onsubmit="return false;">
-        <input type="text" placeholder="Your Name" required>
-        <input type="email" placeholder="Your Email" required>
-        <textarea rows="4" placeholder="Message" required></textarea>
-        <button type="submit">Send (Simulated)</button>
+    <div class="contact-redesign-formarea">
+      <p class="contact-redesign-note">Or leave me a message</p>
+      <form id="contact-redesign-form" class="contact-redesign-form">
+        <label for="contact-redesign-name">Name</label>
+        <input id="contact-redesign-name" name="name" type="text" placeholder="Your name" autocomplete="name" required>
+        <label for="contact-redesign-email">Email</label>
+        <input id="contact-redesign-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
+        <label for="contact-redesign-message">Message</label>
+        <textarea id="contact-redesign-message" name="message" rows="4" placeholder="Write your message here..." required></textarea>
+        <button type="submit">Open email app <span aria-hidden="true">↗</span></button>
       </form>
-      <div class="edu-card-desc" style="margin-top:10px;color:var(--muted);">* This is a simulated RPG mail window. Please use the real email above to contact Yue.</div>
+      <p class="contact-redesign-footnote">Submitting opens your email app; it doesn't send a message automatically.</p>
     </div>
-  </section>
+  </div>
+  <script>
+    (() => {
+      const form = document.getElementById('contact-redesign-form');
+      if (!form) return;
+      form.addEventListener('submit', (event) => {
+        event.preventDefault();
+        if (!form.reportValidity()) return;
+        const name = form.elements.namedItem('name').value.trim();
+        const email = form.elements.namedItem('email').value.trim();
+        const message = form.elements.namedItem('message').value.trim();
+        const subject = encodeURIComponent('Homepage message from ' + name);
+        const body = encodeURIComponent(message + '\n\nFrom: ' + name + ' (' + email + ')');
+        window.location.href = 'mailto:shiyue0101@outlook.com?subject=' + subject + '&body=' + body;
+      });
+    })();
+  </script>
+</section>
   <section id="professional" class="page-section hidden">
     <div class="prof-container">
       <div class="prof-list">

@@ -2156,3 +2156,218 @@ body #life.page-section {
 }
 /* Match Projects touch headline */
 /* LIFE BAKING GALLERY END */
+
+
+/* BEGIN contact redesign 2026 */
+#contact.page-section {
+  box-sizing: border-box;
+  position: fixed;
+  top: var(--header-height, 88px);
+  left: 0; right: 0; bottom: 0;
+  width: 100%;
+  height: auto;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: block;
+  background: transparent;
+  padding: clamp(32px, 6vw, 96px) clamp(24px, 5vw, 90px) 60px;
+  color: var(--text);
+}
+#contact.page-section.hidden { display: none; }
+#contact.page-section.active { display: block; }
+#contact .contact-redesign {
+  width: min(100%, 1360px);
+  min-height: min(620px, 70vh);
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.93fr);
+  column-gap: clamp(48px, 9vw, 160px);
+  align-items: start;
+}
+#contact .contact-redesign-intro,
+#contact .contact-redesign-formarea { min-width: 0; }
+#contact .contact-redesign-intro h1 {
+  margin: 0 0 22px;
+  color: var(--accent);
+  font-family: inherit;
+  font-size: clamp(3.4rem, 7vw, 6.7rem);
+  font-weight: 400;
+  line-height: 1.02;
+  letter-spacing: -0.035em;
+}
+#contact .contact-redesign-intro > p {
+  margin: 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.45vw, 1.3rem);
+}
+#contact .contact-redesign-links {
+  margin-top: clamp(56px, 10vh, 130px);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
+}
+#contact .contact-redesign-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  max-width: 100%;
+  min-height: 32px;
+  color: var(--text);
+  text-decoration: none;
+  font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+  overflow-wrap: anywhere;
+}
+#contact a.contact-redesign-link:hover { color: var(--accent); }
+#contact .contact-redesign-link svg { width: 24px; height: 24px; flex: 0 0 24px; }
+#contact .contact-redesign-linkedin svg { width: 30px; height: 30px; flex-basis: 30px; }
+#contact .sr-contact {
+  position: absolute;
+  width: 1px; height: 1px;
+  padding: 0; margin: -1px;
+  overflow: hidden; clip: rect(0,0,0,0);
+  white-space: nowrap; border: 0;
+}
+#contact .contact-redesign-formarea { padding-top: clamp(24px, 5vw, 74px); }
+#contact .contact-redesign-note { font-size: 1rem; margin: 0 0 36px; color: var(--muted); }
+#contact .contact-redesign-form { display: flex; flex-direction: column; gap: 0; }
+#contact .contact-redesign-form label {
+  font-size: 0.9rem;
+  color: var(--muted);
+  margin: 12px 0 2px;
+}
+#contact .contact-redesign-form input,
+#contact .contact-redesign-form textarea {
+  box-sizing: border-box;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  padding: 13px 0 16px;
+  margin: 0 0 18px;
+  border: none;
+  border-bottom: 1px solid var(--border);
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent;
+  color: var(--text);
+  font: inherit;
+  font-size: clamp(1.05rem, 1.8vw, 1.35rem);
+  outline-offset: 4px;
+}
+#contact .contact-redesign-form textarea { min-height: 110px; resize: vertical; }
+#contact .contact-redesign-form input::placeholder,
+#contact .contact-redesign-form textarea::placeholder { color: var(--muted); opacity: .76; }
+#contact .contact-redesign-form input:focus,
+#contact .contact-redesign-form textarea:focus { border-bottom-color: var(--accent); border-bottom-width: 2px; }
+#contact .contact-redesign-form button {
+  align-self: flex-end;
+  border: none;
+  border-radius: 9px;
+  margin-top: 20px;
+  padding: 13px 24px;
+  background: var(--accent);
+  color: var(--surface);
+  font: inherit;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: opacity .2s ease, transform .2s ease;
+}
+#contact .contact-redesign-form button:hover { opacity: .88; transform: translateY(-2px); }
+#contact .contact-redesign-form button:focus-visible,
+#contact .contact-redesign-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
+#contact .contact-redesign-footnote {
+  margin: 15px 0 0;
+  text-align: right;
+  font-size: .8rem;
+  color: var(--muted);
+}
+@media (max-width: 900px) {
+  #contact .contact-redesign { grid-template-columns: 1fr; row-gap: 36px; min-height: 0; }
+  #contact .contact-redesign-intro h1 { font-size: clamp(2.9rem, 9vw, 5.5rem); }
+  #contact .contact-redesign-links { margin-top: 32px; gap: 12px; }
+  #contact .contact-redesign-formarea { padding-top: 8px; }
+}
+@media (max-width: 600px) {
+  #contact.page-section { padding: 26px 22px 52px; }
+  #contact .contact-redesign { row-gap: 30px; }
+  #contact .contact-redesign-intro h1 { font-size: clamp(2.7rem, 12vw, 4rem); }
+  #contact .contact-redesign-note { margin-bottom: 18px; }
+  #contact .contact-redesign-form button { align-self: stretch; }
+}
+/* END contact redesign 2026 */
+
+/* BEGIN centered contact and projects 2026 */
+/* Desktop: bring both sections slightly inward without changing colors. */
+@media (min-width: 901px) {
+  body #projects.page-section .projects-grid {
+    width: 100%;
+    max-width: 1320px;
+    margin-inline: auto;
+  }
+  #contact .contact-redesign {
+    width: 100%;
+    max-width: 1200px;
+    margin-inline: auto;
+    column-gap: clamp(40px, 6vw, 100px);
+  }
+}
+/* END centered contact and projects 2026 */
+
+/* BEGIN unified page margins and contact heading 2026 */
+/* Shared horizontal rhythm. Keep the original colors and vertical spacing. */
+:root {
+  --page-gutter: clamp(24px, 3.5vw, 48px);
+  --page-content-max: 1120px;
+}
+
+/* Every main section uses the same viewport-side gutter. */
+body #projects.page-section,
+body #professional.page-section,
+body #life.page-section,
+body #contact.page-section {
+  padding-left: var(--page-gutter) !important;
+  padding-right: var(--page-gutter) !important;
+}
+
+/* Center the content, while keeping each page's existing layout. */
+body #projects .projects-grid,
+body #professional .prof-container,
+body #life .life-content,
+body #contact .contact-redesign {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--page-content-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Same left and right alignment for the Home content and case-study pages. */
+body #main {
+  padding-left: max(var(--page-gutter), calc((100% - var(--page-content-max))/2));
+  padding-right: var(--page-gutter);
+}
+body .case-study {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: calc(var(--page-content-max) + 2 * var(--page-gutter));
+  padding-left: max(var(--page-gutter), calc((100% - var(--page-content-max))/2));
+  padding-right: max(var(--page-gutter), calc((100% - var(--page-content-max))/2));
+}
+
+/* Smaller Contact heading, still prominent but not oversized. */
+#contact .contact-redesign-intro h1 {
+  font-size: clamp(2.5rem, 4.5vw, 4.5rem);
+  line-height: 1.12;
+}
+
+@media (max-width: 900px) {
+  :root { --page-gutter: 24px; }
+  body #main { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+}
+@media (max-width: 600px) {
+  :root { --page-gutter: 20px; }
+  #contact .contact-redesign-intro h1 {
+    font-size: clamp(2.2rem, 8vw, 3rem);
+  }
+}
+/* END unified page margins and contact heading 2026 */
