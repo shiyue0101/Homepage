@@ -1213,7 +1213,7 @@ body #projects.page-section {
   justify-content: center;
   padding: 24px;
   text-align: center;
-  background: rgba(232, 198, 193, 0.80);
+  background: rgba(232, 198, 193, 0.85);
   color: var(--text);
   opacity: 0;
   transition: opacity 220ms ease;
@@ -2067,3 +2067,92 @@ body #life.page-section {
   }
 }
 /* EXPERIENCE HEADER / SCROLL FIX — END */
+
+/* LIFE BAKING GALLERY START */
+/* Asymmetric, uncropped photos that inherit the site's palette and type. */
+#life .life-baking-gallery {
+  margin: clamp(52px, 7vw, 96px) auto 36px;
+  width: 100%;
+  max-width: 1060px;
+}
+#life .life-gallery-grid {
+  columns: 3;
+  column-gap: clamp(18px, 3.5vw, 46px);
+}
+#life .life-gallery-photo {
+  position: relative;
+  display: block;
+  box-sizing: border-box;
+  margin: 0 0 clamp(22px, 4vw, 60px);
+  max-width: 100%;
+  overflow: hidden;
+  break-inside: avoid;
+  -webkit-column-break-inside: avoid;
+  border-radius: 3px;
+  isolation: isolate;
+  outline-offset: 5px;
+}
+#life .life-gallery-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  /* Keep each picture's original aspect ratio: no object-fit: cover. */
+}
+
+
+
+
+
+#life .life-gallery-label {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 12px;
+  box-sizing: border-box;
+  background: rgba(63, 35, 43, .58);
+  color: #fff8f5;
+  font-family: inherit;
+  font-size: clamp(18px, 1.65vw, 24px);
+  font-weight: normal;
+  line-height: 1.4;
+  text-align: center;
+  opacity: 0;
+  transition: opacity 180ms ease;
+  pointer-events: none;
+}
+#life .life-gallery-photo:hover .life-gallery-label,
+#life .life-gallery-photo:focus-visible .life-gallery-label {
+  opacity: 1;
+}
+@media (max-width: 820px) {
+  #life .life-gallery-grid { columns: 2; column-gap: 20px; }
+  #life .life-baking-gallery { margin-top: 48px; }
+}
+@media (max-width: 520px) {
+  #life .life-gallery-grid { columns: 2; column-gap: 12px; }
+  #life .life-gallery-photo { margin-bottom: 22px; }
+
+}
+@media (prefers-reduced-motion: reduce) {
+  #life .life-gallery-label { transition: none; }
+}
+
+/* LIFE WIDTH UNIFIED */
+#life .life-gallery-photo {
+  width: 100%;
+  margin-left: 0;
+  margin-right: 0;
+}
+#life .life-gallery-photo img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+@media (hover: none) {
+  #life .life-gallery-label { font-size: 20px; }
+}
+/* Match Projects touch headline */
+/* LIFE BAKING GALLERY END */
