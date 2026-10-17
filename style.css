@@ -1,9 +1,9 @@
 /* Shared warm rose palette. */
 :root {
-  --background: #e8c6c1;
+  --background: #efd9d5;
   --surface: #fff7f2;
   --surface-soft: #f3ddd6;
-  --text: #432f32;
+  --text: #534847;
   --muted: #604349;
   --accent: #773548;
   --highlight: #e9b3b8;
@@ -19,6 +19,7 @@ body {
   font-family: Georgia, "Times New Roman", serif;
   background: var(--background);
   overflow-x: hidden;
+  color: var(--text);
 }
 #star-bg {
   position: fixed;
@@ -983,12 +984,12 @@ body {
 #loading-overlay {
   position: fixed;
   top: 0; left: 0; right: 0; bottom: 0;
-  background: rgba(232, 198, 193, 0.96);
+  background: rgba(239, 217, 213, 0.8);
   z-index: 9999;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: opacity 0.5s ease-out;
+  transition: opacity 0.18s ease-out;
 }
 
 #loading-overlay.hidden {
