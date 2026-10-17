@@ -1734,3 +1734,336 @@ body #life.page-section {
   color: var(--text);
 }
 /* END Masking Ball prototype subheading hierarchy */
+
+/* EXPERIENCE MOBILE FIX START */
+/* Mobile-only overrides. All colors inherit from the existing design. */
+@media (max-width: 760px) {
+  #professional.page-section.active {
+    display: block;
+    padding: 20px 16px 48px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  #professional .prof-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    margin: 0 auto;
+    gap: 16px;
+    box-sizing: border-box;
+  }
+
+  #professional .prof-list,
+  #professional .prof-detail-panel {
+    flex: 0 0 auto;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 0;
+    max-height: none;
+    height: auto;
+    box-sizing: border-box;
+    margin: 0;
+  }
+
+  #professional .prof-list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    padding: 12px 0;
+    gap: 3px;
+  }
+
+  #professional .prof-group-heading {
+    padding: 10px 16px 5px;
+    font-size: 0.78rem;
+  }
+
+  #professional .prof-group-heading-next {
+    margin-top: 10px;
+    padding-top: 16px;
+  }
+
+  #professional .prof-list-item {
+    display: block;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 12px 16px;
+    font-size: 0.96rem;
+    line-height: 1.4;
+    text-align: left;
+    overflow-wrap: anywhere;
+    border-top: 0;
+    border-left: 4px solid transparent;
+    border-radius: 0 8px 8px 0;
+  }
+
+  #professional .prof-list-item.selected,
+  #professional .prof-list-item:hover {
+    border-top: 0;
+    border-left: 4px solid var(--accent);
+    background: var(--highlight);
+  }
+
+  #professional .prof-list-sub {
+    font-size: 0.84rem;
+    line-height: 1.45;
+  }
+
+  #professional .prof-detail-panel {
+    display: flex;
+    flex-direction: column;
+    padding: 22px 20px;
+    gap: 12px;
+    overflow: visible;
+    overflow-wrap: anywhere;
+    font-size: 0.96rem;
+    line-height: 1.6;
+  }
+
+  #professional .prof-detail-title {
+    font-size: 1.08rem;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+  }
+
+  #professional .prof-detail-date {
+    display: block;
+    margin: 6px 0 0;
+    font-size: 0.88rem;
+  }
+
+  #professional .prof-detail-role {
+    font-size: 0.96rem;
+    line-height: 1.5;
+  }
+
+  #professional .prof-detail-desc {
+    margin-left: 0;
+    padding-left: 20px;
+    font-size: 0.93rem;
+    line-height: 1.6;
+  }
+}
+
+@media (max-width: 380px) {
+  #professional.page-section.active { padding: 14px 12px 40px; }
+  #professional .prof-list-item { padding: 10px 13px; }
+  #professional .prof-detail-panel { padding: 18px 15px; }
+}
+/* EXPERIENCE MOBILE FIX END */
+
+/* EXPERIENCE MOBILE HEADER OVERLAP FIX — START */
+/* The fixed header already reserves its height via .page-section top. */
+@media (max-width: 760px) {
+  #professional.page-section.active {
+    top: var(--header-height) !important;
+    bottom: 0;
+    height: auto;
+    padding: 20px 16px 48px !important;
+    box-sizing: border-box;
+    overflow-x: hidden;
+    overflow-y: auto !important;
+    overscroll-behavior-y: contain;
+    align-items: stretch;
+    justify-content: flex-start;
+  }
+
+  #professional .prof-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    margin: 0 auto;
+    gap: 18px;
+  }
+
+  #professional .prof-list,
+  #professional .prof-detail-panel {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    min-height: 0;
+    height: auto;
+    flex: none;
+    box-sizing: border-box;
+  }
+
+  #professional .prof-list {
+    margin: 0;
+  }
+
+  #professional .prof-detail-panel {
+    overflow: visible;
+    overflow-wrap: anywhere;
+  }
+}
+/* EXPERIENCE MOBILE HEADER OVERLAP FIX — END */
+
+/* EXPERIENCE RESPONSIVE STABILITY FIX — BEGIN */
+/* One-column experience layout for tablets and phones. No palette changes. */
+@media (max-width: 1000px) {
+  body #professional.page-section.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    box-sizing: border-box;
+    padding: 22px clamp(16px, 4vw, 32px) 60px;
+    overflow-x: hidden;
+    overflow-y: auto;
+  }
+
+  #professional .prof-container {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 18px;
+    flex: none;
+    width: min(100%, 780px);
+    min-width: 0;
+    max-width: 780px;
+    margin: 0 auto;
+  }
+
+  #professional .prof-list,
+  #professional .prof-detail-panel {
+    box-sizing: border-box;
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 0;
+    max-height: none;
+    height: auto;
+    margin: 0;
+  }
+
+  #professional .prof-list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+    padding: 12px 0;
+  }
+
+  #professional .prof-group-heading {
+    flex: none;
+    width: auto;
+    padding: 12px 20px 8px;
+    white-space: normal;
+  }
+
+  #professional .prof-group-heading-next {
+    margin-top: 12px;
+    padding-top: 18px;
+  }
+
+  #professional .prof-list-item {
+    box-sizing: border-box;
+    display: block;
+    flex: none;
+    width: 100%;
+    min-width: 0;
+    padding: 13px 20px;
+    text-align: left;
+    border-top: 0;
+    border-left: 6px solid transparent;
+    border-radius: 0 8px 8px 0;
+    white-space: normal;
+    overflow-wrap: break-word;
+    line-height: 1.45;
+  }
+
+  #professional .prof-list-item.selected,
+  #professional .prof-list-item:hover {
+    border-top: 0;
+    border-left: 6px solid var(--accent);
+    background: var(--highlight);
+  }
+
+  #professional .prof-detail-panel {
+    padding: clamp(20px, 4vw, 34px);
+    overflow: visible;
+    overflow-wrap: anywhere;
+  }
+}
+
+@media (max-width: 760px) {
+  body #professional.page-section.active {
+    padding: 18px 16px 48px;
+  }
+  #professional .prof-detail-panel { padding: 22px 20px; }
+}
+/* EXPERIENCE RESPONSIVE STABILITY FIX — END */
+
+/* EXPERIENCE HEADER / SCROLL FIX — BEGIN */
+/* On narrow screens the section is its own scrollport below the fixed header.
+   Override older rules regardless of whether they use padding, top or flex centering. */
+@media (max-width: 1000px) {
+  body #professional.page-section,
+  body #professional.page-section.active {
+    position: fixed;
+    top: var(--header-height);
+    right: 0;
+    bottom: 0;
+    left: 0;
+    height: auto;
+    width: 100%;
+    box-sizing: border-box;
+    padding: 24px clamp(16px, 3vw, 28px) 48px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    overscroll-behavior-y: contain;
+    align-items: stretch;
+    justify-content: flex-start;
+    scroll-padding-top: 12px;
+  }
+  body #professional .prof-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 20px;
+    margin: 0 auto;
+  }
+  body #professional .prof-list,
+  body #professional .prof-detail-panel {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    flex: none;
+    margin: 0;
+    height: auto;
+    max-height: none;
+  }
+  body #professional .prof-list {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+  }
+  body #professional .prof-list-item {
+    box-sizing: border-box;
+    width: 100%;
+    min-width: 0;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+  body #professional .prof-detail-panel {
+    overflow-wrap: anywhere;
+  }
+}
+@media (max-width: 760px) {
+  body #professional.page-section,
+  body #professional.page-section.active {
+    padding: 20px 16px 44px;
+  }
+}
+/* EXPERIENCE HEADER / SCROLL FIX — END */

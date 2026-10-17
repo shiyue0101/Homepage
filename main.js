@@ -295,3 +295,31 @@ function updateProfessionalScrollbar() {
   professionalSection.style.overflowY =
     professionalSection.scrollHeight > professionalSection.clientHeight ? 'auto' : 'hidden';
 }
+
+/* EXPERIENCE SCROLL RESET — BEGIN */
+// The Experience section has an independent scroll position. When navigating
+// away and back, ensure its first item is visible below the fixed header.
+(function () {
+  function setupExperienceScrollReset() {
+    const section = document.getElementById('professional');
+    if (!section) return;
+    function reset() {
+      if (section.classList.contains('active')) {
+        section.scrollTop = 0;
+        requestAnimationFrame(() => { section.scrollTop = 0; });
+      }
+    }
+    const observer = new MutationObserver(records => {
+      if (records.some(record => record.attributeName === 'class') &&
+          section.classList.contains('active')) reset();
+    });
+    observer.observe(section, { attributes: true, attributeFilter: ['class'] });
+    if (section.classList.contains('active')) reset();
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', setupExperienceScrollReset, { once: true });
+  } else {
+    setupExperienceScrollReset();
+  }
+})();
+/* EXPERIENCE SCROLL RESET — END */
