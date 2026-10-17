@@ -1602,7 +1602,7 @@ body #life.page-section {
   margin: 0 0 30px;
   padding: 0;
   font-family: Georgia, 'Times New Roman', serif;
-  font-size: clamp(16px, 2vw, 19px);
+  font-size: 14px;
   font-weight: 400;
   line-height: 1.5;
   color: var(--text);
@@ -1633,7 +1633,7 @@ body #life.page-section {
 .case-study > .project-breadcrumb > .breadcrumb-separator { color: var(--muted); }
 .case-study > .project-breadcrumb > .breadcrumb-current { color: var(--text); font-weight: 600; }
 @media (max-width: 600px) {
-  .case-study > .project-breadcrumb { font-size: 15px; gap: 0.4em; margin-bottom: 22px; }
+  .case-study > .project-breadcrumb { font-size: 14px; gap: 0.4em; margin-bottom: 22px; }
 }
 /* END project breadcrumb alignment fix */
 
