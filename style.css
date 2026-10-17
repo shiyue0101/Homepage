@@ -3162,3 +3162,26 @@ body .case-study {
   -webkit-backdrop-filter: none !important;
 }
 /* END: transparent collapsed project TOC */
+
+/* EXPERIENCE PROJECT TOC HIGHLIGHT — START */
+/* Only changes selection and hover colors; leaves layout unchanged. */
+#professional .prof-list-item.selected,
+#professional .prof-list-item.selected:hover {
+  background: rgba(119, 53, 72, 0.11) !important;
+  color: #773548 !important;
+  border-left-color: #773548 !important;
+}
+#professional .prof-list-item.selected .prof-list-sub {
+  color: #773548 !important;
+}
+#professional .prof-list-item:not(.selected):hover {
+  background: rgba(119, 53, 72, 0.055) !important;
+  color: #773548;
+}
+/* Existing tablet CSS changes the active indicator to a top border. */
+@media (min-width: 761px) and (max-width: 900px) {
+  #professional .prof-list-item.selected {
+    border-top-color: #773548 !important;
+  }
+}
+/* EXPERIENCE PROJECT TOC HIGHLIGHT — END */
