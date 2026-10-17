@@ -22,6 +22,7 @@
       background: var(--background, #e8c6c1);
     }
   </style>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
   <header class="site-header">
@@ -229,7 +230,20 @@
           <label for="contact-redesign-company">Leave this field empty</label>
           <input id="contact-redesign-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
         </div>
-        <button type="submit">Send</button>
+        <div class="contact-turnstile-send-row">
+          <div class="contact-turnstile-wrap" data-contact-turnstile="1">
+          <div
+            class="cf-turnstile"
+            data-sitekey="0x4AAAAAAFZAdynZh8qaA9hB"
+            data-theme="light"
+            data-size="compact"
+            data-language="en"
+            data-appearance="interaction-only">
+          </div>
+          <p class="contact-turnstile-error" id="contact-turnstile-error" role="alert" hidden></p>
+        </div>
+          <button type="submit">Send</button>
+        </div>
       </form>
     </div>
   </div>
@@ -384,5 +398,6 @@
 })();
 </script>
 <!-- CONTACT REQUIRED VALIDATION END -->
+  <script defer src="/contact-turnstile.js"></script>
 </body>
 </html>

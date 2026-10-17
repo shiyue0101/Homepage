@@ -2769,3 +2769,71 @@ body .case-study {
   }
 }
 /* END CONTACT FORM COMPACT TYPOGRAPHY */
+
+
+/* CONTACT TURNSTILE START */
+#contact .contact-turnstile-wrap {
+  margin: 16px 0 18px;
+  max-width: 100%;
+}
+#contact .contact-turnstile-wrap .cf-turnstile { max-width: 100%; }
+#contact .contact-turnstile-error,
+#contact .contact-turnstile-field-error {
+  margin: 5px 0 9px;
+  padding: 0;
+  color: var(--accent, #873b52);
+  font-size: 0.82rem;
+  line-height: 1.35;
+  font-weight: 400;
+}
+#contact .contact-turnstile-error[hidden],
+#contact .contact-turnstile-field-error[hidden] { display: none !important; }
+#contact .contact-redesign-form button[type="submit"]:disabled {
+  cursor: wait;
+  opacity: .65;
+}
+/* CONTACT TURNSTILE END */
+
+
+/* Align Cloudflare Turnstile to the right */
+#contact .cf-turnstile {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+/* Keep verification centered on narrow screens */
+@media (max-width: 360px) {
+  #contact .cf-turnstile {
+    justify-content: center;
+  }
+}
+
+/* CONTACT TURNSTILE SEND ALIGN START */
+#contact .contact-turnstile-send-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 16px;
+  width: 100%;
+  margin-top: 16px;
+}
+#contact .contact-turnstile-send-row .contact-turnstile-wrap {
+  margin: 0;
+  flex: 0 1 auto;
+  min-width: 0;
+}
+#contact .contact-turnstile-send-row button[type="submit"] {
+  flex: 0 0 auto;
+  margin: 0;
+}
+@media (max-width: 560px) {
+  #contact .contact-turnstile-send-row {
+    gap: 12px;
+  }
+  #contact .contact-turnstile-send-row .contact-turnstile-wrap {
+    width: 100%;
+  }
+}
+/* CONTACT TURNSTILE SEND ALIGN END */
