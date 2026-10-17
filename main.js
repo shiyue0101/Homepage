@@ -172,10 +172,6 @@ document.addEventListener('DOMContentLoaded', function () {
 // 监听浏览器前进后退
 window.addEventListener('popstate', () => handleRoute());
 
-// 齿轮按钮（预留功能）
-document.getElementById('gear-btn').addEventListener('click', () => {
-  alert('Settings coming soon!');
-});
 
 // 像素星星样式
 const style = document.createElement('style');
