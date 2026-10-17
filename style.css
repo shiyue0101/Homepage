@@ -2458,7 +2458,7 @@ body .case-study {
 /* Move the entire Contact form slightly upward */
 @media (min-width: 901px) {
   #contact .contact-redesign > :last-child {
-    transform: translateY(-24px);
+    transform: translateY(-22px);
   }
 }
 
@@ -2639,3 +2639,133 @@ body .case-study {
   #contact .contact-send-toast { transition: none; }
 }
 /* END contact-no-redirect-v2 */
+
+/* BEGIN CONTACT ENGLISH INLINE VALIDATION */
+#contact .contact-inline-error {
+  display: block;
+  min-height: 0;
+  margin: 0;
+  color: #873b52;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.4;
+}
+#contact .contact-inline-error:not(:empty) {
+  padding-top: 7px;
+  padding-bottom: 7px;
+}
+#contact .contact-field-invalid {
+  border-bottom-color: #873b52;
+}
+#contact .contact-field-invalid:focus {
+  outline: none;
+  border-bottom-color: #873b52;
+}
+.contact-inline-toast {
+  position: fixed;
+  z-index: 100010;
+  left: 50%;
+  bottom: 28px;
+  transform: translate(-50%, 14px);
+  max-width: min(440px, calc(100vw - 32px));
+  padding: 14px 22px;
+  background: #432f32;
+  color: #fff;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(67, 47, 50, .2);
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+.contact-inline-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+.contact-inline-toast.is-error { background: #783849; }
+/* END CONTACT ENGLISH INLINE VALIDATION */
+
+/* BEGIN CONTACT VALIDATION V2 */
+#contact .contact-inline-error {
+  display: block;
+  margin: 0;
+  padding: 0;
+  font-family: inherit;
+  font-size: 0.82rem;
+  font-weight: 400;
+  line-height: 1.45;
+  color: var(--accent, #873b52);
+}
+#contact .contact-inline-error:not(:empty) { padding: 7px 0 4px; }
+#contact .contact-field-invalid { border-bottom-color: var(--accent, #873b52) !important; }
+.contact-english-toast {
+  position: fixed;
+  z-index: 100010;
+  bottom: 28px;
+  left: 50%;
+  transform: translate(-50%, 12px);
+  max-width: min(460px, calc(100vw - 32px));
+  padding: 13px 20px;
+  background: #432f32;
+  color: #fff;
+  font-family: inherit;
+  font-size: 0.92rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(67, 47, 50, .20);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .2s ease, transform .2s ease;
+}
+.contact-english-toast.is-visible { opacity: 1; transform: translate(-50%, 0); }
+.contact-english-toast.is-error { background: #783849; }
+/* END CONTACT VALIDATION V2 */
+
+/* BEGIN CONTACT FORM COMPACT TYPOGRAPHY */
+/* A slightly smaller, more cohesive Contact form. */
+#contact .contact-redesign-form label {
+  font-size: 0.84rem;
+  line-height: 1.35;
+  margin-top: 10px;
+  margin-bottom: 0;
+}
+#contact .contact-redesign-form input,
+#contact .contact-redesign-form textarea {
+  font-size: 1rem;
+  line-height: 1.5;
+  padding-top: 9px;
+  padding-bottom: 11px;
+  margin-bottom: 13px;
+}
+#contact .contact-redesign-form input::placeholder,
+#contact .contact-redesign-form textarea::placeholder {
+  font-size: 1rem;
+}
+/* The error is inserted directly after its field by contact-validation-v2.js. */
+#contact .contact-redesign-form input.contact-field-invalid,
+#contact .contact-redesign-form textarea.contact-field-invalid {
+  margin-bottom: 2px;
+}
+#contact .contact-redesign-form .contact-inline-error {
+  font-size: 0.78rem;
+  line-height: 1.35;
+  margin: 0;
+  padding: 0;
+}
+#contact .contact-redesign-form .contact-inline-error:not(:empty) {
+  padding: 2px 0 3px;
+  margin-bottom: 8px;
+}
+@media (max-width: 600px) {
+  #contact .contact-redesign-form input,
+  #contact .contact-redesign-form textarea,
+  #contact .contact-redesign-form input::placeholder,
+  #contact .contact-redesign-form textarea::placeholder {
+    font-size: 1rem; /* Keep readable on iPhone and avoid Safari input zoom. */
+  }
+}
+/* END CONTACT FORM COMPACT TYPOGRAPHY */

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<script src="/contact-validation.js?v=2"></script>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yue's Homepage</title>
@@ -208,7 +209,7 @@
     </div>
     <div class="contact-redesign-formarea">
       <p class="contact-redesign-note">Or leave me a message</p>
-      <form id="contact-redesign-form" class="contact-redesign-form" action="https://formspree.io/f/mbgdwrgo" method="POST">
+      <form id="contact-redesign-form" class="contact-redesign-form" action="https://formspree.io/f/mbgdwrgo" method="POST" novalidate>
         <div class="contact-name-row">
           <div class="contact-name-field">
             <label for="contact-redesign-first-name">First Name</label>
@@ -228,7 +229,7 @@
           <label for="contact-redesign-company">Leave this field empty</label>
           <input id="contact-redesign-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
         </div>
-        <button type="submit">Send Message <span aria-hidden="true">↗</span></button>
+        <button type="submit">Send</button>
       </form>
     </div>
   </div>
@@ -341,6 +342,47 @@
   <div id="typewriter-tip">Tip: Press Ctrl (⌃) to instantly show all text.</div>
   <script defer src="/contact-protection.js"></script>
   <!-- contact-no-redirect-v2 -->
-  <script defer src="/contact-formspree.js"></script>
+<!-- CONTACT REQUIRED VALIDATION START -->
+<script>
+(() => {
+  const init = () => {
+    const form = document.getElementById('contact-redesign-form');
+    if (!form || form.dataset.requiredCheckReady === '1') return;
+    form.dataset.requiredCheckReady = '1';
+    const fields = [
+      'contact-redesign-first-name',
+      'contact-redesign-last-name',
+      'contact-redesign-email',
+      'contact-redesign-message'
+    ].map(id => document.getElementById(id)).filter(Boolean);
+
+    // Clear errors while typing; treat whitespace-only values as empty.
+    fields.forEach(field => {
+      field.addEventListener('input', () => field.setCustomValidity(''));
+    });
+
+    // Capture phase runs before existing Formspree submit handler.
+    form.addEventListener('submit', event => {
+      fields.forEach(field => {
+        field.setCustomValidity('');
+        if (!field.value.trim()) {
+          field.setCustomValidity('Please fill out this field.');
+        }
+      });
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        form.reportValidity();
+      }
+    }, true);
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init, { once: true });
+  } else {
+    init();
+  }
+})();
+</script>
+<!-- CONTACT REQUIRED VALIDATION END -->
 </body>
 </html>
