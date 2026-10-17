@@ -2453,3 +2453,34 @@ body .case-study {
     font-size: 16px;
   }
 }
+
+
+/* Move the entire Contact form slightly upward */
+@media (min-width: 901px) {
+  #contact .contact-redesign > :last-child {
+    transform: translateY(-28px);
+  }
+}
+
+/* CONTACT-PROTECTION-V1: clean contact information rows only */
+#contact .contact-info-row > svg,
+#contact .contact-info-row > i,
+#contact .contact-detail > svg,
+#contact .contact-detail > i,
+#contact .contact-item > svg,
+#contact .contact-item > i,
+#contact .contact-line > svg,
+#contact .contact-line > i,
+#contact .contact-method > svg,
+#contact .contact-method > i {
+  display: none;
+}
+#contact .protected-contact-link {
+  color: inherit;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+#contact .protected-contact-link:hover {
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
