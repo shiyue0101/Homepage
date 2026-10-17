@@ -1635,3 +1635,62 @@ body #life.page-section {
   .case-study > .project-breadcrumb { font-size: 15px; gap: 0.4em; margin-bottom: 22px; }
 }
 /* END project breadcrumb alignment fix */
+
+/* CAT PAW LOADER START */
+/* Scoped to the existing overlay; original show/hide logic stays unchanged. */
+#loading-overlay .cat-paw-loading {
+  width: min(88vw, 420px);
+  font-family: Georgia, 'Times New Roman', serif;
+  text-align: center;
+  color: var(--accent, #773548);
+}
+#loading-overlay .cat-paw-track {
+  position: relative;
+  height: 112px;
+  width: 100%;
+  margin: 0 auto;
+}
+#loading-overlay .cat-paw-step {
+  position: absolute;
+  width: 32px;
+  height: 37px;
+  opacity: 0;
+  transform-origin: center;
+
+  animation-name: catwalk-step;
+  animation-duration: 1s;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+}
+#loading-overlay .cat-paw-icon {
+  display: block;
+  width: 100%;
+  height: 100%;
+  fill: currentColor;
+}
+/* Facing right: clockwise ~90deg; alternating slight inward/outward angles. */
+#loading-overlay .cat-paw-step:nth-child(odd) { top: 12px; transform: rotate(78deg); }
+#loading-overlay .cat-paw-step:nth-child(even) { top: 62px; transform: rotate(102deg); }
+#loading-overlay .cat-paw-step:nth-child(1) { left: 4%;  animation-delay: 0s; }
+#loading-overlay .cat-paw-step:nth-child(2) { left: 19%; animation-delay: .1s; }
+#loading-overlay .cat-paw-step:nth-child(3) { left: 35%; animation-delay: .2s; }
+#loading-overlay .cat-paw-step:nth-child(4) { left: 51%; animation-delay: .3s; }
+#loading-overlay .cat-paw-step:nth-child(5) { left: 67%; animation-delay: .4s; }
+#loading-overlay .cat-paw-step:nth-child(6) { left: 83%; animation-delay: .5s; }
+@keyframes catwalk-step {
+  0%, 4% {opacity: 0;}
+  10%, 40% {opacity: 1;}
+  65% {opacity: 0.4;}
+  90%, 100% {opacity: 0;}
+}
+#loading-overlay .cat-paw-loading .loading-text {
+  margin-top: 18px;
+  font-size: 1rem;
+  letter-spacing: 2px;
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  #loading-overlay .cat-paw-step { animation: none; opacity: .75; }
+}
+/* CAT PAW LOADER END */
