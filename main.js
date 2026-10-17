@@ -227,7 +227,7 @@ const professionalDetails = {
     itu: {
         title: 'IT University of Copenhagen',
         date: '08/2025 – 12/2025',
-        role: 'Teaching Assistant for Distributed Systems',
+        role: 'Teaching Assistant for <a href="https://learnit.itu.dk/local/coursebase/view.php?s=ft&amp;view=public&amp;ciid=1785" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Distributed Systems</a>',
         desc: [
             'Guided students through weekly exercises and live coding sessions, helping them understand technical concepts and complete programming assignments',
             'Participated in weekly teaching team meetings to coordinate teaching activities, share observations from grading, and adjust support strategies for students'
@@ -236,7 +236,7 @@ const professionalDetails = {
   cph: {
     title: 'University of Copenhagen, Department of Computer Science',
     date: '02/2025 – 04/2025',
-    role: 'Teaching Assistant for Advanced Topics in Human-Centered Computing',
+    role: 'Teaching Assistant for <a href="https://kurser.ku.dk/course/ndak15012u/2024-2025" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Advanced Topics in Human-Centered Computing</a>',
     desc: [
       'Supported students by discussing course topics and answering questions during class sessions and office hours',
       'Co-graded and provided detailed feedback on 4 assignments for 43 students in collaboration with another teaching assistant'
@@ -254,7 +254,7 @@ const professionalDetails = {
   tongji: {
     title: 'Tongji University Art Centre',
     date: '03/2020 – 08/2022',
-    role: 'Student Job, Assistant of Art Centre and Deputy Leader of Art Troupe',
+    role: 'Student Job, Assistant of Art Centre \& Student Leader of Art Troupe',
     desc: [
       'Wrote and typeset articles for the official account to promote campus art activities, increasing followers from 6,295 to 15,754 within one year',
       'Conducted an online survey on improving school art events and analyzed 882 valid responses to identify preferences for activity types and timing among students and teachers'
