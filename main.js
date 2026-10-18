@@ -22,10 +22,23 @@ document.addEventListener('DOMContentLoaded', () => {
   ].join('\n\n');
   const introText = document.getElementById('intro-text');
   let position = 0;
-  const timer = setInterval(() => {
-    introText.textContent = text.slice(0, ++position);
-    if (position >= text.length) finish();
-  }, 15);
+  // CAT TYPEWRITER SYNC BEGIN
+  // The cat animation must finish before the first letter is typed.
+  let timer = null;
+  let started = false;
+  let watchdog = null;
+  const onCatFinished = () => startTyping();
+  function startTyping() {
+    if (started) return;
+    started = true;
+    clearTimeout(watchdog);
+    window.removeEventListener('cat-entrance-complete', onCatFinished);
+    timer = setInterval(() => {
+      introText.textContent = text.slice(0, ++position);
+      if (position >= text.length) finish();
+    }, 15);
+    window.addEventListener('keydown', skip);
+  }
   function finish() {
     clearInterval(timer);
     introText.textContent = text;
@@ -34,7 +47,19 @@ document.addEventListener('DOMContentLoaded', () => {
   function skip(event) {
     if (event.ctrlKey) finish();
   }
-  window.addEventListener('keydown', skip);
+  const home = location.pathname.replace(/\/+$/, '') === '';
+  const motionAllowed = !window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const catInstalled = !!document.querySelector('script[src*="cat_entrance_assets/cat-entrance.js"]');
+  const supportedHash = ['', '#home', '#/', '#!/home', '#!/', '#top'].includes(decodeURIComponent(location.hash).toLowerCase());
+  if (home && motionAllowed && catInstalled && supportedHash) {
+    introText.textContent = '';
+    window.addEventListener('cat-entrance-complete', onCatFinished, { once: true });
+    // Fail-safe: a failed animation should never hide the introduction forever.
+    watchdog = setTimeout(startTyping, 12000);
+  } else {
+    startTyping();
+  }
+  // CAT TYPEWRITER SYNC END
 });
 
 const sections = {
