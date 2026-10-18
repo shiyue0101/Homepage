@@ -18,6 +18,8 @@
   if (!ctx) { stage.remove(); return; }
 
   const scriptUrl = document.currentScript?.src || new URL('cat_entrance_assets/cat-entrance.js', location.href).href;
+  const yarnBallImg = new Image();
+  yarnBallImg.src = new URL('yarn-ball.png?v=rose-20261018', scriptUrl).href;
   const imgs = Array.from({length: 6}, (_, i) => {
     const img = new Image();
     img.src = new URL(`cat-frame-${i+1}.png`, scriptUrl).href;
@@ -43,25 +45,25 @@
     return { x, y };
   }
 
+    // YARN_BALL_IMAGE_PATCH_V2
   function drawBall(x, y, angle, r) {
+    if (yarnBallImg.complete && yarnBallImg.naturalWidth > 0) {
+      const size = r * 3.2;
+      ctx.save();
+      ctx.translate(x, y);
+      ctx.rotate(angle);
+      ctx.drawImage(yarnBallImg, -size / 2, -size / 2, size, size);
+      ctx.restore();
+      return;
+    }
+    // Simple fallback while the PNG loads.
     ctx.save();
     ctx.translate(x, y);
     ctx.rotate(angle);
-    ctx.fillStyle = '#b97688';
-    ctx.strokeStyle = '#925668';
-    ctx.lineWidth = 1.6;
+    ctx.fillStyle = '#f19aa0';
     ctx.beginPath();
-    ctx.arc(0, 0, r, 0, Math.PI * 2);
+    ctx.arc(0, 0, r * 1.5, 0, Math.PI * 2);
     ctx.fill();
-    ctx.stroke();
-    ctx.strokeStyle = '#f7d6dd';
-    ctx.lineCap = 'round';
-    ctx.lineWidth = 2;
-    for (let k = 0; k < 5; k++) {
-      ctx.beginPath();
-      ctx.ellipse(0, 0, r * 0.78, r * (0.18 + k * 0.11), (0.3 + k * 0.42), 0, Math.PI * 2);
-      ctx.stroke();
-    }
     ctx.restore();
   }
 
