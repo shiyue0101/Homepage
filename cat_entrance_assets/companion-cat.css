@@ -1,0 +1,3 @@
+#companion-cat-stage{position:fixed;inset:0;z-index:1200;pointer-events:none;overflow:hidden}
+#companion-cat-sprite{position:absolute;width:clamp(190px,19vw,290px);height:auto;opacity:0;will-change:left,bottom,transform,opacity;image-rendering:auto}
+@media (max-width:980px),(prefers-reduced-motion:reduce){#companion-cat-stage{display:none!important}}

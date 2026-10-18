@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function startTyping() {
     if (started) return;
     started = true;
+    window.dispatchEvent(new Event('home-typewriter-start'));
     clearTimeout(watchdog);
     window.removeEventListener('cat-entrance-complete', onCatFinished);
     timer = setInterval(() => {
