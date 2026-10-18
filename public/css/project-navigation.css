@@ -1,0 +1,246 @@
+/* PROJECT_FLOATING_TOC_V2_START */
+/* Independent floating navigation; original inline TOC stays available on small screens. */
+.project-floating-toc {
+  position: fixed;
+  z-index: 2050;
+  top: calc(var(--header-height, 76px) + 28px);
+  right: 18px;
+  width: 230px;
+  max-height: calc(100dvh - var(--header-height, 76px) - 55px);
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid rgba(119,53,72,.25);
+  border-radius: 14px;
+  background: rgba(255,247,242,.93);
+  box-shadow: 0 8px 24px rgba(89,48,58,.12);
+  backdrop-filter: blur(9px);
+  -webkit-backdrop-filter: blur(9px);
+  overflow: hidden;
+  font-family: inherit;
+}
+.project-floating-toc-title { padding: 14px 16px 8px; color: var(--accent); font-size: 12px; font-weight: bold; letter-spacing: .08em; }
+.project-floating-toc-links { display: flex; flex-direction: column; gap: 2px; padding: 0 9px 12px; overflow-y: auto; overscroll-behavior: contain; }
+.project-floating-toc a { display: block; padding: 7px 9px; border-left: 3px solid transparent; border-radius: 5px; color: var(--text); font-size: 13px; line-height: 1.4; text-decoration: none; overflow-wrap: anywhere; }
+.project-floating-toc a:hover { background: var(--surface-soft); }
+.project-floating-toc a[aria-current="location"] { border-left-color: var(--accent); color: var(--accent); background: rgba(233,179,184,.22); font-weight: bold; }
+.project-floating-toc-toggle { display: none; }
+.case-study section[id] { scroll-margin-top: calc(var(--header-height, 76px) + 24px); }
+@media (min-width: 1350px) {
+  .case-study > .case-toc { display: none; }
+}
+/* In narrower desktop widths, use a compact visible button instead of covering the article. */
+@media (min-width: 1050px) and (max-width: 1349px) {
+  .project-floating-toc { width: 230px; right: 14px; }
+  .project-floating-toc:not(.is-open) { width: 46px; max-height: 46px; }
+  .project-floating-toc-toggle { display: block; border: 0; background: transparent; color: var(--accent); font-size: 23px; cursor: pointer; min-height: 45px; }
+  .project-floating-toc:not(.is-open) .project-floating-toc-title,
+  .project-floating-toc:not(.is-open) .project-floating-toc-links { display: none; }
+  .project-floating-toc.is-open .project-floating-toc-toggle { align-self: flex-end; padding: 2px 13px; }
+  .project-floating-toc:not(.is-open) .project-floating-toc-toggle { width: 46px; }
+}
+@media (max-width: 1049px) { .project-floating-toc { display: none; } }
+/* PROJECT_FLOATING_TOC_V2_END */
+
+/* NOTION_TOC_HOVER_COLLAPSE_START */
+/* Fixed-size menu: revealing via clip-path avoids width/height reflow. */
+@media (min-width: 1050px) and (hover: hover) and (pointer: fine) {
+  .project-floating-toc,
+  .project-floating-toc:not(.is-open),
+  .project-floating-toc.is-open {
+    position: fixed !important;
+    top: calc(var(--header-height, 76px) + 28px) !important;
+    right: 16px !important;
+    width: 246px !important;
+    height: min(490px, calc(100dvh - var(--header-height, 76px) - 55px)) !important;
+    max-height: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    box-sizing: border-box !important;
+    padding: 0 !important;
+    overflow: hidden !important;
+    border: 1px solid rgba(119, 53, 72, .25) !important;
+    border-radius: 12px !important;
+    background: rgba(255, 247, 242, .97) !important;
+    box-shadow: 0 8px 24px rgba(89, 48, 58, .12) !important;
+    /* Only the final 34px are visible and receive hover events. */
+    clip-path: inset(0 0 0 calc(100% - 34px) round 12px);
+    transition: clip-path .2s ease !important;
+  }
+  .project-floating-toc::before {
+    content: '';
+    position: absolute;
+    top: 18px;
+    right: 8px;
+    width: 16px;
+    height: 205px;
+    background: repeating-linear-gradient(
+      to bottom,
+      rgba(119, 53, 72, .6) 0px,
+      rgba(119, 53, 72, .6) 2px,
+      transparent 2px,
+      transparent 15px
+    );
+    pointer-events: none;
+    opacity: 1;
+    transition: opacity .12s ease;
+    z-index: 2;
+  }
+  .project-floating-toc .project-floating-toc-title,
+  .project-floating-toc .project-floating-toc-links {
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity .14s ease, visibility .14s ease;
+  }
+  .project-floating-toc .project-floating-toc-links {
+    display: flex !important;
+    flex-direction: column !important;
+    flex: 1 1 auto;
+    min-height: 0;
+    overflow-y: auto;
+  }
+  .project-floating-toc .project-floating-toc-toggle {
+    display: none !important;
+  }
+  .project-floating-toc:hover,
+  .project-floating-toc:focus-within {
+    clip-path: inset(0 0 0 0 round 12px);
+  }
+  .project-floating-toc:hover::before,
+  .project-floating-toc:focus-within::before {
+    opacity: 0;
+  }
+  .project-floating-toc:hover .project-floating-toc-title,
+  .project-floating-toc:hover .project-floating-toc-links,
+  .project-floating-toc:focus-within .project-floating-toc-title,
+  .project-floating-toc:focus-within .project-floating-toc-links {
+    visibility: visible;
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+/* NOTION_TOC_HOVER_COLLAPSE_END */
+
+/* BEGIN: transparent collapsed project TOC */
+/* 收起状态：只留目录短线，不显示底色、边框、阴影或毛玻璃。 */
+.project-floating-toc:not(:hover):not(:focus-within) {
+  background: transparent !important;
+  background-color: transparent !important;
+  background-image: none !important;
+  border: 0 !important;
+  outline: 0 !important;
+  box-shadow: none !important;
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
+}
+/* END: transparent collapsed project TOC */
+
+/* EXPERIENCE PROJECT TOC HIGHLIGHT — START */
+/* Only changes selection and hover colors; leaves layout unchanged. */
+#professional .prof-list-item.selected,
+#professional .prof-list-item.selected:hover {
+  background: rgba(119, 53, 72, 0.11) !important;
+  color: #773548 !important;
+  border-left-color: #773548 !important;
+}
+#professional .prof-list-item.selected .prof-list-sub {
+  color: #773548 !important;
+}
+#professional .prof-list-item:not(.selected):hover {
+  background: rgba(119, 53, 72, 0.055) !important;
+  color: #773548;
+}
+/* Existing tablet CSS changes the active indicator to a top border. */
+@media (min-width: 761px) and (max-width: 900px) {
+  #professional .prof-list-item.selected {
+    border-top-color: #773548 !important;
+  }
+}
+/* EXPERIENCE PROJECT TOC HIGHLIGHT — END */
+
+/* BEGIN MATCH LIFE TOP SPACING */
+/* Match Life page: 56px desktop, 32px on small screens.
+   Do not change horizontal gutters, header transparency or page interactions. */
+body #professional.page-section,
+body #professional.page-section.active,
+body #contact.page-section,
+body #contact.page-section.active {
+  padding-top: 56px !important;
+}
+
+@media (max-width: 600px) {
+  body #professional.page-section,
+  body #professional.page-section.active,
+  body #contact.page-section,
+  body #contact.page-section.active {
+    padding-top: 32px !important;
+  }
+}
+/* END MATCH LIFE TOP SPACING */
+
+/* BEGIN: LIFE-MATCHED GAP BELOW HEADER */
+/* top: 0 keeps content scrolling under the translucent fixed header.
+   The visible gap BELOW that header is 56px desktop / 32px mobile. */
+body #professional.page-section,
+body #professional.page-section.active,
+body #contact.page-section,
+body #contact.page-section.active {
+  top: 0 !important;
+  bottom: 0;
+  height: auto;
+  box-sizing: border-box;
+  padding-top: calc(var(--header-height) + 56px) !important;
+  justify-content: flex-start;
+}
+
+@media (max-width: 600px) {
+  body #professional.page-section,
+  body #professional.page-section.active,
+  body #contact.page-section,
+  body #contact.page-section.active {
+    padding-top: calc(var(--header-height) + 32px) !important;
+  }
+}
+/* END: LIFE-MATCHED GAP BELOW HEADER */
+
+/* TOC_REVERSE_COLLAPSE_ONLY_START */
+@media (min-width: 1050px) and (hover: hover) and (pointer: fine) {
+  .project-floating-toc .project-floating-toc-title,
+  .project-floating-toc .project-floating-toc-links {
+    transition: opacity .14s ease, visibility 0s linear .2s !important;
+  }
+  .project-floating-toc:hover .project-floating-toc-title,
+  .project-floating-toc:hover .project-floating-toc-links,
+  .project-floating-toc:focus-within .project-floating-toc-title,
+  .project-floating-toc:focus-within .project-floating-toc-links {
+    transition: opacity .14s ease, visibility 0s linear 0s !important;
+  }
+}
+/* TOC_REVERSE_COLLAPSE_ONLY_END */
+
+/* TOC_FINAL_SOFT_FADE_V2_START */
+/* Only the closing state is overridden. Hover/focus opening remains original. */
+@media (min-width: 1050px) and (hover: hover) and (pointer: fine) {
+  .project-floating-toc:not(:hover):not(:focus-within) {
+    /* Keep border geometry so its COLOR, not its width, fades. */
+    border: 1px solid transparent !important;
+    background-color: transparent !important;
+    box-shadow: 0 8px 24px rgba(89, 48, 58, 0) !important;
+    /* Original clip closes for .2s. Fade only during its final .1s. */
+    transition:
+      clip-path .2s ease,
+      background-color .10s ease-out .12s,
+      border-color .10s ease-out .12s,
+      box-shadow .10s ease-out .12s !important;
+  }
+  .project-floating-toc:not(:hover):not(:focus-within) .project-floating-toc-title,
+  .project-floating-toc:not(:hover):not(:focus-within) .project-floating-toc-links {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s step-end, visibility 0s linear .2s !important;
+  }
+  /* The opening transition is intentionally NOT changed. */
+}
+/* TOC_FINAL_SOFT_FADE_V2_END */

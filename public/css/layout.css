@@ -1,0 +1,99 @@
+/* HEADER SCROLL-THROUGH PATCH START */
+/* Header stays readable while content can show through during scrolling. */
+.site-header {
+  background: rgba(239, 217, 213, 0.65) !important;
+  backdrop-filter: blur(2px);
+  -webkit-backdrop-filter: blur(2px);
+}
+
+/* Life has its own fixed scroll container; extend it behind the header. */
+body #life.page-section {
+  top: 0 !important;
+  padding-top: calc(var(--header-height) + 56px) !important;
+}
+
+@media (max-width: 600px) {
+  body #life.page-section {
+    padding-top: calc(var(--header-height) + 32px) !important;
+  }
+}
+/* HEADER SCROLL-THROUGH PATCH END */
+
+/* TRANSLUCENT HEADER ALL PAGES — START */
+/* The navigation stays on top; scrolled text/images can pass behind it. */
+.site-header {
+  background: rgba(239, 217, 213, 0.65) !important;
+  -webkit-backdrop-filter: blur(2px);
+  backdrop-filter: blur(2px);
+}
+
+/* Scrollports must begin at the viewport top, not below the header. */
+body #projects.page-section,
+body #professional.page-section,
+body #professional.page-section.active,
+body #life.page-section,
+body #contact.page-section {
+  top: 0 !important;
+  bottom: 0 !important;
+  height: auto !important;
+  box-sizing: border-box;
+  scroll-padding-top: calc(var(--header-height) + 12px);
+}
+
+/* Preserve each page's original initial visual spacing. */
+body #projects.page-section {
+  padding-top: calc(var(--header-height) + 40px) !important;
+}
+body #life.page-section {
+  padding-top: calc(var(--header-height) + 56px) !important;
+}
+body #professional.page-section,
+body #professional.page-section.active {
+  padding-top: calc(var(--header-height) + clamp(100px, 14vh, 145px)) !important;
+}
+body #contact.page-section {
+  padding-top: calc(var(--header-height) + clamp(32px, 6vw, 96px)) !important;
+}
+
+@media (max-width: 1000px) {
+  body #professional.page-section,
+  body #professional.page-section.active {
+    padding-top: calc(var(--header-height) + 24px) !important;
+  }
+}
+@media (max-width: 760px) {
+  body #professional.page-section,
+  body #professional.page-section.active {
+    padding-top: calc(var(--header-height) + 20px) !important;
+  }
+}
+@media (max-width: 600px) {
+  body #projects.page-section {
+    padding-top: calc(var(--header-height) + 28px) !important;
+  }
+  body #life.page-section {
+    padding-top: calc(var(--header-height) + 32px) !important;
+  }
+  body #contact.page-section {
+    padding-top: calc(var(--header-height) + 26px) !important;
+  }
+}
+/* TRANSLUCENT HEADER ALL PAGES — END */
+
+/* PROJECT DETAIL MARGINS FIX START */
+/* Same content width and viewport gutters as other pages. */
+body .case-study {
+  box-sizing: border-box;
+  width: calc(100% - 2 * var(--page-gutter));
+  max-width: var(--page-content-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+/* PROJECT DETAIL MARGINS FIX END */
+
+/* Hide bottom breadcrumb on all project detail pages */
+.case-study > .case-breadcrumb {
+  display: none !important;
+}

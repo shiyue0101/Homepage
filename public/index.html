@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Yue's Homepage</title>
+  <link rel="stylesheet" href="/css/styles.css">
+  <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* initial-route-loading-guard */
+    html:not(.site-ready) #loading-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 99999;
+      display: flex !important;
+      align-items: center;
+      justify-content: center;
+      opacity: 1 !important;
+      visibility: visible !important;
+      pointer-events: auto !important;
+      background: var(--background, #e8c6c1);
+    }
+  </style>
+  <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+  <link rel="stylesheet" href="/css/cat-entrance.css">
+    <link rel="stylesheet" href="/css/companion-cat.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="site-brand" href="/" data-nav-page="home">Yue Shi</a>
+    <nav class="site-nav" aria-label="Main navigation">
+      <a href="/assets/CV.pdf" target="_blank" rel="noopener noreferrer" aria-label="CV (PDF, opens in a new tab)">CV</a>
+      <a href="/projects" data-nav-page="projects">Projects</a>
+      <a href="/professional" data-nav-page="professional">Experience</a>
+      <a href="/life" data-nav-page="life">Life</a>
+      <a href="/contact" data-nav-page="contact">Contact</a>
+    </nav>
+  </header>
+  <div id="star-bg"></div>
+  <div id="loading-overlay" class="hidden">
+    <div class="loading-content cat-paw-loading" role="status" aria-live="polite" aria-label="Loading">
+        <div class="cat-paw-track" aria-hidden="true">
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+        </div>
+        <div class="loading-text">Loading...</div>
+      </div>
+  </div>
+  <div id="main">
+    <div id="right">
+      <div id="intro-dialog" class="pixel-dialog">
+        <span id="intro-text"></span><span class="blinking-cursor">|</span>
+      </div>
+    </div>
+  </div>
+
+
+  <section id="projects" class="page-section hidden" aria-label="Projects">
+    <div class="projects-grid">
+      <a class="project-card" href="/projects/purrpost.html" aria-label="Not Alone, Just Apart — View the PurrPost project">
+        <img src="/assets/purrpost-cover.jpg" alt="PurrPost concept sketch showing voice messages between a phone and a connected cat bed" width="1600" height="1600">
+        <div class="project-card-overlay">
+          <h2>Not Alone, Just Apart</h2>
+          <p class="project-card-subtitle">Designing PurrPost to Mitigate Pet-Owner Separation Anxiety</p>
+          <p class="project-card-duration">01/2025 – 06/2025</p>
+        </div>
+      </a>
+      <a class="project-card" href="/projects/masking-ball.html" aria-label="Masking Ball — View project">
+        <img src="/assets/masking-ball-cover.jpg" alt="Masking Ball project cover">
+        <div class="project-card-overlay"><h2>Masking Ball</h2><p class="project-card-subtitle">A Critical Artefact for Reflecting on Neurodiversity and Inclusive Environments</p><p class="project-card-duration">02/2024 – 06/2024</p></div>
+      </a>
+      <a class="project-card" href="/projects/turn-taking-band.html" aria-label="Turn-Taking Band — View project">
+        <img src="/assets/turn-taking-band-cover.jpg" alt="Turn-Taking Band project cover">
+        <div class="project-card-overlay"><h2>Turn-Taking Band</h2><p class="project-card-subtitle">A Wearable Device Supporting Turn-Takings in Hybrid Settings</p><p class="project-card-duration">02/2024 – 04/2024</p></div>
+      </a>
+      <a class="project-card" href="/projects/makiwara.html" aria-label="Makiwara — View project">
+        <img src="/assets/makiwara-cover.jpg" alt="Makiwara project cover">
+        <div class="project-card-overlay"><h2>Makiwara</h2><p class="project-card-subtitle">Improvement and After-Training Database Establishment</p><p class="project-card-duration">03/2021 – 05/2022</p></div>
+      </a>
+      <a class="project-card" href="/projects/video-conference.html" aria-label="Video Conference User Demands — View project">
+        <img src="/assets/video-conference-cover.jpg" alt="Video Conference User Demands project cover">
+        <div class="project-card-overlay"><h2>Video Conference User Demands</h2><p class="project-card-subtitle">Text Mining Based Analysis: Take Tencent Meeting APP As An Example</p><p class="project-card-duration">02/2023 – 06/2023</p></div>
+      </a>
+    </div>
+  </section>
+  <section id="skills" class="page-section hidden">
+    <div class="edu-title-pixel">SKILLS</div>
+    <div class="skills-content">
+      <div class="skills-lang-block">
+        <div class="edu-card-title skills-lang-title">Languages</div>
+        <div class="skills-lang-bars">
+          <div class="skill-lang-row">English <span class="skill-bar">
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+          </span></div>
+          <div class="skill-lang-row">Chinese <span class="skill-bar">
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+          </span></div>
+          <div class="skill-lang-row">Danish <span class="skill-bar">
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+          </span></div>
+          <div class="skill-lang-row">Japanese <span class="skill-bar">
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#ffe066" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+            <svg class="pixel-star" width="20" height="20" viewBox="0 0 20 20"><polygon points="10,2 12,8 18,8 13,12 15,18 10,14 5,18 7,12 2,8 8,8" fill="#888" stroke="#222" stroke-width="1"/></svg>
+          </span></div>
+        </div>
+      </div>
+      <div class="skills-icons">
+        <div class="skill-icon" data-skill="python">🐍<span class="skill-tooltip">Python: Expert</span></div>
+        <div class="skill-icon" data-skill="java">☕️<span class="skill-tooltip">Java: Advanced</span></div>
+        <div class="skill-icon" data-skill="cpp">💻<span class="skill-tooltip">C++: Advanced</span></div>
+        <div class="skill-icon" data-skill="js">🌐<span class="skill-tooltip">JavaScript: Advanced</span></div>
+        <div class="skill-icon" data-skill="arduino">🤖<span class="skill-tooltip">Arduino: Intermediate</span></div>
+      </div>
+    </div>
+    <div id="skill-modal-python" class="skill-modal">
+      <button class="skill-modal-close">×</button>
+      <div class="edu-card-title">Python</div>
+      <div class="edu-card-desc">Expert in data analysis, web development, automation, and AI prototyping. Used in most academic and personal projects.</div>
+    </div>
+    <div id="skill-modal-java" class="skill-modal">
+      <button class="skill-modal-close">×</button>
+      <div class="edu-card-title">Java</div>
+      <div class="edu-card-desc">Advanced in OOP, backend development, and Android. Used in university and enterprise projects.</div>
+    </div>
+    <div id="skill-modal-cpp" class="skill-modal">
+      <button class="skill-modal-close">×</button>
+      <div class="edu-card-title">C++</div>
+      <div class="edu-card-desc">Advanced in algorithms, data structures, and embedded systems. Used for performance-critical tasks.</div>
+    </div>
+    <div id="skill-modal-js" class="skill-modal">
+      <button class="skill-modal-close">×</button>
+      <div class="edu-card-title">JavaScript</div>
+      <div class="edu-card-desc">Advanced in web development, interactive UI, and creative coding. Used for personal web and HCI projects.</div>
+    </div>
+    <div id="skill-modal-arduino" class="skill-modal">
+      <button class="skill-modal-close">×</button>
+      <div class="edu-card-title">Arduino</div>
+      <div class="edu-card-desc">Intermediate in hardware prototyping, sensors, and IoT. Used in creative and research projects.</div>
+    </div>
+  </section>
+  <section id="contact" class="page-section hidden" aria-labelledby="contact-page-heading">
+  <div class="contact-redesign">
+    <div class="contact-redesign-intro">
+      <h1 id="contact-page-heading">Contact me</h1>
+      <p>I'd love to hear from you :D</p>
+      <div class="contact-redesign-links" aria-label="Contact details">
+        <span class="contact-redesign-link"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Copenhagen, Denmark</span></span>
+        <a id="protected-email" class="protected-contact-link" aria-label="Email address"></a>
+        <a id="protected-phone" class="protected-contact-link" aria-label="Phone number"></a>
+        <a class="contact-redesign-link contact-redesign-linkedin" href="https://www.linkedin.com/in/yueshi0101/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn profile" title="LinkedIn"><svg viewBox="0 0 24 24" aria-hidden="true" fill="currentColor"><path d="M20.45 2H3.55A1.55 1.55 0 0 0 2 3.55v16.9A1.55 1.55 0 0 0 3.55 22h16.9A1.55 1.55 0 0 0 22 20.45V3.55A1.55 1.55 0 0 0 20.45 2ZM7.93 18.64H4.97V9.12h2.96v9.52ZM6.45 7.82a1.72 1.72 0 1 1 0-3.44 1.72 1.72 0 0 1 0 3.44Zm12.2 10.82H15.7v-4.63c0-1.1-.02-2.53-1.54-2.53-1.54 0-1.78 1.2-1.78 2.45v4.71H9.43V9.12h2.83v1.3h.04a3.1 3.1 0 0 1 2.79-1.54c2.98 0 3.56 1.96 3.56 4.5v5.26Z"/></svg><span class="sr-contact">LinkedIn</span></a>
+      </div>
+    </div>
+    <div class="contact-redesign-formarea">
+      <p class="contact-redesign-note">Or leave me a message</p>
+      <form id="contact-redesign-form" class="contact-redesign-form" action="https://formspree.io/f/mbgdwrgo" method="POST" novalidate>
+        <div class="contact-name-row">
+          <div class="contact-name-field">
+            <label for="contact-redesign-first-name">First Name</label>
+            <input id="contact-redesign-first-name" name="firstName" type="text" placeholder="First name" autocomplete="given-name" required>
+          </div>
+          <div class="contact-name-field">
+            <label for="contact-redesign-last-name">Last Name</label>
+            <input id="contact-redesign-last-name" name="lastName" type="text" placeholder="Last name" autocomplete="family-name" required>
+          </div>
+        </div>
+        <label for="contact-redesign-email">Email</label>
+        <input id="contact-redesign-email" name="email" type="email" placeholder="name@example.com" autocomplete="email" required>
+        <label for="contact-redesign-message">Message</label>
+        <textarea id="contact-redesign-message" name="message" rows="4" placeholder="Write your message here..." required></textarea>
+        
+        <div aria-hidden="true" style="position:absolute;left:-10000px;width:1px;height:1px;overflow:hidden;">
+          <label for="contact-redesign-company">Leave this field empty</label>
+          <input id="contact-redesign-company" name="_gotcha" type="text" tabindex="-1" autocomplete="off">
+        </div>
+        <div class="contact-turnstile-send-row">
+          <div class="contact-turnstile-wrap" data-contact-turnstile="1">
+          <div
+            class="cf-turnstile"
+            data-sitekey="0x4AAAAAAFZAdynZh8qaA9hB"
+            data-theme="light"
+            data-size="compact"
+            data-language="en"
+            data-appearance="interaction-only">
+          </div>
+          <p class="contact-turnstile-error" id="contact-turnstile-error" role="alert" hidden></p>
+        </div>
+          <button type="submit">Send</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  <div id="contact-send-toast" class="contact-send-toast" role="status" aria-live="polite" aria-atomic="true"></div>
+</section>
+  <section id="professional" class="page-section hidden">
+    <div class="prof-container">
+      <div class="prof-list">
+          <div class="prof-group-heading">Teaching</div>
+          <div class="prof-list-item selected" data-key="cph">University of Copenhagen<br><span class="prof-list-sub">Teaching Assistant · Advanced Topics in Human-Centered Computing</span></div>
+<div class="prof-list-item" data-key="itu">IT University of Copenhagen<br><span class="prof-list-sub">Teaching Assistant · Distributed Systems</span></div>
+          <div class="prof-group-heading prof-group-heading-next">Professional</div>
+          <div class="prof-list-item" data-key="tongji">Tongji University Art Centre<br><span class="prof-list-sub">Art Centre Assistant</span></div>
+          <div class="prof-list-item" data-key="bili">Shanghai Bilibili Technology Ltd<br><span class="prof-list-sub">Front-end Intern</span></div>
+        
+      </div>
+      <div class="prof-detail-panel" id="prof-detail-panel">
+        <div class="prof-detail-title">University of Copenhagen, Department of Computer Science<br><span class="prof-detail-date">02/2025 – 04/2025</span></div>
+        <div class="prof-detail-role">Teaching Assistant for <a href="https://kurser.ku.dk/course/ndak15012u/2024-2025" target="_blank" rel="noopener noreferrer" style="color:inherit;text-decoration:underline;text-underline-offset:3px">Advanced Topics in Human-Centered Computing</a></div>
+        <ul class="prof-detail-desc">
+          <li>Supported students by discussing course topics and answering questions during class sessions and office hours</li>
+          <li>Co-graded and provided detailed feedback on 4 assignments for 43 students in collaboration with another teaching assistant</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  <section id="life" class="page-section hidden" aria-labelledby="life-title">
+    <div class="life-content">
+      <h1 id="life-title">I enjoy trying new things!</h1>
+      <div class="life-list">
+        <div class="life-row">
+          <h2>🍰 Baking</h2>
+          <div class="life-description">
+            <p>I enjoy baking and often share what I make with friends :)</p>
+            <ul>
+              <li>Mont Blanc</li>
+              <li>Flower Pastry</li>
+              <li>Rye Bread</li>
+              <li>…</li>
+            </ul>
+          </div>
+        </div>
+        <div class="life-row">
+          <h2>💃 Dancing</h2>
+          <div class="life-description">
+            <p>I love dancing, especially contemporary and jazz.</p>
+            <p>I enjoy trying all kinds of different styles.</p>
+          </div>
+        </div>
+        <div class="life-row">
+          <h2>🥾 Hiking</h2>
+          <div class="life-description">
+            <p>I enjoy hiking and spending time in nature.</p>
+            <p>I embrace whatever weather comes, whether it is sunny, windy, rainy, or snowy!</p>
+          </div>
+        </div>
+      </div>
+      <!-- LIFE BAKING GALLERY START -->
+      <div class="life-baking-gallery" aria-label="Baking photo gallery">
+        <div class="life-gallery-grid">
+          <figure class="life-gallery-photo" tabindex="0" aria-label="Mont Blanc">
+            <img src="/assets/life/mont-blanc.jpg" alt="Mont Blanc baked by Yue" loading="lazy" decoding="async">
+            <figcaption class="life-gallery-label">Mont Blanc</figcaption>
+          </figure>
+          <figure class="life-gallery-photo" tabindex="0" aria-label="Flower Pastry">
+            <img src="/assets/life/flower-pastry-1.jpg" alt="Flower Pastry baked by Yue" loading="lazy" decoding="async">
+            <figcaption class="life-gallery-label">Flower Pastry</figcaption>
+          </figure>
+          <figure class="life-gallery-photo" tabindex="0" aria-label="Sourdough Scone">
+            <img src="/assets/life/sourdough-scone-1.jpg" alt="Sourdough Scone baked by Yue" loading="lazy" decoding="async">
+            <figcaption class="life-gallery-label">Sourdough Scone</figcaption>
+          </figure>
+          <figure class="life-gallery-photo" tabindex="0" aria-label="Shortbread">
+            <img src="/assets/life/shortbread.jpg" alt="Shortbread baked by Yue" loading="lazy" decoding="async">
+            <figcaption class="life-gallery-label">Shortbread</figcaption>
+          </figure>
+          <figure class="life-gallery-photo" tabindex="0" aria-label="Tofu Cheese Cake">
+            <img src="/assets/life/tofu-cheese-cake.jpg" alt="Tofu Cheese Cake baked by Yue" loading="lazy" decoding="async">
+            <figcaption class="life-gallery-label">Tofu Cheese Cake</figcaption>
+          </figure>
+          <figure class="life-gallery-photo" tabindex="0" aria-label="Flower Pastry">
+            <img src="/assets/life/flower-pastry-2.jpg" alt="Flower Pastry baked by Yue" loading="lazy" decoding="async">
+            <figcaption class="life-gallery-label">Flower Pastry</figcaption>
+          </figure>
+          <figure class="life-gallery-photo" tabindex="0" aria-label="Rye Bread">
+            <img src="/assets/life/rye-bread.jpg" alt="Rye Bread baked by Yue" loading="lazy" decoding="async">
+            <figcaption class="life-gallery-label">Rye Bread</figcaption>
+          </figure>
+          <figure class="life-gallery-photo" tabindex="0" aria-label="Sourdough Scone">
+            <img src="/assets/life/sourdough-scone-2.jpg" alt="Sourdough Scone baked by Yue" loading="lazy" decoding="async">
+            <figcaption class="life-gallery-label">Sourdough Scone</figcaption>
+          </figure>
+          <figure class="life-gallery-photo" tabindex="0" aria-label="Sourdough">
+            <img src="/assets/life/sourdough.jpg" alt="Sourdough baked by Yue" loading="lazy" decoding="async">
+            <figcaption class="life-gallery-label">Sourdough</figcaption>
+          </figure>
+          <figure class="life-gallery-photo" tabindex="0" aria-label="Sourdough Scone">
+            <img src="/assets/life/sourdough-scone-3.jpg" alt="Sourdough Scone baked by Yue" loading="lazy" decoding="async">
+            <figcaption class="life-gallery-label">Sourdough Scone</figcaption>
+          </figure>
+        </div>
+      </div>
+      <!-- LIFE BAKING GALLERY END -->
+    </div>
+  </section>
+  <div id="crt-flash" class="hidden"></div>
+  <button id="back-btn" class="pixel-btn">&#8592;</button>
+  <div id="typewriter-tip">Tip: Press Ctrl (⌃) to instantly show all text.</div>
+  <script defer src="/js/background.js"></script>
+  <script defer src="/js/intro.js"></script>
+  <script defer src="/js/experience.js"></script>
+  <script defer src="/js/skills.js"></script>
+  <script defer src="/js/main.js"></script>
+  <script defer src="/js/contact-details.js"></script>
+  <script defer src="/js/contact-form.js"></script>
+  <script defer src="/js/cat-entrance.js"></script>
+  <script defer src="/js/companion-cat.js"></script>
+  <script defer src="/js/companion-first-visit-guard.js"></script>
+</body>
+</html>
