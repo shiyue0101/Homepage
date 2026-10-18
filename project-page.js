@@ -235,3 +235,30 @@ for (let i = 0; i < 120; i++) {
   });
 })();
 // END TOC CLICK HIGHLIGHT LOCK
+
+// PROJECT_TOC_POINTER_FOCUS_FIX_V1
+// Clicking a TOC link gives it focus. :focus-within used to keep the
+// menu expanded even after pointer hover ended. Blur mouse-originated
+// focus when leaving, while preserving keyboard tab navigation.
+(() => {
+  let lastPointerInteraction = false;
+  document.addEventListener('pointerdown', (event) => {
+    if (event.target.closest('.project-floating-toc')) {
+      lastPointerInteraction = true;
+    } else {
+      lastPointerInteraction = false;
+    }
+  }, true);
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Tab') lastPointerInteraction = false;
+  }, true);
+
+  document.addEventListener('pointerout', (event) => {
+    const nav = event.target.closest('.project-floating-toc');
+    if (!nav || !lastPointerInteraction) return;
+    if (event.relatedTarget && nav.contains(event.relatedTarget)) return;
+    if (nav.contains(document.activeElement)) document.activeElement.blur();
+    lastPointerInteraction = false;
+  }, true);
+})();

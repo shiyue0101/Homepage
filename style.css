@@ -3230,3 +3230,43 @@ body #contact.page-section.active {
   }
 }
 /* END: LIFE-MATCHED GAP BELOW HEADER */
+
+/* TOC_REVERSE_COLLAPSE_ONLY_START */
+@media (min-width: 1050px) and (hover: hover) and (pointer: fine) {
+  .project-floating-toc .project-floating-toc-title,
+  .project-floating-toc .project-floating-toc-links {
+    transition: opacity .14s ease, visibility 0s linear .2s !important;
+  }
+  .project-floating-toc:hover .project-floating-toc-title,
+  .project-floating-toc:hover .project-floating-toc-links,
+  .project-floating-toc:focus-within .project-floating-toc-title,
+  .project-floating-toc:focus-within .project-floating-toc-links {
+    transition: opacity .14s ease, visibility 0s linear 0s !important;
+  }
+}
+/* TOC_REVERSE_COLLAPSE_ONLY_END */
+
+/* TOC_FINAL_SOFT_FADE_V2_START */
+/* Only the closing state is overridden. Hover/focus opening remains original. */
+@media (min-width: 1050px) and (hover: hover) and (pointer: fine) {
+  .project-floating-toc:not(:hover):not(:focus-within) {
+    /* Keep border geometry so its COLOR, not its width, fades. */
+    border: 1px solid transparent !important;
+    background-color: transparent !important;
+    box-shadow: 0 8px 24px rgba(89, 48, 58, 0) !important;
+    /* Original clip closes for .2s. Fade only during its final .1s. */
+    transition:
+      clip-path .2s ease,
+      background-color .10s ease-out .12s,
+      border-color .10s ease-out .12s,
+      box-shadow .10s ease-out .12s !important;
+  }
+  .project-floating-toc:not(:hover):not(:focus-within) .project-floating-toc-title,
+  .project-floating-toc:not(:hover):not(:focus-within) .project-floating-toc-links {
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity .2s step-end, visibility 0s linear .2s !important;
+  }
+  /* The opening transition is intentionally NOT changed. */
+}
+/* TOC_FINAL_SOFT_FADE_V2_END */
