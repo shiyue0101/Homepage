@@ -7,3 +7,5 @@
   #companion-cat-stage.is-mobile #companion-cat-sprite{position:absolute;max-width:none}
 }
 @media(prefers-reduced-motion:reduce){#companion-cat-stage{display:none!important}}
+/* COMPANION_ABOUT_VISIBILITY_V3 */
+body:has(#main[style*="display: none"]) #companion-cat-stage { display: none !important; }

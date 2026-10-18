@@ -121,4 +121,21 @@
   const page=dialog.closest('.page-section');
   if(page) observer.observe(page,{attributes:true,attributeFilter:['class','style']});
   layout();
+
+  // COMPANION_ABOUT_VISIBILITY_V3
+  // main.js sets #main to flex on About Me and none on all other pages.
+  // Do not rely on location.hash, pushState or non-existent home.active.
+  const aboutMain = document.getElementById('main');
+  if (aboutMain) {
+    const syncAboutCatVisibility = () => {
+      const visible = getComputedStyle(aboutMain).display !== 'none';
+      const catLayer = document.getElementById('companion-cat-stage');
+      if (catLayer) catLayer.style.setProperty('display', visible ? 'block' : 'none', 'important');
+    };
+    const aboutCatObserver = new MutationObserver(syncAboutCatVisibility);
+    aboutCatObserver.observe(aboutMain, { attributes: true, attributeFilter: ['style', 'class', 'hidden'] });
+    syncAboutCatVisibility();
+    window.addEventListener('pageshow', syncAboutCatVisibility);
+  }
+  // END COMPANION_ABOUT_VISIBILITY_V3
 })();
