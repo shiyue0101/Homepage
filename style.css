@@ -3185,3 +3185,48 @@ body .case-study {
   }
 }
 /* EXPERIENCE PROJECT TOC HIGHLIGHT — END */
+
+/* BEGIN MATCH LIFE TOP SPACING */
+/* Match Life page: 56px desktop, 32px on small screens.
+   Do not change horizontal gutters, header transparency or page interactions. */
+body #professional.page-section,
+body #professional.page-section.active,
+body #contact.page-section,
+body #contact.page-section.active {
+  padding-top: 56px !important;
+}
+
+@media (max-width: 600px) {
+  body #professional.page-section,
+  body #professional.page-section.active,
+  body #contact.page-section,
+  body #contact.page-section.active {
+    padding-top: 32px !important;
+  }
+}
+/* END MATCH LIFE TOP SPACING */
+
+/* BEGIN: LIFE-MATCHED GAP BELOW HEADER */
+/* top: 0 keeps content scrolling under the translucent fixed header.
+   The visible gap BELOW that header is 56px desktop / 32px mobile. */
+body #professional.page-section,
+body #professional.page-section.active,
+body #contact.page-section,
+body #contact.page-section.active {
+  top: 0 !important;
+  bottom: 0;
+  height: auto;
+  box-sizing: border-box;
+  padding-top: calc(var(--header-height) + 56px) !important;
+  justify-content: flex-start;
+}
+
+@media (max-width: 600px) {
+  body #professional.page-section,
+  body #professional.page-section.active,
+  body #contact.page-section,
+  body #contact.page-section.active {
+    padding-top: calc(var(--header-height) + 32px) !important;
+  }
+}
+/* END: LIFE-MATCHED GAP BELOW HEADER */
