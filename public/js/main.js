@@ -56,9 +56,8 @@ function applyHomeState() {
   });
   backBtn.classList.remove('visible');
 
-  document.getElementById('intro-dialog').style.removeProperty('display');
+  document.getElementById('piano-about').style.removeProperty('display');
 
-  document.getElementById('typewriter-tip').style.removeProperty('display');
 }
 
 // loading-policy: initial-navigation-only
@@ -92,14 +91,13 @@ function showSection(page, push = false, { initial = false, transition = true } 
     document.getElementById('main').style.display = 'none';
     sections[page].classList.add('active');
     sections[page].classList.remove('hidden');
-    document.getElementById('typewriter-tip').style.display = 'none';
     if (page === 'professional') {
       sections.professional.scrollTop = 0;
       updateProfessionalScrollbar();
     }
     crtFlash.classList.remove('active');
     backBtn.classList.toggle('visible', !['projects', 'professional', 'contact', 'life'].includes(page));
-    document.getElementById('intro-dialog').style.display = 'none';
+    document.getElementById('piano-about').style.display = 'none';
     if (push) history.pushState({ page }, '', '/' + page);
     if (initial) hideLoading(0);
   };

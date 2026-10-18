@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yue's Homepage</title>
   <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="/css/piano-about.css">
   <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     /* initial-route-loading-guard */
@@ -87,9 +88,7 @@
   </div>
   <div id="main">
     <div id="right">
-      <div id="intro-dialog" class="pixel-dialog">
-        <span id="intro-text"></span><span class="blinking-cursor">|</span>
-      </div>
+      <section id="piano-about" class="intro" aria-label="Interactive About Me"><div class="piano-columns"><div class="intro-left"><h1>Hi :)</h1><p class="intro-hint">Play the piano to get to know me, one note at a time.</p><button class="skip" id="skip" title="Play Chopin-Sexte and show introduction"><span class="note">♫</span> Tip: Press the note or Ctrl (^) to instantly show all text.</button><div class="music-particles" id="music-particles" aria-hidden="true"></div></div><div class="intro-right"><div class="viewport" id="view"><div class="scroll" id="scroll"><div class="empty" id="empty">Every note reveals a little more…</div><div class="line-list" id="lines" hidden></div></div><div class="summary" id="summary"><div><p>I am a master’s graduate in Computer Science from the University of Copenhagen, with a focus on Human-Computer Interaction.</p><p>My interests include critical making, social computing, physical prototyping, and animal-computer interaction.</p><p>I am particularly interested in how interactive systems shape people’s understanding, experiences, and relationships in everyday settings, and I enjoy combining empirical studies with design and prototyping.</p></div></div></div><div class="rule"></div><div class="piano-wrap"><div class="piano" id="piano" aria-label="Interactive piano keyboard"></div><div class="count" id="count">0 / 12 notes discovered <button class="reset" id="reset">Replay</button></div></div></div></div></section>
     </div>
   </div>
 
@@ -350,9 +349,8 @@
   </section>
   <div id="crt-flash" class="hidden"></div>
   <button id="back-btn" class="pixel-btn">&#8592;</button>
-  <div id="typewriter-tip">Tip: Press Ctrl (⌃) to instantly show all text.</div>
   <script defer src="/js/background.js"></script>
-  <script defer src="/js/intro.js"></script>
+  <script defer src="/js/piano-about.js"></script>
   <script defer src="/js/experience.js"></script>
   <script defer src="/js/skills.js"></script>
   <script defer src="/js/main.js"></script>
