@@ -47,6 +47,13 @@ body > main { grid-template-rows: minmax(0, 1fr) auto; }
 }
 </style>
 <style id="piano-raise-v3">.piano-wrap{transform:translateY(-12px);margin-bottom:-12px}</style>
+
+<style id="about-me-mobile-top-spacing-v1">
+/* Additional breathing room below the two-row navigation, mobile only. */
+@media (max-width: 780px) {
+  body > main { padding-top: 116px !important; }
+}
+</style>
 </head><body><main><section class="left"><h1>About Me</h1><div class="intro"><p>I am a master’s graduate in Computer Science from the University of Copenhagen, with a focus on Human-Computer Interaction.</p><p>My interests include critical making, social computing, physical prototyping, and animal-computer interaction.</p><p>I am particularly interested in how interactive systems shape people’s understanding, experiences, and relationships in everyday settings, and I enjoy combining empirical studies with design and prototyping.</p></div><div class="left-decoration">♫ Play a little melody to discover more.</div>
 
 <div aria-hidden="true" class="floatfield" id="floatfield"></div></section><section class="right"><div class="eyebrow">BEYOND THE INTRODUCTION</div><div class="story"><div class="story-empty" id="empty">Every melody reveals a little more…</div><div aria-label="Additional research notes" class="story-scroll" id="scroll" tabindex="0"><div id="lines"></div></div></div><div class="piano-wrap"><div aria-label="Scrollable piano keyboard" class="keyboard" id="keyboard"><div class="keybed" id="keybed"></div></div><div class="hint">← Drag or scroll sideways to explore lower and higher notes →</div></div><div class="controls"><span class="count" id="count">0 / 7 research notes discovered</span><button class="control-btn" id="reset" type="button">↺ Replay exploration</button></div><div class="subhint">Click any piano key to play. Short pauses between musical phrases reveal more of the story; playing a chord won't skip several notes at once. The introduction on the left always remains visible.</div></section>
