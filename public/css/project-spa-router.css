@@ -1,0 +1,17 @@
+/* PROJECT_SPA_ROUTER_V3: only the parent document owns the header and audio. */
+#spa-project-frame {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: var(--header-height, 76px);
+  bottom: 0;
+  width: 100%;
+  height: calc(100vh - var(--header-height, 76px));
+  height: calc(100dvh - var(--header-height, 76px));
+  border: none;
+  background: #f3deda;
+  z-index: 2000;
+}
+#spa-project-frame[hidden] { display: none !important; }
+html.spa-project-open .site-header { z-index: 2100; }
+html.spa-project-open #site-floating-music { z-index: 9000 !important; }
