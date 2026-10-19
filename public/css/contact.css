@@ -545,3 +545,15 @@ body .case-study {
   }
 }
 /* CONTACT TURNSTILE SEND ALIGN END */
+
+/* CONTACT_WIDE_ABOUT_ALIGNMENT_V1_START */
+/* Match the 1220px content canvas used by WIDE_ABOUT_GUTTERS_V1.
+   The #contact section already has the correct responsive side gutters
+   in pages.css. Only the inner grid was still capped at 1120px. */
+body #contact .contact-redesign {
+  box-sizing: border-box;
+  width: 100%;
+  max-width: var(--wide-about-content, 1220px);
+  margin-inline: auto;
+}
+/* CONTACT_WIDE_ABOUT_ALIGNMENT_V1_END */

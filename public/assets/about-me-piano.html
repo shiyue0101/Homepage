@@ -12,7 +12,24 @@
 header{display:none!important}
 main{min-height:100vh;padding-top:clamp(24px,5vh,62px)}
 @media(max-width:780px){main{min-height:100vh;padding-top:28px;padding-bottom:48px}}
-</style></head><body><main><section class="left"><h1>About Me</h1><div class="intro"><p>I am a master’s graduate in Computer Science from the University of Copenhagen, with a focus on Human-Computer Interaction.</p><p>My interests include critical making, social computing, physical prototyping, and animal-computer interaction.</p><p>I am particularly interested in how interactive systems shape people’s understanding, experiences, and relationships in everyday settings, and I enjoy combining empirical studies with design and prototyping.</p></div><div class="left-decoration">♫ Play a little melody to discover more.</div>
+</style><style id="about-story-piano-safe-spacing-v1">
+/* Keep the piano in normal flow so the story panel never overlaps it. */
+body > main .right .piano-wrap {
+  transform: none !important;
+  margin-top: 20px !important;
+  margin-bottom: 0 !important;
+  position: relative;
+}
+/* Lower the complete About Me content, without moving its external navbar. */
+@media (min-width: 781px) {
+  body > main { padding-top: calc(76px + clamp(52px, 4vh + 24px, 80px)) !important; }
+}
+@media (max-width: 780px) {
+  body > main { padding-top: 140px !important; }
+  body > main .right .piano-wrap { margin-top: 18px !important; }
+}
+</style>
+</head><body><main><section class="left"><h1>About Me</h1><div class="intro"><p>I am a master’s graduate in Computer Science from the University of Copenhagen, with a focus on Human-Computer Interaction.</p><p>My interests include critical making, social computing, physical prototyping, and animal-computer interaction.</p><p>I am particularly interested in how interactive systems shape people’s understanding, experiences, and relationships in everyday settings, and I enjoy combining empirical studies with design and prototyping.</p></div><div class="left-decoration">♫ Play a little melody to discover more.</div>
 <div class="music-panel"><button aria-label="Play or pause The Poet Speaks" class="music-btn" id="bg-toggle" type="button">♫ Play background music</button><span class="music-status" id="bg-status" role="status">Preparing background music…</span></div>
 <div class="music-help">Schumann · <em>The Poet Speaks</em> · Donald Betts<br/>Recording provided by you · Original source: Musopen · <a href="https://creativecommons.org/publicdomain/mark/1.0/" rel="noopener" target="_blank">Public Domain Mark 1.0</a><br/>Browsers may prevent sound from starting automatically. Click Play if needed.</div>
 <audio id="bg-music" preload="none" src="/assets/about-me/the-poet-speaks.mp3"></audio><div aria-hidden="true" class="floatfield" id="floatfield"></div></section><section class="right"><div class="eyebrow">BEYOND THE INTRODUCTION</div><div class="story"><div class="story-empty" id="empty">Every melody reveals a little more…</div><div aria-label="Additional research notes" class="story-scroll" id="scroll" tabindex="0"><div id="lines"></div></div></div><div class="piano-wrap"><div aria-label="Scrollable piano keyboard" class="keyboard" id="keyboard"><div class="keybed" id="keybed"></div></div><div class="hint">← Drag or scroll sideways to explore lower and higher notes →</div></div><div class="controls"><span class="count" id="count">0 / 7 research notes discovered</span><button class="control-btn" id="reset" type="button">↺ Replay exploration</button></div><div class="subhint">Click any piano key to play. Short pauses between musical phrases reveal more of the story; playing a chord won't skip several notes at once. The introduction on the left always remains visible.</div></section></main><script>
