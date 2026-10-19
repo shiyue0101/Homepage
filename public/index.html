@@ -21,9 +21,85 @@
       pointer-events: auto !important;
       background: var(--background, #e8c6c1);
     }
+  
+    /* contact-turnstile-normal-width-v1 */
+    @media (min-width: 650px) {
+      #contact .contact-turnstile-send-row {
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        align-items: flex-end;
+        flex-wrap: nowrap;
+        gap: 18px;
+        width: 100%;
+      }
+      #contact .contact-turnstile-wrap {
+        width: 300px;
+        min-width: 300px;
+        max-width: 300px;
+        flex: 0 0 300px;
+      }
+      #contact .contact-turnstile-send-row > button[type="submit"] {
+        flex: 0 0 auto;
+      }
+    }
+    @media (max-width: 649px) {
+      #contact .contact-turnstile-send-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: flex-end;
+        align-items: flex-end;
+        gap: 14px;
+      }
+      #contact .contact-turnstile-wrap {
+        width: min(300px, 100%);
+        max-width: 100%;
+      }
+    }
+    #contact .contact-turnstile-wrap .cf-turnstile {
+      width: 300px;
+      max-width: 100%;
+    }
   </style>
   <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
     
+  <style id="about-piano-v2-style">
+    /* ABOUT_PIANO_V2_STYLE: preserve navigation + loader, affect Home only */
+    body #main { overflow: hidden; display: flex; align-items: stretch; justify-content: stretch; padding: 0 !important; }
+    body #main #right { display: none !important; }
+    body #main #about-piano-frame { display: block; box-sizing: border-box; border: 0; flex: 1 1 auto; width: 100%; height: calc(100vh - 76px); height: calc(100dvh - 76px); min-width: 0; min-height: 420px; background: #f3deda; }
+    body #typewriter-tip { display: none !important; }
+    @media (max-width: 780px) { body #main #about-piano-frame { height: calc(100dvh - 68px); min-height: 340px; } }
+  </style>
+
+<style id="about-piano-layout-fix-v1">
+/* Only embedded Home piano; leaves loading overlay and all other sections intact. */
+body #main:has(> #about-piano-frame) {
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  align-items: stretch !important;
+}
+body #main > #about-piano-frame {
+  display: block !important;
+  width: 100% !important;
+  flex: 1 1 100% !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: #f3deda;
+}
+</style>
+
+
+
+<link rel="stylesheet" href="/css/floating-music-v2.css" data-floating-music-v2>
 </head>
 <body>
   <header class="site-header">
@@ -87,9 +163,12 @@
       </div>
   </div>
   <div id="main">
-    <div id="right">
-      <section id="piano-about" class="intro" aria-label="Interactive About Me"><div class="piano-columns"><div class="intro-left"><h1>Hi :)</h1><p class="intro-hint">Play the piano to get to know me, one note at a time.</p><button class="skip" id="skip" title="Play Chopin-Sexte and show introduction"><span class="note">♫</span> Tip: Press the note or Ctrl (^) to instantly show all text.</button><div class="music-particles" id="music-particles" aria-hidden="true"></div></div><div class="intro-right"><div class="viewport" id="view"><div class="scroll" id="scroll"><div class="empty" id="empty">Every note reveals a little more…</div><div class="line-list" id="lines" hidden></div></div><div class="summary" id="summary"><div><p>I am a master’s graduate in Computer Science from the University of Copenhagen, with a focus on Human-Computer Interaction.</p><p>My interests include critical making, social computing, physical prototyping, and animal-computer interaction.</p><p>I am particularly interested in how interactive systems shape people’s understanding, experiences, and relationships in everyday settings, and I enjoy combining empirical studies with design and prototyping.</p></div></div></div><div class="rule"></div><div class="piano-wrap"><div class="piano" id="piano" aria-label="Interactive piano keyboard"></div><div class="count" id="count">0 / 12 notes discovered <button class="reset" id="reset">Replay</button></div></div></div></div></section>
+    <!-- ABOUT_PIANO_V2_HOME_START -->
+    <div id="right" aria-hidden="true" hidden>
+      <div id="intro-dialog" class="pixel-dialog"><span id="intro-text"></span><span class="blinking-cursor">|</span></div>
     </div>
+    <iframe id="about-piano-frame" title="Interactive About Me piano" src="/assets/about-me/about-me-piano.html" loading="eager" allow="autoplay"></iframe>
+    <!-- ABOUT_PIANO_V2_HOME_END -->
   </div>
 
   <section id="projects" class="page-section hidden" aria-label="Projects">
@@ -197,7 +276,7 @@
   <section id="contact" class="page-section hidden" aria-labelledby="contact-page-heading">
   <div class="contact-redesign">
     <div class="contact-redesign-intro">
-      <h1 id="contact-page-heading">Contact me</h1>
+      <h1 id="contact-page-heading">Contact Me</h1>
       <p>I'd love to hear from you :D</p>
       <div class="contact-redesign-links" aria-label="Contact details">
         <span class="contact-redesign-link"><svg viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 5-8 12-8 12S4 15 4 10a8 8 0 1 1 16 0Z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Copenhagen, Denmark</span></span>
@@ -234,7 +313,7 @@
             class="cf-turnstile"
             data-sitekey="0x4AAAAAAFZAdynZh8qaA9hB"
             data-theme="light"
-            data-size="compact"
+            data-size="normal"
             data-language="en"
             data-appearance="interaction-only">
           </div>
@@ -350,12 +429,26 @@
   <div id="crt-flash" class="hidden"></div>
   <button id="back-btn" class="pixel-btn">&#8592;</button>
   <script defer src="/js/background.js"></script>
-  <script defer src="/js/piano-about.js"></script>
   <script defer src="/js/experience.js"></script>
   <script defer src="/js/skills.js"></script>
   <script defer src="/js/main.js"></script>
   <script defer src="/js/contact-details.js"></script>
-  <script defer src="/js/contact-form.js"></script>
   
+
+
+
+
+
+<!-- site-floating-music-v2 -->
+<div id="site-floating-music" class="site-floating-music" role="group" aria-label="Background music player">
+  <div class="site-music-detail" id="site-music-detail">
+    <strong class="site-music-title">The Poet Speaks</strong>
+    <span class="site-music-subtitle">Robert Schumann · Donald Betts</span>
+    <span class="site-music-state" id="site-music-state" aria-live="polite">Paused</span>
+  </div>
+  <button id="site-music-toggle" class="site-music-toggle" type="button" aria-label="Play The Poet Speaks" aria-pressed="false" title="Click to play/pause · Drag to reposition"><span class="site-music-note" aria-hidden="true">♫</span></button>
+  <audio id="site-music-audio" preload="metadata" src="/assets/about-me/the-poet-speaks.mp3"></audio>
+</div>
+<script defer src="/js/floating-music-v2.js" data-floating-music-v2></script>
 </body>
 </html>

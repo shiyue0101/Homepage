@@ -122,8 +122,14 @@ function handleRoute({ initial = false } = {}) {
 
 // 页面加载完成后的初始化
 document.addEventListener('DOMContentLoaded', function () {
+  /* piano-loading-fix-v2: always resolve initial overlay */
+  try {
   setupProfessionalList();
   handleRoute({ initial: true });
+
+  } finally {
+    hideLoading(0);
+  }
 });
 
 // 监听浏览器前进后退
