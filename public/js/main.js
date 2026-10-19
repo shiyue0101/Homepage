@@ -56,15 +56,20 @@ function applyHomeState() {
   });
   backBtn.classList.remove('visible');
 
-  document.getElementById('piano-about').style.removeProperty('display');
+  /* route-stale-piano-id-fix-v1: old piano-about element was removed. */
+  document.getElementById('piano-about')?.style.removeProperty('display');
 
 }
 
 // loading-policy: initial-navigation-only
 // The HTML/CSS loading guard covers the first paint of each full document load.
 // In-page navigation must never show the loading overlay again.
+// ROUTE_TRANSITION_GUARD_V1
+window.__homepageNavigationGeneration = 0;
 function showHome({ push = false, transition = false, initial = false } = {}) {
+  const navigationGeneration = ++window.__homepageNavigationGeneration;
   const finish = () => {
+    if (navigationGeneration !== window.__homepageNavigationGeneration) return;
     applyHomeState();
     crtFlash.classList.remove('active');
     if (push) history.pushState({}, '', '/');
@@ -80,9 +85,11 @@ function showHome({ push = false, transition = false, initial = false } = {}) {
 }
 
 function showSection(page, push = false, { initial = false, transition = true } = {}) {
+  const navigationGeneration = ++window.__homepageNavigationGeneration;
   if (!sections[page]) return;
   if (transition) crtFlash.classList.add('active');
   const finish = () => {
+    if (navigationGeneration !== window.__homepageNavigationGeneration) return;
     Object.values(sections).forEach(sec => {
       sec.classList.remove('active');
       sec.classList.add('hidden');
@@ -97,7 +104,8 @@ function showSection(page, push = false, { initial = false, transition = true } 
     }
     crtFlash.classList.remove('active');
     backBtn.classList.toggle('visible', !['projects', 'professional', 'contact', 'life'].includes(page));
-    document.getElementById('piano-about').style.display = 'none';
+    /* route-stale-piano-id-fix-v1: safely skip missing legacy piano element. */
+    if (document.getElementById('piano-about')) document.getElementById('piano-about').style.display = 'none';
     if (push) history.pushState({ page }, '', '/' + page);
     if (initial) hideLoading(0);
   };
