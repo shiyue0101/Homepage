@@ -54,6 +54,55 @@ body > main { grid-template-rows: minmax(0, 1fr) auto; }
   body > main { padding-top: 116px !important; }
 }
 </style>
+<style id="about-experience-margin-sync-v1">
+/* ABOUT_EXPERIENCE_MARGIN_SYNC_V1_START */
+/* Experience content: max 1120px; outer 28px desktop / 16px phone. */
+/* About Me is in its own iframe, so apply its gutters inside that document. */
+@media (min-width: 1001px) {
+  body > main {
+    width: 100% !important;
+    max-width: 1176px !important; /* 1120px of content + 28px on each side */
+    margin-inline: auto !important;
+    padding-left: 28px !important;
+    padding-right: 28px !important;
+    box-sizing: border-box !important;
+  }
+}
+@media (min-width: 761px) and (max-width: 1000px) {
+  body > main {
+    max-width: 100% !important;
+    padding-left: clamp(16px, 3vw, 28px) !important;
+    padding-right: clamp(16px, 3vw, 28px) !important;
+    box-sizing: border-box !important;
+  }
+}
+@media (max-width: 760px) {
+  body > main {
+    max-width: 100% !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+    box-sizing: border-box !important;
+  }
+}
+/* ABOUT_EXPERIENCE_MARGIN_SYNC_V1_END */
+</style>
+<!-- WIDE_ABOUT_GUTTERS_V1_BEGIN -->
+<style id="wide-about-gutters-v1">
+/* Restore the original wider About Me canvas, without moving the piano vertically. */
+body > main {
+  box-sizing: border-box !important;
+  width: 100% !important;
+  max-width: 1370px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: clamp(20px, 5vw, 75px) !important;
+  padding-right: clamp(20px, 5vw, 75px) !important;
+}
+@media (max-width:780px) {
+  body > main { padding-left: 20px !important; padding-right: 20px !important; }
+}
+</style>
+<!-- WIDE_ABOUT_GUTTERS_V1_END -->
 </head><body><main><section class="left"><h1>About Me</h1><div class="intro"><p>I am a master’s graduate in Computer Science from the University of Copenhagen, with a focus on Human-Computer Interaction.</p><p>My interests include critical making, social computing, physical prototyping, and animal-computer interaction.</p><p>I am particularly interested in how interactive systems shape people’s understanding, experiences, and relationships in everyday settings, and I enjoy combining empirical studies with design and prototyping.</p></div><div class="left-decoration">♫ Play a little melody to discover more.</div>
 
 <div aria-hidden="true" class="floatfield" id="floatfield"></div></section><section class="right"><div class="eyebrow">BEYOND THE INTRODUCTION</div><div class="story"><div class="story-empty" id="empty">Every melody reveals a little more…</div><div aria-label="Additional research notes" class="story-scroll" id="scroll" tabindex="0"><div id="lines"></div></div></div><div class="piano-wrap"><div aria-label="Scrollable piano keyboard" class="keyboard" id="keyboard"><div class="keybed" id="keybed"></div></div><div class="hint">← Drag or scroll sideways to explore lower and higher notes →</div></div><div class="controls"><span class="count" id="count">0 / 7 research notes discovered</span><button class="control-btn" id="reset" type="button">↺ Replay exploration</button></div><div class="subhint">Click any piano key to play. Short pauses between musical phrases reveal more of the story; playing a chord won't skip several notes at once. The introduction on the left always remains visible.</div></section>

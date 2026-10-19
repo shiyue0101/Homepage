@@ -1078,3 +1078,63 @@ body #life.page-section {
 }
 /* Match Projects touch headline */
 /* LIFE BAKING GALLERY END */
+
+/* WIDE_ABOUT_GUTTERS_V1_BEGIN */
+/* Original About Me: 1370px outer canvas, 20px–75px responsive gutters.
+   Its usable content width is approximately 1220px on large screens. */
+:root {
+  --wide-about-gutter: clamp(20px, 5vw, 75px);
+  --wide-about-content: 1220px;
+}
+/* Projects: keep the card grid and its original responsive columns. */
+body #projects.page-section {
+  padding-left: max(var(--wide-about-gutter), calc((100% - var(--wide-about-content)) / 2)) !important;
+  padding-right: max(var(--wide-about-gutter), calc((100% - var(--wide-about-content)) / 2)) !important;
+}
+/* Experience: only widen its containing columns, not the cards. */
+body #professional .prof-container {
+  width: min(var(--wide-about-content), calc(100% - 2 * var(--wide-about-gutter))) !important;
+  max-width: var(--wide-about-content) !important;
+  min-width: 0 !important;
+  box-sizing: border-box;
+}
+/* Life: keep its internal row design, widen the overall text canvas. */
+body #life.page-section {
+  padding-left: max(var(--wide-about-gutter), calc((100% - var(--wide-about-content)) / 2)) !important;
+  padding-right: max(var(--wide-about-gutter), calc((100% - var(--wide-about-content)) / 2)) !important;
+}
+body #life .life-content {
+  width: 100% !important;
+  max-width: var(--wide-about-content) !important;
+}
+/* Contact: use the same available page width; preserve its form layout. */
+body #contact.page-section {
+  padding-left: max(var(--wide-about-gutter), calc((100% - var(--wide-about-content)) / 2)) !important;
+  padding-right: max(var(--wide-about-gutter), calc((100% - var(--wide-about-content)) / 2)) !important;
+}
+body #contact .contact-content {
+  width: 100%;
+  max-width: var(--wide-about-content);
+  box-sizing: border-box;
+}
+@media (max-width: 760px) {
+  body #professional .prof-container {
+    flex-direction: column;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  body #professional.page-section,
+  body #professional.page-section.active {
+    padding-left: var(--wide-about-gutter) !important;
+    padding-right: var(--wide-about-gutter) !important;
+  }
+  body #professional .prof-list,
+  body #professional .prof-detail-panel {
+    box-sizing: border-box;
+    min-width: 0;
+    max-width: 100%;
+  }
+}
+/* WIDE_ABOUT_GUTTERS_V1_END */

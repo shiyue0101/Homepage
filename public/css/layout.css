@@ -97,3 +97,16 @@ body .case-study {
 .case-study > .case-breadcrumb {
   display: none !important;
 }
+
+/* WIDE_ABOUT_GUTTERS_V1_BEGIN */
+/* Both standalone case pages and SPA iframe content load layout.css. */
+body .case-study {
+  box-sizing: border-box;
+  width: min(1220px, calc(100% - 2 * clamp(20px, 5vw, 75px))) !important;
+  max-width: 1220px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+/* WIDE_ABOUT_GUTTERS_V1_END */
