@@ -1,7 +1,93 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><title>Turn-Taking Band — Yue Shi</title><link rel="stylesheet" href="/css/styles.css"><link rel="stylesheet" href="/css/floating-music-v2.css" data-floating-music-v2>
 <link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600;700&display=swap" rel="stylesheet">
+<!-- PROJECT_PAW_LOADING_V1_HEAD_BEGIN -->
+<style id="project-paw-loading-v1">
+  /* Paint the mask before the browser paints the project/header. */
+  html:not(.project-paw-ready) #loading-overlay {
+    position: fixed !important;
+    inset: 0 !important;
+    z-index: 99999 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    pointer-events: auto !important;
+    background: var(--background, #e8c6c1) !important;
+  }
+  html.project-paw-ready #loading-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    display: flex !important;
+    align-items: center;
+    justify-content: center;
+    background: var(--background, #e8c6c1);
+    opacity: 0 !important;
+    visibility: visible !important;
+    pointer-events: none !important;
+    transition: opacity 300ms ease;
+  }
+  html.project-paw-finished #loading-overlay { display: none !important; }
+  @media (prefers-reduced-motion: reduce) {
+    html.project-paw-ready #loading-overlay { transition: none; }
+  }
+</style>
+<!-- PROJECT_PAW_LOADING_V1_HEAD_END -->
+<link rel="stylesheet" href="/css/project-exit-loading.css" data-project-exit-paw-loading-v1>
 </head><body>
+<!-- PROJECT_PAW_LOADING_V1_BEGIN -->
+<div id="loading-overlay">
+    <div class="loading-content cat-paw-loading" role="status" aria-live="polite" aria-label="Loading">
+        <div class="cat-paw-track" aria-hidden="true">
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+          <span class="cat-paw-step"><svg class="cat-paw-icon" viewBox="0 0 40 44" aria-hidden="true" focusable="false">
+              <ellipse cx="5" cy="17" rx="4" ry="5" transform="rotate(-22 5 17)" />
+              <ellipse cx="14" cy="8" rx="4" ry="5" transform="rotate(-10 14 8)" />
+              <ellipse cx="26" cy="8" rx="4" ry="5" transform="rotate(10 26 8)" />
+              <ellipse cx="35" cy="17" rx="4" ry="5" transform="rotate(22 35 17)" />
+              <path d="M9 32 C9 25 14 22 20 22 C26 22 31 25 31 32 C31 38 26 40 20 39 C14 40 9 38 9 32Z" />
+            </svg></span>
+        </div>
+        <div class="loading-text">Loading...</div>
+      </div>
+  </div>
+<!-- PROJECT_PAW_LOADING_V1_END -->
 <div id="star-bg" aria-hidden="true"></div>
 <header class="site-header">
     <a class="site-brand" href="/" data-nav-page="home">Yue Shi</a>
@@ -123,4 +209,45 @@
   <audio id="site-music-audio" preload="metadata" src="/assets/about-me/the-poet-speaks.mp3"></audio>
 </div>
 <script defer src="/js/floating-music-v2.js" data-floating-music-v2></script>
+<!-- PROJECT_PAW_LOADING_V1_SCRIPT_BEGIN -->
+<script>
+(() => {
+  'use strict';
+  const root = document.documentElement;
+  const overlay = document.getElementById('loading-overlay');
+  if (!overlay) return;
+  let finished = false;
+  let safety;
+  const reveal = () => {
+    if (finished) return;
+    finished = true;
+    clearTimeout(safety);
+    root.classList.add('project-paw-ready');
+    // Retain the mask during the opacity transition.
+    window.setTimeout(() => root.classList.add('project-paw-finished'), 360);
+  };
+  // Always unblock the visitor even if fonts or scripts never settle.
+  safety = window.setTimeout(reveal, 3200);
+  const run = async () => {
+    try {
+      if (document.fonts && document.fonts.ready) {
+        await Promise.race([
+          document.fonts.ready.catch(() => undefined),
+          new Promise(resolve => window.setTimeout(resolve, 1400))
+        ]);
+      }
+    } catch (_) { /* loading is never allowed to block navigation */ }
+    window.requestAnimationFrame(() => {
+      window.requestAnimationFrame(reveal);
+    });
+  };
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', run, {once: true});
+  } else {
+    run();
+  }
+})();
+</script>
+<!-- PROJECT_PAW_LOADING_V1_SCRIPT_END -->
+<script defer src="/js/project-exit-loading.js" data-project-exit-paw-loading-v1></script>
 </body></html>
