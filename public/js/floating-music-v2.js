@@ -56,14 +56,25 @@
    if(!dragging&&Math.hypot(dx,dy)>6){dragging=true;wasDragged=true;shell.classList.add('is-dragging');shell.classList.remove('is-expanded')}
    if(dragging)pin(dragStart.originX+dx,dragStart.originY+dy);
  });
+ let dragClickBlockUntil=0;
  const endDrag=e=>{
    if(!dragStart||e.pointerId!==dragStart.id)return;
    dragStart=null;
-   if(dragging){dragging=false;shell.classList.remove('is-dragging');save();}
+   if(dragging){dragging=false;shell.classList.remove('is-dragging');save();dragClickBlockUntil=Date.now()+450;}
    if(hover)expand(true);
  };
  button.addEventListener('pointerup',endDrag);
  button.addEventListener('pointercancel',endDrag);
+
+  // music-drag-click-guard-v1: pointerup may synthesize a click after dragging.
+  // Capture it before the normal play/pause click handler can see it.
+  button.addEventListener('click',e=>{
+    if(wasDragged || Date.now()<dragClickBlockUntil){
+      e.preventDefault();
+      e.stopImmediatePropagation();
+      wasDragged=false;
+    }
+  },true);
  button.addEventListener('click',async e=>{
    if(wasDragged){e.preventDefault();wasDragged=false;return}
    if(!audio.paused){desiredPlaying=false;audio.pause();refresh();save();return}
