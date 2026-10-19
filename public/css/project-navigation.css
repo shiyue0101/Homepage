@@ -10,36 +10,97 @@
   box-sizing: border-box;
   display: flex;
   flex-direction: column;
-  border: 1px solid rgba(119,53,72,.25);
+  border: 1px solid rgba(119, 53, 72, 0.25);
   border-radius: 14px;
-  background: rgba(255,247,242,.93);
-  box-shadow: 0 8px 24px rgba(89,48,58,.12);
+  background: rgba(255, 247, 242, 0.93);
+  box-shadow: 0 8px 24px rgba(89, 48, 58, 0.12);
   backdrop-filter: blur(9px);
   -webkit-backdrop-filter: blur(9px);
   overflow: hidden;
   font-family: inherit;
 }
-.project-floating-toc-title { padding: 14px 16px 8px; color: var(--accent); font-size: 12px; font-weight: bold; letter-spacing: .08em; }
-.project-floating-toc-links { display: flex; flex-direction: column; gap: 2px; padding: 0 9px 12px; overflow-y: auto; overscroll-behavior: contain; }
-.project-floating-toc a { display: block; padding: 7px 9px; border-left: 3px solid transparent; border-radius: 5px; color: var(--text); font-size: 13px; line-height: 1.4; text-decoration: none; overflow-wrap: anywhere; }
-.project-floating-toc a:hover { background: var(--surface-soft); }
-.project-floating-toc a[aria-current="location"] { border-left-color: var(--accent); color: var(--accent); background: rgba(233,179,184,.22); font-weight: bold; }
-.project-floating-toc-toggle { display: none; }
-.case-study section[id] { scroll-margin-top: calc(var(--header-height, 76px) + 24px); }
+.project-floating-toc-title {
+  padding: 14px 16px 8px;
+  color: var(--accent);
+  font-size: 12px;
+  font-weight: bold;
+  letter-spacing: 0.08em;
+}
+.project-floating-toc-links {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: 0 9px 12px;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+}
+.project-floating-toc a {
+  display: block;
+  padding: 7px 9px;
+  border-left: 3px solid transparent;
+  border-radius: 5px;
+  color: var(--text);
+  font-size: 13px;
+  line-height: 1.4;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.project-floating-toc a:hover {
+  background: var(--surface-soft);
+}
+.project-floating-toc a[aria-current="location"] {
+  border-left-color: var(--accent);
+  color: var(--accent);
+  background: rgba(233, 179, 184, 0.22);
+  font-weight: bold;
+}
+.project-floating-toc-toggle {
+  display: none;
+}
+.case-study section[id] {
+  scroll-margin-top: calc(var(--header-height, 76px) + 24px);
+}
 @media (min-width: 1350px) {
-  .case-study > .case-toc { display: none; }
+  .case-study > .case-toc {
+    display: none;
+  }
 }
 /* In narrower desktop widths, use a compact visible button instead of covering the article. */
 @media (min-width: 1050px) and (max-width: 1349px) {
-  .project-floating-toc { width: 230px; right: 14px; }
-  .project-floating-toc:not(.is-open) { width: 46px; max-height: 46px; }
-  .project-floating-toc-toggle { display: block; border: 0; background: transparent; color: var(--accent); font-size: 23px; cursor: pointer; min-height: 45px; }
+  .project-floating-toc {
+    width: 230px;
+    right: 14px;
+  }
+  .project-floating-toc:not(.is-open) {
+    width: 46px;
+    max-height: 46px;
+  }
+  .project-floating-toc-toggle {
+    display: block;
+    border: 0;
+    background: transparent;
+    color: var(--accent);
+    font-size: 23px;
+    cursor: pointer;
+    min-height: 45px;
+  }
   .project-floating-toc:not(.is-open) .project-floating-toc-title,
-  .project-floating-toc:not(.is-open) .project-floating-toc-links { display: none; }
-  .project-floating-toc.is-open .project-floating-toc-toggle { align-self: flex-end; padding: 2px 13px; }
-  .project-floating-toc:not(.is-open) .project-floating-toc-toggle { width: 46px; }
+  .project-floating-toc:not(.is-open) .project-floating-toc-links {
+    display: none;
+  }
+  .project-floating-toc.is-open .project-floating-toc-toggle {
+    align-self: flex-end;
+    padding: 2px 13px;
+  }
+  .project-floating-toc:not(.is-open) .project-floating-toc-toggle {
+    width: 46px;
+  }
 }
-@media (max-width: 1049px) { .project-floating-toc { display: none; } }
+@media (max-width: 1049px) {
+  .project-floating-toc {
+    display: none;
+  }
+}
 /* PROJECT_FLOATING_TOC_V2_END */
 
 /* NOTION_TOC_HOVER_COLLAPSE_START */
@@ -52,23 +113,26 @@
     top: calc(var(--header-height, 76px) + 28px) !important;
     right: 16px !important;
     width: 246px !important;
-    height: min(490px, calc(100dvh - var(--header-height, 76px) - 55px)) !important;
+    height: min(
+      490px,
+      calc(100dvh - var(--header-height, 76px) - 55px)
+    ) !important;
     max-height: none !important;
     display: flex !important;
     flex-direction: column !important;
     box-sizing: border-box !important;
     padding: 0 !important;
     overflow: hidden !important;
-    border: 1px solid rgba(119, 53, 72, .25) !important;
+    border: 1px solid rgba(119, 53, 72, 0.25) !important;
     border-radius: 12px !important;
-    background: rgba(255, 247, 242, .97) !important;
-    box-shadow: 0 8px 24px rgba(89, 48, 58, .12) !important;
+    background: rgba(255, 247, 242, 0.97) !important;
+    box-shadow: 0 8px 24px rgba(89, 48, 58, 0.12) !important;
     /* Only the final 34px are visible and receive hover events. */
     clip-path: inset(0 0 0 calc(100% - 34px) round 12px);
-    transition: clip-path .2s ease !important;
+    transition: clip-path 0.2s ease !important;
   }
   .project-floating-toc::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 18px;
     right: 8px;
@@ -76,14 +140,14 @@
     height: 205px;
     background: repeating-linear-gradient(
       to bottom,
-      rgba(119, 53, 72, .6) 0px,
-      rgba(119, 53, 72, .6) 2px,
+      rgba(119, 53, 72, 0.6) 0px,
+      rgba(119, 53, 72, 0.6) 2px,
       transparent 2px,
       transparent 15px
     );
     pointer-events: none;
     opacity: 1;
-    transition: opacity .12s ease;
+    transition: opacity 0.12s ease;
     z-index: 2;
   }
   .project-floating-toc .project-floating-toc-title,
@@ -92,7 +156,9 @@
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: opacity .14s ease, visibility .14s ease;
+    transition:
+      opacity 0.14s ease,
+      visibility 0.14s ease;
   }
   .project-floating-toc .project-floating-toc-links {
     display: flex !important;
@@ -209,13 +275,17 @@ body #contact.page-section.active {
 @media (min-width: 1050px) and (hover: hover) and (pointer: fine) {
   .project-floating-toc .project-floating-toc-title,
   .project-floating-toc .project-floating-toc-links {
-    transition: opacity .14s ease, visibility 0s linear .2s !important;
+    transition:
+      opacity 0.14s ease,
+      visibility 0s linear 0.2s !important;
   }
   .project-floating-toc:hover .project-floating-toc-title,
   .project-floating-toc:hover .project-floating-toc-links,
   .project-floating-toc:focus-within .project-floating-toc-title,
   .project-floating-toc:focus-within .project-floating-toc-links {
-    transition: opacity .14s ease, visibility 0s linear 0s !important;
+    transition:
+      opacity 0.14s ease,
+      visibility 0s linear 0s !important;
   }
 }
 /* TOC_REVERSE_COLLAPSE_ONLY_END */
@@ -230,16 +300,20 @@ body #contact.page-section.active {
     box-shadow: 0 8px 24px rgba(89, 48, 58, 0) !important;
     /* Original clip closes for .2s. Fade only during its final .1s. */
     transition:
-      clip-path .2s ease,
-      background-color .10s ease-out .12s,
-      border-color .10s ease-out .12s,
-      box-shadow .10s ease-out .12s !important;
+      clip-path 0.2s ease,
+      background-color 0.1s ease-out 0.12s,
+      border-color 0.1s ease-out 0.12s,
+      box-shadow 0.1s ease-out 0.12s !important;
   }
-  .project-floating-toc:not(:hover):not(:focus-within) .project-floating-toc-title,
-  .project-floating-toc:not(:hover):not(:focus-within) .project-floating-toc-links {
+  .project-floating-toc:not(:hover):not(:focus-within)
+    .project-floating-toc-title,
+  .project-floating-toc:not(:hover):not(:focus-within)
+    .project-floating-toc-links {
     opacity: 0;
     visibility: hidden;
-    transition: opacity .2s step-end, visibility 0s linear .2s !important;
+    transition:
+      opacity 0.2s step-end,
+      visibility 0s linear 0.2s !important;
   }
   /* The opening transition is intentionally NOT changed. */
 }

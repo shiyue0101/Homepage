@@ -1,9 +1,10 @@
-/* BEGIN contact redesign 2026 */
 #contact.page-section {
   box-sizing: border-box;
   position: fixed;
   top: var(--header-height, 88px);
-  left: 0; right: 0; bottom: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
   width: 100%;
   height: auto;
   overflow-y: auto;
@@ -13,8 +14,15 @@
   padding: clamp(32px, 6vw, 96px) clamp(24px, 5vw, 90px) 60px;
   color: var(--text);
 }
-#contact.page-section.hidden { display: none; }
-#contact.page-section.active { display: block; }
+
+#contact.page-section.hidden {
+  display: none;
+}
+
+#contact.page-section.active {
+  display: block;
+}
+
 #contact .contact-redesign {
   width: min(100%, 1360px);
   min-height: min(620px, 70vh);
@@ -24,8 +32,12 @@
   column-gap: clamp(48px, 9vw, 160px);
   align-items: start;
 }
+
 #contact .contact-redesign-intro,
-#contact .contact-redesign-formarea { min-width: 0; }
+#contact .contact-redesign-formarea {
+  min-width: 0;
+}
+
 #contact .contact-redesign-intro h1 {
   margin: 0 0 22px;
   color: var(--accent);
@@ -35,11 +47,13 @@
   line-height: 1.02;
   letter-spacing: -0.035em;
 }
+
 #contact .contact-redesign-intro > p {
   margin: 0;
   color: var(--muted);
   font-size: clamp(1rem, 1.45vw, 1.3rem);
 }
+
 #contact .contact-redesign-links {
   margin-top: clamp(56px, 10vh, 130px);
   display: flex;
@@ -47,6 +61,7 @@
   align-items: flex-start;
   gap: 18px;
 }
+
 #contact .contact-redesign-link {
   display: inline-flex;
   align-items: center;
@@ -58,24 +73,57 @@
   font-size: clamp(0.95rem, 1.3vw, 1.15rem);
   overflow-wrap: anywhere;
 }
-#contact a.contact-redesign-link:hover { color: var(--accent); }
-#contact .contact-redesign-link svg { width: 24px; height: 24px; flex: 0 0 24px; }
-#contact .contact-redesign-linkedin svg { width: 30px; height: 30px; flex-basis: 30px; }
+
+#contact a.contact-redesign-link:hover {
+  color: var(--accent);
+}
+
+#contact .contact-redesign-link svg {
+  width: 24px;
+  height: 24px;
+  flex: 0 0 24px;
+}
+
+#contact .contact-redesign-linkedin svg {
+  width: 30px;
+  height: 30px;
+  flex-basis: 30px;
+}
+
 #contact .sr-contact {
   position: absolute;
-  width: 1px; height: 1px;
-  padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0,0,0,0);
-  white-space: nowrap; border: 0;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
-#contact .contact-redesign-formarea { padding-top: clamp(24px, 5vw, 74px); }
-#contact .contact-redesign-note { font-size: 1.45rem; margin: 0 0 36px; color: var(--muted); }
-#contact .contact-redesign-form { display: flex; flex-direction: column; gap: 0; }
+
+#contact .contact-redesign-formarea {
+  padding-top: clamp(24px, 5vw, 74px);
+}
+
+#contact .contact-redesign-note {
+  font-size: 1.45rem;
+  margin: 0 0 36px;
+  color: var(--muted);
+}
+
+#contact .contact-redesign-form {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
 #contact .contact-redesign-form label {
   font-size: 0.9rem;
   color: var(--muted);
   margin: 12px 0 2px;
 }
+
 #contact .contact-redesign-form input,
 #contact .contact-redesign-form textarea {
   box-sizing: border-box;
@@ -94,11 +142,24 @@
   font-size: clamp(1.05rem, 1.8vw, 1.35rem);
   outline-offset: 4px;
 }
-#contact .contact-redesign-form textarea { min-height: 110px; resize: vertical; }
+
+#contact .contact-redesign-form textarea {
+  min-height: 110px;
+  resize: vertical;
+}
+
 #contact .contact-redesign-form input::placeholder,
-#contact .contact-redesign-form textarea::placeholder { color: var(--muted); opacity: .76; }
+#contact .contact-redesign-form textarea::placeholder {
+  color: var(--muted);
+  opacity: 0.76;
+}
+
 #contact .contact-redesign-form input:focus,
-#contact .contact-redesign-form textarea:focus { border-bottom-color: var(--accent); border-bottom-width: 2px; }
+#contact .contact-redesign-form textarea:focus {
+  border-bottom-color: var(--accent);
+  border-bottom-width: 2px;
+}
+
 #contact .contact-redesign-form button {
   align-self: flex-end;
   border: none;
@@ -110,40 +171,72 @@
   font: inherit;
   font-size: 1rem;
   cursor: pointer;
-  transition: opacity .2s ease, transform .2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease;
 }
-#contact .contact-redesign-form button:hover { opacity: .88; transform: translateY(-2px); }
-#contact .contact-redesign-form button:focus-visible,
-#contact .contact-redesign-link:focus-visible { outline: 2px solid var(--accent); outline-offset: 4px; }
-#contact .contact-redesign-footnote {
-  margin: 15px 0 0;
-  text-align: right;
-  font-size: .8rem;
-  color: var(--muted);
-}
-@media (max-width: 900px) {
-  #contact .contact-redesign { grid-template-columns: 1fr; row-gap: 36px; min-height: 0; }
-  #contact .contact-redesign-intro h1 { font-size: clamp(2.9rem, 9vw, 5.5rem); }
-  #contact .contact-redesign-links { margin-top: 32px; gap: 12px; }
-  #contact .contact-redesign-formarea { padding-top: 8px; }
-}
-@media (max-width: 600px) {
-  #contact.page-section { padding: 26px 22px 52px; }
-  #contact .contact-redesign { row-gap: 30px; }
-  #contact .contact-redesign-intro h1 { font-size: clamp(2.7rem, 12vw, 4rem); }
-  #contact .contact-redesign-note { margin-bottom: 18px; }
-  #contact .contact-redesign-form button { align-self: stretch; }
-}
-/* END contact redesign 2026 */
 
-/* BEGIN centered contact and projects 2026 */
-/* Desktop: bring both sections slightly inward without changing colors. */
+#contact .contact-redesign-form button:hover {
+  opacity: 0.88;
+  transform: translateY(-2px);
+}
+
+#contact .contact-redesign-form button:focus-visible,
+#contact .contact-redesign-link:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (max-width: 900px) {
+  #contact .contact-redesign {
+    grid-template-columns: 1fr;
+    row-gap: 36px;
+    min-height: 0;
+  }
+
+  #contact .contact-redesign-intro h1 {
+    font-size: clamp(2.9rem, 9vw, 5.5rem);
+  }
+
+  #contact .contact-redesign-links {
+    margin-top: 32px;
+    gap: 12px;
+  }
+
+  #contact .contact-redesign-formarea {
+    padding-top: 8px;
+  }
+}
+
+@media (max-width: 600px) {
+  #contact.page-section {
+    padding: 26px 22px 52px;
+  }
+
+  #contact .contact-redesign {
+    row-gap: 30px;
+  }
+
+  #contact .contact-redesign-intro h1 {
+    font-size: clamp(2.7rem, 12vw, 4rem);
+  }
+
+  #contact .contact-redesign-note {
+    margin-bottom: 18px;
+  }
+
+  #contact .contact-redesign-form button {
+    align-self: stretch;
+  }
+}
+
 @media (min-width: 901px) {
   body #projects.page-section .projects-grid {
     width: 100%;
     max-width: 1320px;
     margin-inline: auto;
   }
+
   #contact .contact-redesign {
     width: 100%;
     max-width: 1200px;
@@ -151,16 +244,12 @@
     column-gap: clamp(40px, 6vw, 100px);
   }
 }
-/* END centered contact and projects 2026 */
 
-/* BEGIN unified page margins and contact heading 2026 */
-/* Shared horizontal rhythm. Keep the original colors and vertical spacing. */
 :root {
   --page-gutter: clamp(24px, 3.5vw, 48px);
   --page-content-max: 1120px;
 }
 
-/* Every main section uses the same viewport-side gutter. */
 body #projects.page-section,
 body #professional.page-section,
 body #life.page-section,
@@ -169,7 +258,6 @@ body #contact.page-section {
   padding-right: var(--page-gutter) !important;
 }
 
-/* Center the content, while keeping each page's existing layout. */
 body #projects .projects-grid,
 body #professional .prof-container,
 body #life .life-content,
@@ -181,48 +269,73 @@ body #contact .contact-redesign {
   margin-right: auto;
 }
 
-/* Same left and right alignment for the Home content and case-study pages. */
 body #main {
-  padding-left: max(var(--page-gutter), calc((100% - var(--page-content-max))/2));
+  padding-left: max(
+    var(--page-gutter),
+    calc((100% - var(--page-content-max)) / 2)
+  );
   padding-right: var(--page-gutter);
 }
+
 body .case-study {
   box-sizing: border-box;
   width: 100%;
   max-width: calc(var(--page-content-max) + 2 * var(--page-gutter));
-  padding-left: max(var(--page-gutter), calc((100% - var(--page-content-max))/2));
-  padding-right: max(var(--page-gutter), calc((100% - var(--page-content-max))/2));
+  padding-left: max(
+    var(--page-gutter),
+    calc((100% - var(--page-content-max)) / 2)
+  );
+  padding-right: max(
+    var(--page-gutter),
+    calc((100% - var(--page-content-max)) / 2)
+  );
 }
 
-/* Smaller Contact heading, still prominent but not oversized. */
 #contact .contact-redesign-intro h1 {
   font-size: clamp(2.5rem, 4.5vw, 4.5rem);
   line-height: 1.12;
 }
 
 @media (max-width: 900px) {
-  :root { --page-gutter: 24px; }
-  body #main { padding-left: var(--page-gutter); padding-right: var(--page-gutter); }
+  :root {
+    --page-gutter: 24px;
+  }
+
+  body #main {
+    padding-left: var(--page-gutter);
+    padding-right: var(--page-gutter);
+  }
 }
+
 @media (max-width: 600px) {
-  :root { --page-gutter: 20px; }
+  :root {
+    --page-gutter: 20px;
+  }
+
   #contact .contact-redesign-intro h1 {
     font-size: clamp(2.2rem, 8vw, 3rem);
   }
 }
-/* END unified page margins and contact heading 2026 */
 
-/* BEGIN contact name fields and focus fix */
 #contact .contact-name-row {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: clamp(14px, 2vw, 28px);
   width: 100%;
 }
-#contact .contact-name-field { min-width: 0; }
-#contact .contact-name-field label { display: block; }
-#contact .contact-name-field input { width: 100%; }
-/* Keep the site's underline focus cue; remove the browser's blue ring. */
+
+#contact .contact-name-field {
+  min-width: 0;
+}
+
+#contact .contact-name-field label {
+  display: block;
+}
+
+#contact .contact-name-field input {
+  width: 100%;
+}
+
 #contact .contact-redesign-form input:focus,
 #contact .contact-redesign-form textarea:focus,
 #contact .contact-redesign-form input:focus-visible,
@@ -231,50 +344,51 @@ body .case-study {
   box-shadow: none !important;
   border-bottom: 2px solid var(--accent) !important;
 }
-@media (max-width: 380px) {
-  #contact .contact-name-row { gap: 12px; }
-  #contact .contact-name-field input { font-size: 1rem; }
-}
-/* END contact name fields and focus fix */
 
-/* BEGIN contact details bottom-left */
-/* Desktop: keep heading near the top and move contact info to lower-left. */
+@media (max-width: 380px) {
+  #contact .contact-name-row {
+    gap: 12px;
+  }
+
+  #contact .contact-name-field input {
+    font-size: 1rem;
+  }
+}
+
 @media (min-width: 901px) {
   #contact .contact-redesign {
     align-items: stretch;
     min-height: max(520px, calc(100dvh - var(--header-height, 88px) - 125px));
   }
+
   #contact .contact-redesign-intro {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     min-height: 0;
   }
+
   #contact .contact-redesign-links {
     margin-top: auto;
     padding-top: 48px;
   }
 }
-/* On tablet/phone, preserve readable natural flow above the form. */
+
 @media (max-width: 900px) {
   #contact .contact-redesign-intro {
     display: block;
   }
+
   #contact .contact-redesign-links {
     margin-top: 32px;
     padding-top: 0;
   }
 }
-/* END contact details bottom-left */
-
-
-/* Contact: spacing and placeholder typography */
 
 #contact .contact-redesign {
   margin-top: 24px;
 }
 
-/* Only change placeholder text, not labels or typed values */
 #contact .contact-redesign input::placeholder,
 #contact .contact-redesign textarea::placeholder {
   font-size: 18px;
@@ -282,7 +396,6 @@ body .case-study {
   opacity: 0.8;
 }
 
-/* Mobile */
 @media (max-width: 600px) {
   #contact .contact-redesign {
     margin-top: 16px;
@@ -294,106 +407,90 @@ body .case-study {
   }
 }
 
-
-/* Move the entire Contact form slightly upward */
 @media (min-width: 901px) {
   #contact .contact-redesign > :last-child {
     transform: translateY(-22px);
   }
 }
 
-/* CONTACT-PROTECTION-V1: clean contact information rows only */
-#contact .contact-info-row > svg,
-#contact .contact-info-row > i,
-#contact .contact-detail > svg,
-#contact .contact-detail > i,
-#contact .contact-item > svg,
-#contact .contact-item > i,
-#contact .contact-line > svg,
-#contact .contact-line > i,
-#contact .contact-method > svg,
-#contact .contact-method > i {
-  display: none;
-}
 #contact .protected-contact-link {
   color: inherit;
   text-decoration: none;
   overflow-wrap: anywhere;
 }
+
 #contact .protected-contact-link:hover {
   text-decoration: underline;
   text-underline-offset: 3px;
 }
 
-/* BEGIN contact details footnote alignment 2026 */
-/* All three details use exactly the same font size as the location row. */
 #contact .contact-redesign-links > .contact-redesign-link {
   font-family: inherit;
   font-size: clamp(0.95rem, 1.3vw, 1.15rem);
   font-weight: 400;
   line-height: 1.5;
 }
+
 #contact .contact-redesign-links > .contact-redesign-link span,
-#contact .contact-redesign-links > .contact-redesign-link .protected-contact-link,
+#contact
+  .contact-redesign-links
+  > .contact-redesign-link
+  .protected-contact-link,
 #contact .contact-redesign-links > .contact-redesign-link > a {
   font-family: inherit;
   font-size: inherit;
   font-weight: inherit;
   line-height: inherit;
 }
-/* The source-protected email/phone may be anchors themselves. */
+
 #contact .contact-redesign-links > #protected-email,
 #contact .contact-redesign-links > #protected-phone {
   font: inherit;
   font-size: clamp(0.95rem, 1.3vw, 1.15rem);
   line-height: 1.5;
 }
+
 @media (min-width: 901px) {
-  /* Remove the artificial tall column that left a gap beneath the form. */
   #contact .contact-redesign {
     height: auto;
     min-height: 0;
     align-items: stretch;
   }
+
   #contact .contact-redesign-intro {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     min-height: 0;
   }
+
   #contact .contact-redesign-links {
     margin-top: auto;
     padding-top: 30px;
     padding-bottom: 0;
   }
-  /* The bottom of this note and the LinkedIn icon share the grid row bottom. */
+
   #contact .contact-redesign-formarea {
     min-height: 0;
     display: flex;
     flex-direction: column;
     align-self: stretch;
   }
-  #contact .contact-redesign-footnote {
-    margin-top: auto;
-    padding-top: 15px;
-    margin-bottom: 0;
+}
+
+@media (max-width: 900px) {
+  #contact .contact-redesign-formarea {
+    display: block;
   }
 }
-/* Keep the existing natural top-to-bottom flow on tablets and phones. */
-@media (max-width: 900px) {
-  #contact .contact-redesign-formarea { display: block; }
-}
-/* END contact details footnote alignment 2026 */
 
-/* CONTACT LINKS BELOW INTRO — START */
-/* Keep the whole left column top-aligned; do not push links to its bottom. */
 #contact .contact-redesign-intro {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   justify-content: flex-start;
 }
-/* Space between “I'd love to hear from you :D” and contact details. */
+
 #contact .contact-redesign-intro .contact-redesign-links {
   margin-top: 48px;
   margin-bottom: 0;
@@ -403,18 +500,13 @@ body .case-study {
   transform: none;
   align-self: flex-start;
 }
+
 @media (max-width: 900px) {
   #contact .contact-redesign-intro .contact-redesign-links {
     margin-top: 32px;
   }
 }
-/* CONTACT LINKS BELOW INTRO — END */
 
-
-
-
-
-/* BEGIN contact-no-redirect-v2 */
 .contact-send-toast {
   position: fixed;
   left: 50%;
@@ -426,36 +518,32 @@ body .case-study {
   border-radius: 12px;
   background: #432f32;
   color: white;
-  box-shadow: 0 8px 28px rgba(40, 20, 26, .2);
+  box-shadow: 0 8px 28px rgba(40, 20, 26, 0.2);
   font: inherit;
   font-size: 0.95rem;
   text-align: center;
   opacity: 0;
   visibility: hidden;
   pointer-events: none;
-  transition: opacity .2s ease, transform .2s ease, visibility .2s ease;
+  transition:
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0.2s ease;
 }
-.contact-send-toast.is-visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translate(-50%, 0);
-}
-.contact-send-toast.is-error { background: #7a3e47; }
+
 @media (prefers-reduced-motion: reduce) {
-  .contact-send-toast { transition: none; }
+  .contact-send-toast {
+    transition: none;
+  }
 }
-/* END contact-no-redirect-v2 */
 
-
-
-/* BEGIN CONTACT FORM COMPACT TYPOGRAPHY */
-/* A slightly smaller, more cohesive Contact form. */
 #contact .contact-redesign-form label {
   font-size: 0.84rem;
   line-height: 1.35;
   margin-top: 10px;
   margin-bottom: 0;
 }
+
 #contact .contact-redesign-form input,
 #contact .contact-redesign-form textarea {
   font-size: 1rem;
@@ -464,29 +552,31 @@ body .case-study {
   padding-bottom: 11px;
   margin-bottom: 13px;
 }
+
 #contact .contact-redesign-form input::placeholder,
 #contact .contact-redesign-form textarea::placeholder {
   font-size: 1rem;
 }
+
 @media (max-width: 600px) {
   #contact .contact-redesign-form input,
   #contact .contact-redesign-form textarea,
   #contact .contact-redesign-form input::placeholder,
   #contact .contact-redesign-form textarea::placeholder {
-    font-size: 1rem; /* Keep readable on iPhone and avoid Safari input zoom. */
+    font-size: 1rem;
   }
 }
-/* END CONTACT FORM COMPACT TYPOGRAPHY */
 
-
-/* CONTACT TURNSTILE START */
 #contact .contact-turnstile-wrap {
   margin: 16px 0 18px;
   max-width: 100%;
 }
-#contact .contact-turnstile-wrap .cf-turnstile { max-width: 100%; }
-#contact .contact-turnstile-error,
-#contact .contact-turnstile-field-error {
+
+#contact .contact-turnstile-wrap .cf-turnstile {
+  max-width: 100%;
+}
+
+#contact .contact-turnstile-error {
   margin: 5px 0 9px;
   padding: 0;
   color: var(--accent, #873b52);
@@ -494,30 +584,28 @@ body .case-study {
   line-height: 1.35;
   font-weight: 400;
 }
-#contact .contact-turnstile-error[hidden],
-#contact .contact-turnstile-field-error[hidden] { display: none !important; }
+
+#contact .contact-turnstile-error[hidden] {
+  display: none !important;
+}
+
 #contact .contact-redesign-form button[type="submit"]:disabled {
   cursor: wait;
-  opacity: .65;
+  opacity: 0.65;
 }
-/* CONTACT TURNSTILE END */
 
-
-/* Align Cloudflare Turnstile to the right */
 #contact .cf-turnstile {
   display: flex;
   justify-content: flex-end;
   width: 100%;
 }
 
-/* Keep verification centered on narrow screens */
 @media (max-width: 360px) {
   #contact .cf-turnstile {
     justify-content: center;
   }
 }
 
-/* CONTACT TURNSTILE SEND ALIGN START */
 #contact .contact-turnstile-send-row {
   display: flex;
   align-items: center;
@@ -527,33 +615,31 @@ body .case-study {
   width: 100%;
   margin-top: 16px;
 }
+
 #contact .contact-turnstile-send-row .contact-turnstile-wrap {
   margin: 0;
   flex: 0 1 auto;
   min-width: 0;
 }
+
 #contact .contact-turnstile-send-row button[type="submit"] {
   flex: 0 0 auto;
   margin: 0;
 }
+
 @media (max-width: 560px) {
   #contact .contact-turnstile-send-row {
     gap: 12px;
   }
+
   #contact .contact-turnstile-send-row .contact-turnstile-wrap {
     width: 100%;
   }
 }
-/* CONTACT TURNSTILE SEND ALIGN END */
 
-/* CONTACT_WIDE_ABOUT_ALIGNMENT_V1_START */
-/* Match the 1220px content canvas used by WIDE_ABOUT_GUTTERS_V1.
-   The #contact section already has the correct responsive side gutters
-   in pages.css. Only the inner grid was still capped at 1120px. */
 body #contact .contact-redesign {
   box-sizing: border-box;
   width: 100%;
   max-width: var(--wide-about-content, 1220px);
   margin-inline: auto;
 }
-/* CONTACT_WIDE_ABOUT_ALIGNMENT_V1_END */

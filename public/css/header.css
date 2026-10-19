@@ -1,0 +1,26 @@
+/* Responsive header offsets. */
+@media (max-width: 760px) {
+  /* Nav may wrap onto two rows; its measured height drives page offsets. */
+  html {
+    scroll-padding-top: calc(var(--header-height, 116px) + 16px);
+  }
+  .site-header {
+    min-height: 0;
+    height: auto;
+  }
+  #main {
+    padding-top: var(--header-height, 116px);
+  }
+  body .page-section {
+    top: var(--header-height, 116px);
+  }
+  .case-study {
+    padding-top: calc(var(--header-height, 116px) + 40px);
+  }
+  .case-study section {
+    scroll-margin-top: calc(var(--header-height, 116px) + 20px);
+  }
+  #back-btn {
+    top: calc(var(--header-height, 116px) + 16px);
+  }
+}

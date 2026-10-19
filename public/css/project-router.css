@@ -1,0 +1,31 @@
+/* Embedded projects keep the parent header and music mounted. */
+#spa-project-frame {
+  position: fixed;
+  inset: var(--header-height, 76px) 0 0;
+  width: 100%;
+  height: calc(100vh - var(--header-height, 76px));
+  height: calc(100dvh - var(--header-height, 76px));
+  border: none;
+  background: #efd9d5;
+  z-index: 2000;
+  opacity: 1;
+  transition: opacity 420ms ease-out;
+}
+#spa-project-frame[hidden] {
+  display: none !important;
+}
+html.spa-project-open .site-header {
+  z-index: 2100;
+}
+html.spa-project-open #site-floating-music {
+  z-index: 9000 !important;
+}
+html.spa-project-loading #spa-project-frame {
+  opacity: 0 !important;
+  visibility: hidden !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  #spa-project-frame {
+    transition: none !important;
+  }
+}

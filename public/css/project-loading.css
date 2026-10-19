@@ -1,0 +1,34 @@
+/* Paint the mask before the browser paints the project/header. */
+html:not(.project-paw-ready) #loading-overlay {
+  position: fixed !important;
+  inset: 0 !important;
+  z-index: 99999 !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
+  background: var(--background, #e8c6c1) !important;
+}
+html.project-paw-ready #loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  background: var(--background, #e8c6c1);
+  opacity: 0 !important;
+  visibility: visible !important;
+  pointer-events: none !important;
+  transition: opacity 300ms ease;
+}
+html.project-paw-finished #loading-overlay {
+  display: none !important;
+}
+@media (prefers-reduced-motion: reduce) {
+  html.project-paw-ready #loading-overlay {
+    transition: none;
+  }
+}

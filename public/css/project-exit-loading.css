@@ -14,7 +14,7 @@ body #loading-overlay.project-exit-loading {
 }
 body #loading-overlay.project-exit-loading .cat-paw-loading {
   width: min(88vw, 420px);
-  font-family: Georgia, 'Times New Roman', serif;
+  font-family: Georgia, "Times New Roman", serif;
   text-align: center;
   color: var(--accent, #773548);
 }

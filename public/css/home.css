@@ -1,0 +1,156 @@
+html:not(.site-ready) #loading-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  display: flex !important;
+  align-items: center;
+  justify-content: center;
+  opacity: 1 !important;
+  visibility: visible !important;
+  pointer-events: auto !important;
+  background: var(--background, #e8c6c1);
+}
+
+@media (min-width: 650px) {
+  #contact .contact-turnstile-send-row {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+    align-items: flex-end;
+    flex-wrap: nowrap;
+    gap: 18px;
+    width: 100%;
+  }
+
+  #contact .contact-turnstile-wrap {
+    width: 300px;
+    min-width: 300px;
+    max-width: 300px;
+    flex: 0 0 300px;
+  }
+
+  #contact .contact-turnstile-send-row > button[type="submit"] {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 649px) {
+  #contact .contact-turnstile-send-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: flex-end;
+    gap: 14px;
+  }
+
+  #contact .contact-turnstile-wrap {
+    width: min(300px, 100%);
+    max-width: 100%;
+  }
+}
+
+#contact .contact-turnstile-wrap .cf-turnstile {
+  width: 300px;
+  max-width: 100%;
+}
+
+body #main {
+  overflow: hidden;
+  display: flex;
+  align-items: stretch;
+  justify-content: stretch;
+  padding: 0 !important;
+}
+
+body #main #right {
+  display: none !important;
+}
+
+body #main #about-piano-frame {
+  display: block;
+  box-sizing: border-box;
+  border: 0;
+  flex: 1 1 auto;
+  width: 100%;
+  height: calc(100vh - 76px);
+  height: calc(100dvh - 76px);
+  min-width: 0;
+  min-height: 420px;
+  background: #f3deda;
+}
+
+@media (max-width: 780px) {
+  body #main #about-piano-frame {
+    height: calc(100dvh - 68px);
+    min-height: 340px;
+  }
+}
+
+body #main:has(> #about-piano-frame) {
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  align-items: stretch !important;
+}
+
+body #main > #about-piano-frame {
+  display: block !important;
+  width: 100% !important;
+  flex: 1 1 100% !important;
+  height: 100vh !important;
+  height: 100dvh !important;
+  min-height: 0 !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border: 0 !important;
+  background: #f3deda;
+}
+
+.site-copyright-footer {
+  box-sizing: border-box;
+  width: 100%;
+  flex: 0 0 auto;
+  grid-column: 1 / -1;
+  clear: both;
+  text-align: center;
+  margin: 44px 0 0;
+  padding: 16px 20px 22px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: 0.025em;
+  line-height: 1.5;
+  color: #9b7580;
+}
+
+@media (max-width: 780px) {
+  .site-copyright-footer {
+    margin-top: 32px;
+    padding-bottom: 18px;
+  }
+}
+
+.site-copyright-footer {
+  margin-top: 88px !important;
+  padding-top: 10px !important;
+  padding-bottom: 6px !important;
+  margin-bottom: 0 !important;
+}
+
+@media (max-width: 780px) {
+  .site-copyright-footer {
+    margin-top: 64px !important;
+    padding-bottom: 6px !important;
+  }
+}
+
+body #projects.page-section:has(> .site-copyright-footer),
+body #professional.page-section:has(> .site-copyright-footer),
+body #life.page-section:has(> .site-copyright-footer),
+body #contact.page-section:has(> .site-copyright-footer),
+body #skills.page-section:has(> .site-copyright-footer) {
+  padding-bottom: 12px !important;
+}
