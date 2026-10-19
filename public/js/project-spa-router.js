@@ -174,3 +174,53 @@
   window.HomepageProjectRouter = {loadProject, hideFrame};
   if (isProject(location.pathname)) loadProject(location.pathname);
 })();
+
+
+/* SPA_PROJECT_BG_V2_FRAME_LOAD — keep embedded project's base color consistent. */
+(() => {
+  'use strict';
+  const FRAME_ID = 'spa-project-frame';
+  const BASE = '#efd9d5';
+  const attached = new WeakSet();
+
+  function paint(frame) {
+    if (!frame) return;
+    frame.style.setProperty('background-color', BASE, 'important');
+    try {
+      const doc = frame.contentDocument;
+      if (!doc) return;
+      if (doc.documentElement) {
+        doc.documentElement.style.setProperty('background-color', BASE, 'important');
+      }
+      if (doc.body) {
+        doc.body.style.setProperty('background-color', BASE, 'important');
+      }
+    } catch (error) {
+      // Standalone/cross-origin iframe: leave its page untouched.
+      console.warn('[Project SPA] Cannot set embedded background:', error);
+    }
+  }
+
+  function attach() {
+    const frame = document.getElementById(FRAME_ID);
+    if (!frame) return;
+    if (!attached.has(frame)) {
+      attached.add(frame);
+      frame.addEventListener('load', () => paint(frame));
+    }
+    paint(frame);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', attach, { once: true });
+  } else {
+    attach();
+  }
+  // The SPA router may recreate the frame: reattach if its DOM identity changes.
+  const observer = new MutationObserver(() => attach());
+  const startObserver = () => {
+    if (document.documentElement) observer.observe(document.documentElement, {childList:true, subtree:true});
+  };
+  if (document.documentElement) startObserver();
+  else document.addEventListener('DOMContentLoaded', startObserver, { once: true });
+})();

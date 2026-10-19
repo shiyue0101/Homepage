@@ -15,3 +15,6 @@
 #spa-project-frame[hidden] { display: none !important; }
 html.spa-project-open .site-header { z-index: 2100; }
 html.spa-project-open #site-floating-music { z-index: 9000 !important; }
+
+/* SPA_PROJECT_BG_V2_CSS — match the homepage background. */
+#spa-project-frame { background-color: #efd9d5 !important; }
