@@ -16,6 +16,55 @@
   let activePath = null;
   let generation = 0;
   let loadingFrame = false;
+
+  // SPA_STALE_FRAME_GUARD_V1: shared cat-paw transition, independent of the Home loader.
+  const projectCurtain = document.createElement('div');
+  projectCurtain.id = 'spa-project-curtain';
+  projectCurtain.setAttribute('aria-label', 'Loading project');
+  const pawContent = document.querySelector('#loading-overlay .cat-paw-loading');
+  if (pawContent) projectCurtain.appendChild(pawContent.cloneNode(true));
+  else projectCurtain.textContent = 'Loading...';
+  document.body.appendChild(projectCurtain);
+  let pendingProjectToken = 0;
+  let projectRevealFallback = null;
+  function beginProjectReveal(token) {
+    pendingProjectToken = token;
+    clearTimeout(projectRevealFallback);
+    document.documentElement.classList.add('spa-project-loading');
+    // Hide the previous document *before* fetching the next one.
+    frame.hidden = true;
+    // Clear stale A now, so a delayed paint can never expose it while B loads.
+    frame.removeAttribute('srcdoc');
+    loadingFrame = false;
+    projectRevealFallback = setTimeout(() => {
+      if (generation !== token || pendingProjectToken !== token) return;
+      console.error('[Project SPA] Timed out preparing project; falling back to standalone URL');
+      location.assign(activePath || location.pathname);
+    }, 7000);
+  }
+  async function revealProject(token) {
+    if (generation !== token || pendingProjectToken !== token || !activePath) return;
+    try {
+      const doc = frame.contentDocument;
+      if (!doc || doc.querySelector('meta[name="spa-project-request-token"]')?.content !== String(token)) return;
+      // Wait for typography and a stable painted frame, not for every long image.
+      if (doc.fonts && doc.fonts.ready) await Promise.race([
+        doc.fonts.ready,
+        new Promise(resolve => setTimeout(resolve, 1600))
+      ]);
+      await new Promise(resolve => requestAnimationFrame(() => requestAnimationFrame(resolve)));
+      if (generation !== token || pendingProjectToken !== token || !activePath) return;
+      clearTimeout(projectRevealFallback);
+      loadingFrame = false;
+      document.documentElement.classList.remove('spa-project-loading');
+    } catch(error) {
+      console.warn('[Project SPA] Reveal check:', error);
+      if (generation === token) {
+        clearTimeout(projectRevealFallback);
+        document.documentElement.classList.remove('spa-project-loading');
+      }
+    }
+  }
   const isProject = p => PROJECT_RE.test(p);
   const plain = (e,a) => e.button === 0 && !e.metaKey && !e.ctrlKey && !e.altKey && !e.shiftKey && !a.target && !a.hasAttribute('download');
 
@@ -23,11 +72,25 @@
     generation++;
     activePath = null;
     frame.hidden = true;
+    pendingProjectToken = 0;
+    clearTimeout(projectRevealFallback);
+    document.documentElement.classList.remove('spa-project-loading');
+    frame.removeAttribute('srcdoc');
     document.documentElement.classList.remove('spa-project-open');
     document.title = homeTitle;
   }
   function regularPath(path, push = true) {
     if (!REGULAR.has(path)) return;
+    // SITE_SOFT_TRANSITIONS_PROJECT_EXIT_V1
+    // Delay closing the iframe until the fade curtain covers its last frame.
+    if (activePath && window.HomepageSoftTransition && !regularPath.__softBypass) {
+      window.HomepageSoftTransition.run(() => {
+        regularPath.__softBypass = true;
+        try { regularPath(path, push); }
+        finally { regularPath.__softBypass = false; }
+      });
+      return;
+    }
     hideFrame();
     // Call the existing Home router directly; do NOT briefly show Projects first.
     const page = path === '/' ? 'home' : path.slice(1);
@@ -72,6 +135,8 @@
   async function loadProject(path, {push=false}={}) {
     if (!isProject(path)) return false;
     const current = ++generation;
+    activePath = path;
+    beginProjectReveal(current);
     try {
       if (!cache.has(path)) {
         const res = await fetch(path, {credentials:'same-origin'});
@@ -88,11 +153,14 @@
       });
       frame.hidden = false;
       loadingFrame = true;
-      frame.srcdoc = cache.get(path);
+      frame.srcdoc = cache.get(path).replace(/<\/head>/i,
+        '<meta name="spa-project-request-token" content="' + current + '"></head>');
       document.title = path.split('/').pop().replace('.html','').replaceAll('-',' ') + ' — Yue Shi';
       return true;
     } catch(err) {
       if (generation !== current) return false;
+      clearTimeout(projectRevealFallback);
+      document.documentElement.classList.remove('spa-project-loading');
       console.error('[Project SPA] project load failed', err);
       if (push) location.assign(path);
       return false;
@@ -157,7 +225,8 @@
   frame.addEventListener('load', () => {
     bindFrameNavigation();
     if (!loadingFrame || !activePath) return;
-    loadingFrame = false;
+    const loadedToken = Number(frame.contentDocument?.querySelector('meta[name="spa-project-request-token"]')?.content);
+    if (!loadedToken || loadedToken !== pendingProjectToken) return;
     // Guard against a full homepage accidentally navigating inside the iframe.
     try {
       if (frame.contentWindow.location.href !== 'about:srcdoc') {
@@ -165,6 +234,7 @@
         regularPath('/projects');
       }
     } catch(err) { console.warn('[Project SPA] iframe navigation check', err); }
+    revealProject(loadedToken);
   });
   window.addEventListener('popstate', () => {
     const path = location.pathname;
