@@ -57,14 +57,38 @@
    if(dragging)pin(dragStart.originX+dx,dragStart.originY+dy);
  });
  let dragClickBlockUntil=0;
+ let suppressEdgeClickUntil=0;
+ // EDGE_DRAG_RELEASE_V2: finish consistently even when the button moves away from the pointer.
  const endDrag=e=>{
-   if(!dragStart||e.pointerId!==dragStart.id)return;
+   if(!dragStart)return;
+   if(e && typeof e.pointerId==='number' && e.pointerId!==dragStart.id)return;
+   const id=dragStart.id;
    dragStart=null;
-   if(dragging){dragging=false;shell.classList.remove('is-dragging');save();dragClickBlockUntil=Date.now()+450;}
-   if(hover)expand(true);
+   const moved=dragging || wasDragged;
+   dragging=false;
+   shell.classList.remove('is-dragging');
+   if(moved){
+     wasDragged=true;
+     suppressEdgeClickUntil=performance.now()+500;
+     shell.classList.remove('is-expanded');
+     hover=false;
+     save();
+     setTimeout(()=>{if(performance.now()>=suppressEdgeClickUntil)wasDragged=false},550);
+   }
+   if(button.hasPointerCapture && button.hasPointerCapture(id)){
+     try{button.releasePointerCapture(id)}catch(_){}
+   }
  };
  button.addEventListener('pointerup',endDrag);
  button.addEventListener('pointercancel',endDrag);
+ // Captured events reach window even when the cursor is away from the button.
+ window.addEventListener('pointerup',endDrag,true);
+ window.addEventListener('pointercancel',endDrag,true);
+ window.addEventListener('blur',()=>endDrag());
+ button.addEventListener('lostpointercapture',()=>{
+   // Defer: native lostpointercapture often occurs while pointerup is dispatching.
+   if(dragStart)endDrag();
+ });
 
   // music-drag-click-guard-v1: pointerup may synthesize a click after dragging.
   // Capture it before the normal play/pause click handler can see it.
@@ -75,6 +99,12 @@
       wasDragged=false;
     }
   },true);
+ // The generated click after a drag should not play/pause the audio.
+ button.addEventListener('click',e=>{
+   if(wasDragged || performance.now()<suppressEdgeClickUntil){
+     e.preventDefault();e.stopImmediatePropagation();wasDragged=false;
+   }
+ },true);
  button.addEventListener('click',async e=>{
    if(wasDragged){e.preventDefault();wasDragged=false;return}
    if(!audio.paused){desiredPlaying=false;audio.pause();refresh();save();return}
