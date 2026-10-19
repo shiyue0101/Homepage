@@ -103,6 +103,51 @@ body #main > #about-piano-frame {
   <link rel="stylesheet" href="/css/mobile-header-fix.css">
   <link rel="stylesheet" href="/css/project-spa-router.css" data-project-spa-router>
   <link rel="stylesheet" href="/css/site-soft-transitions.css">
+
+<style id="site-copyright-footer-v1">
+/* SITE_COPYRIGHT_FOOTER_V1: quiet end-of-content copyright line */
+.site-copyright-footer {
+  box-sizing: border-box;
+  width: 100%;
+  flex: 0 0 auto;
+  grid-column: 1 / -1;
+  clear: both;
+  text-align: center;
+  margin: 44px 0 0;
+  padding: 16px 20px 22px;
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  font-weight: 400;
+  letter-spacing: .025em;
+  line-height: 1.5;
+  color: #9b7580;
+}
+@media (max-width: 780px) {
+  .site-copyright-footer { margin-top: 32px; padding-bottom: 18px; }
+}
+
+
+/* FOOTER_BOTTOM_SPACING_V2 — low, close-to-bottom copyright */
+.site-copyright-footer {
+  margin-top: 88px !important;
+  padding-top: 10px !important;
+  padding-bottom: 6px !important;
+  margin-bottom: 0 !important;
+}
+@media (max-width: 780px) {
+  .site-copyright-footer { margin-top: 64px !important; padding-bottom: 6px !important; }
+}
+
+/* Reduce empty scroll area after the footer, not above it. */
+body #projects.page-section:has(> .site-copyright-footer),
+body #professional.page-section:has(> .site-copyright-footer),
+body #life.page-section:has(> .site-copyright-footer),
+body #contact.page-section:has(> .site-copyright-footer),
+body #skills.page-section:has(> .site-copyright-footer) {
+  padding-bottom: 12px !important;
+}
+/* END_FOOTER_BOTTOM_SPACING_V2 */
+</style>
 </head>
 <body>
   <header class="site-header">
@@ -456,5 +501,25 @@ body #main > #about-piano-frame {
   <script defer src="/js/mobile-header-fix.js"></script>
   <script defer src="/js/project-spa-router.js" data-project-spa-router></script>
   <script src="/js/site-soft-transitions.js"></script>
+
+<script id="site-copyright-footer-inserter-v1">
+// SITE_COPYRIGHT_FOOTER_V1: per-section footer; do not create one inside SPA iframe.
+(() => {
+  function insert() {
+    ['projects', 'professional', 'life', 'contact', 'skills'].forEach(id => {
+      const section = document.getElementById(id);
+      if (!section || section.querySelector(':scope > .site-copyright-footer')) return;
+      const footer = document.createElement('footer');
+      footer.className = 'site-copyright-footer';
+      footer.setAttribute('aria-label', 'Copyright');
+      footer.textContent = '© 2026 Yue Shi';
+      section.appendChild(footer);
+    });
+  }
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', insert, {once: true});
+  } else insert();
+})();
+</script>
 </body>
 </html>
