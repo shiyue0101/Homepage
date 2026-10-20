@@ -4,6 +4,7 @@
   const PROJECT_RE =
     /^\/projects\/(purrpost|masking-ball|turn-taking-band|makiwara|video-conference)\.html$/;
   const REGULAR = new Set([
+    "/about",
     "/",
     "/projects",
     "/professional",
@@ -166,7 +167,7 @@
     const guard = doc.createElement("script");
     guard.textContent = `(${function () {
       const allowed =
-        /^\/(?:projects(?:\/(?:purrpost|masking-ball|turn-taking-band|makiwara|video-conference)\.html)?|professional|life|contact|skills)?\/?$/;
+        /^\/(?:projects(?:\/(?:purrpost|masking-ball|turn-taking-band|makiwara|video-conference)\.html)?|professional|life|contact|skills|about)?\/?$/;
       document.addEventListener(
         "click",
         function (e) {

@@ -22,6 +22,7 @@
     <link rel="stylesheet" href="/css/transitions.css" />
 
     <link rel="stylesheet" href="/css/home.css" />
+    <link rel="stylesheet" href="/css/piano-home-integration.css" />
   <link rel="icon" type="image/svg+xml" href="/assets/poet-quill.png?v=1" data-yue-tab-identity>
   <script defer src="/js/yue-tab-identity.js" data-yue-tab-identity></script>
 </head>
@@ -29,6 +30,7 @@
     <header class="site-header">
       <a class="site-brand" href="/" data-nav-page="home">Yue Shi</a>
       <nav class="site-nav" aria-label="Main navigation">
+        <a href="/about" data-nav-page="about">About Me</a>
         <a
           href="/assets/CV.pdf"
           target="_blank"
@@ -290,6 +292,15 @@
       </div>
     </div>
     <div id="main">
+      <!-- PIANO_HOME_V23_INTEGRATION -->
+      <iframe id="piano-home-frame" title="Piano Home" src="/piano-home.html" loading="eager"></iframe>
+      <!-- /PIANO_HOME_V23_INTEGRATION -->
+
+    </div>
+
+    
+    <!-- PIANO_HOME_V23_INTEGRATION: existing About Me moved intact -->
+    <section id="about" class="page-section hidden" aria-label="About Me">
       <!-- ABOUT_PIANO_V2_HOME_START -->
       <iframe
         id="about-piano-frame"
@@ -299,8 +310,7 @@
         allow="autoplay"
       ></iframe>
       <!-- ABOUT_PIANO_V2_HOME_END -->
-    </div>
-
+    </section>
     <section id="projects" class="page-section hidden" aria-label="Projects">
       <div class="projects-grid">
         <a
@@ -1178,6 +1188,7 @@
     <script defer src="/js/experience.js"></script>
     <script defer src="/js/skills.js"></script>
     <script defer src="/js/main.js"></script>
+    <script defer src="/js/piano-home-bridge.js"></script>
     <script defer src="/js/contact-details.js"></script>
 
     <!-- site-floating-music-v2 -->

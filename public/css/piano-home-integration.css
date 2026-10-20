@@ -1,0 +1,16 @@
+/* PIANO_HOME_V23_INTEGRATION: keep original page router and audio alive. */
+#main { overflow: hidden; }
+#piano-home-frame { display:block; width:100%; height:100%; min-height:100dvh; border:0; background:#efd9d5; }
+#about #about-piano-frame { display:block; width:100%; height:100%; border:0; background:#efd9d5; }
+#about { overflow:hidden; }
+#about #about-piano-frame { min-height:calc(100dvh - var(--header-height,76px)); }
+/* Remove the site header only on Home; keep it everywhere else. */
+/* Don't use :has() to detect routes during transitions; bridge sets a body class. */
+body.yue-piano-home .site-header { display:none !important; }
+body.yue-piano-home { --header-height:0px; }
+body.yue-piano-home #main { position:fixed; inset:0; width:100%; height:100dvh !important; min-height:0 !important; margin:0 !important; padding:0 !important; z-index:1; }
+body.yue-piano-home #piano-home-frame { height:100dvh; min-height:100dvh; }
+@media(max-width:960px){
+ body.yue-piano-home #main { height:100dvh; min-height:100dvh; }
+ #about #about-piano-frame { height:100%; min-height:calc(100dvh - var(--header-height,76px)); }
+}

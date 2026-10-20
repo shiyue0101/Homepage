@@ -1,4 +1,5 @@
 const sections = {
+  about: document.getElementById("about"),
   projects: document.getElementById("projects"),
   skills: document.getElementById("skills"),
   contact: document.getElementById("contact"),
@@ -11,6 +12,7 @@ const loadingOverlay = document.getElementById("loading-overlay");
 let loadingHideTimer;
 
 const pathToPage = {
+  "/about": "about",
   "/projects": "projects",
   "/skills": "skills",
   "/contact": "contact",
