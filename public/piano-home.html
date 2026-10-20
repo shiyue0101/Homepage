@@ -495,6 +495,68 @@
   .app > .view.leaving:not(.active) { animation:none; }
   .app > .view.leaving:not(.active) { display:none; }
 }
+
+/* YUE_RESEARCH_NOTES_A_V4: compact identity / interactive research score */
+#view-home .hero-name{font-size:clamp(48px,6vw,88px);margin-bottom:16px;letter-spacing:-.036em}
+#view-home .staves-wrap{width:min(82vw,410px);min-width:0;max-width:410px}
+#view-home .music-staff{height:68px;background:repeating-linear-gradient(to bottom,transparent 0,transparent calc(25% - .9px),rgba(167,103,121,.67) calc(25% - .9px),rgba(167,103,121,.67) 25%);border-top:1px solid rgba(167,103,121,.67)}
+#view-home .music-staff::after{height:1px;background:rgba(167,103,121,.67)}
+@media(max-width:960px){#view-home .hero-name{font-size:42px;margin-bottom:18px}#view-home .staves-wrap{width:min(88vw,370px)}#view-home .music-staff{height:65px}}
+@media(max-width:400px){#view-home .hero-name{font-size:38px}#view-home .staves-wrap{width:88vw}}
+#view-home .research-score{display:block;overflow:visible}
+#view-home .identity-note{position:absolute;top:0;left:calc(12% + var(--i) * 24%);transform:translateX(-50%);height:100%;min-width:62px;border:0;background:none;color:#865569;cursor:pointer;z-index:3;padding:0;font-family:Arial,Helvetica,sans-serif}
+#view-home .identity-note svg{width:24px;height:42px;position:absolute;top:7px;left:50%;transform:translateX(-50%)}
+#view-home .identity-note:nth-child(2) svg{top:0}#view-home .identity-note:nth-child(3) svg{top:16px}#view-home .identity-note:nth-child(4) svg{top:8px}
+#view-home .short-label{position:absolute;top:73px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.08em;white-space:nowrap;color:#835e6c}
+#view-home .full-label{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translate(-50%,5px);font-size:11px;letter-spacing:.015em;white-space:nowrap;background:#fcf4f1;border:1px solid #dac0c8;color:#754d5e;border-radius:6px;padding:7px 10px;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;box-shadow:0 5px 20px #80556812}
+#view-home .identity-note:is(:hover,:focus-visible) .full-label,#view-home .identity-note.is-open .full-label{opacity:1;transform:translate(-50%,0)}
+#view-home .identity-note:is(:hover,:focus-visible) svg{color:#ad7289}
+@media(max-width:550px){#view-home .identity-note{min-width:52px}#view-home .short-label{font-size:9px}#view-home .full-label{font-size:10px;max-width:88vw;white-space:normal;width:max-content}}
+/* Keep bottom piano in the home flex layout; its original styles are unchanged. */
+
+
+/* YUE_PIANO_VIEWPORT_REPAIR_V1 — keep the complete piano in the visible home viewport. */
+#view-home.home {
+  box-sizing: border-box;
+  height: 100%;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#view-home .home-center { flex: 1 1 auto; min-height: 0; }
+#view-home #piano-shell { flex: 0 0 auto; margin-top: auto; margin-bottom: 0; }
+@media (max-width:960px) {
+  /* Override legacy 100svh/min-height rules that enlarge the inner document. */
+  .app:has(> #view-home.active) { height: 100dvh; min-height: 0; overflow: hidden; }
+  .app > #view-home.home.active {
+    height: 100dvh;
+    min-height: 0;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+  }
+  .app > #view-home.home:not(.active):not(.leaving) { display:none; }
+  .app > #view-home.home.leaving:not(.active) { display:flex; }
+  #view-home .home-center {
+    flex: 1 1 auto;
+    min-height: 0;
+    padding-top: clamp(8px, 3dvh, 36px);
+    transform: none;
+    justify-content: center;
+  }
+  #view-home #piano-shell { flex: 0 0 auto; margin-top: auto; }
+  #view-home .piano { max-height: min(165px, 25dvh); }
+}
+@media (max-width:960px) and (max-height:680px) {
+  #view-home.home { padding-top: 8px; padding-bottom: 10px; }
+  #view-home .home-top { margin-bottom:0; }
+  #view-home .home-center { padding-top:0; justify-content:center; }
+  #view-home .hero-name { margin-bottom: 10px; }
+  #view-home .piano-toolbar { margin-bottom:4px; }
+  #view-home .piano { max-height: 138px; }
+}
+
 </style>
 </head>
 <body>
@@ -510,12 +572,7 @@
         <h1 class="hero-name">Yue Shi</h1>
 
         <div class="staves-wrap">
-          <div class="music-staff" aria-label="Research areas illustrated as four spaces between five staff lines">
-            <div class="staff-space"><span class="staff-label">Human–Computer Interaction</span></div>
-            <div class="staff-space"><span class="staff-label">Critical Making</span></div>
-            <div class="staff-space"><span class="staff-label">Research Through Design</span></div>
-            <div class="staff-space"><span class="staff-label">Animal–Computer Interaction</span></div>
-          </div>
+          <div class="music-staff research-score" aria-label="Research interests: four annotated notes"><button class="identity-note" type="button" aria-label="Human–Computer Interaction" aria-expanded="false" data-research="Human–Computer Interaction" style="--i:0"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">HCI</span><span class="full-label">Human–Computer Interaction</span></button><button class="identity-note" type="button" aria-label="Research Through Design" aria-expanded="false" data-research="Research Through Design" style="--i:1"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">RtD</span><span class="full-label">Research Through Design</span></button><button class="identity-note" type="button" aria-label="Critical Making" aria-expanded="false" data-research="Critical Making" style="--i:2"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">Making</span><span class="full-label">Critical Making</span></button><button class="identity-note" type="button" aria-label="Animal–Computer Interaction" aria-expanded="false" data-research="Animal–Computer Interaction" style="--i:3"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">ACI</span><span class="full-label">Animal–Computer Interaction</span></button></div>
         </div>
 
         
@@ -798,7 +855,7 @@
       const startY = rect.top - 14;
       // Rise to anywhere from just above the top staff line to its lower
       // spaces, never into the title's region.
-      const targetY = staffRect.top - staffRect.height * .10 + Math.random() * staffRect.height * .68;
+      const targetY = staffRect.bottom + 35 + Math.random() * 45;
       const distance = Math.max(70, startY - targetY);
       const duration = Math.min(5.9, Math.max(3.7, distance / 145));
       n.style.width = `${size}px`;
@@ -824,5 +881,21 @@
       keyboardViewport.scrollLeft=Math.max(0, centerX-keyboardViewport.clientWidth/2);
     });
   </script>
+<script id="yue-research-notes-interaction">
+/* Research labels are available on hover, keyboard focus, and mobile tap. */
+(() => {
+  const notes = document.querySelectorAll('#view-home .identity-note');
+  notes.forEach(note => note.addEventListener('click', () => {
+    const open = !note.classList.contains('is-open');
+    notes.forEach(n => { n.classList.remove('is-open'); n.setAttribute('aria-expanded', 'false'); });
+    if (open) { note.classList.add('is-open'); note.setAttribute('aria-expanded', 'true'); }
+  }));
+  document.addEventListener('pointerdown', event => {
+    if (!event.target.closest('#view-home .identity-note')) {
+      notes.forEach(n => { n.classList.remove('is-open'); n.setAttribute('aria-expanded', 'false'); });
+    }
+  });
+})();
+</script>
 </body>
 </html>
