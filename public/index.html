@@ -25,7 +25,8 @@
     <link rel="stylesheet" href="/css/piano-home-integration.css" />
   <link rel="icon" type="image/svg+xml" href="/assets/poet-quill.png?v=1" data-yue-tab-identity>
   <script defer src="/js/yue-tab-identity.js" data-yue-tab-identity></script>
-</head>
+    <link rel="stylesheet" href="/css/about-portrait.css" data-about-portrait>
+  </head>
   <body>
     <header class="site-header">
       <a class="site-brand" href="/" data-nav-page="home">Yue Shi</a>
@@ -300,16 +301,21 @@
 
     
     <!-- PIANO_HOME_V23_INTEGRATION: existing About Me moved intact -->
-    <section id="about" class="page-section hidden" aria-label="About Me">
-      <!-- ABOUT_PIANO_V2_HOME_START -->
-      <iframe
-        id="about-piano-frame"
-        title="Interactive About Me piano"
-        src="/about/index.html"
-        loading="eager"
-        allow="autoplay"
-      ></iframe>
-      <!-- ABOUT_PIANO_V2_HOME_END -->
+    <section id="about" class="page-section hidden" aria-labelledby="about-page-title">
+      <!-- ABOUT_PORTRAIT_LAYOUT_V1 -->
+      <div class="about-portrait-content">
+        <div class="about-portrait-text">
+          <h1 id="about-page-title">About Me</h1>
+          <div class="about-portrait-intro">
+            <p>I am a master’s graduate in Computer Science from the University of Copenhagen, with a focus on Human-Computer Interaction.</p>
+            <p>My interests include critical making, social computing, physical prototyping, and animal-computer interaction.</p>
+            <p>I am particularly interested in how interactive systems shape people’s understanding, experiences, and relationships in everyday settings, and I enjoy combining empirical studies with design and prototyping.</p>
+          </div>
+        </div>
+        <figure class="about-portrait-photo">
+          <img src="/assets/about/yue-portrait.jpg" alt="Portrait of Yue Shi" width="968" height="1291" decoding="async" />
+        </figure>
+      </div>
     </section>
     <section id="projects" class="page-section hidden" aria-label="Projects">
       <div class="projects-grid">
