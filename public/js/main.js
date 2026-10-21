@@ -131,6 +131,12 @@ backBtn.addEventListener("click", () => {
 // 路由处理
 function handleRoute({ initial = false } = {}) {
   const path = window.location.pathname.replace(/\/+$/, "") || "/";
+  // HOMEPAGE_PROJECT_ROUTE_GUARD_V3
+  // Embedded project routes are controlled exclusively by project-router.js.
+  if (/^\/projects\/(?:purrpost|masking-ball|turn-taking-band|makiwara|video-conference)\.html$/.test(path)) {
+    if (initial) hideLoading(0);
+    return;
+  }
   const page = pathToPage[path] || "home";
   if (page === "home") {
     showHome({ initial });

@@ -5,6 +5,11 @@ const app = express();
 const publicDirectory = path.join(__dirname, "public");
 const port = process.env.PORT || 3000;
 
+// HOMEPAGE_CANONICAL_ABOUT_V3
+// Redirect legacy trailing-slash URL before Express static's directory redirect.
+app.get("/about/", (req, res) => res.redirect(301, "/about"));
+app.get("/about", (req, res) => res.sendFile(path.join(publicDirectory, "index.html")));
+
 app.use(express.static(publicDirectory));
 
 // These routes share the homepage's client-side navigation.

@@ -391,15 +391,20 @@
     }
     revealProject(loadedToken);
   });
+  // HOMEPAGE_HISTORY_RESTORE_V3
   window.addEventListener("popstate", () => {
     const path = location.pathname;
-    if (isProject(path)) loadProject(path);
-    else {
-  hideFrame();
-  if (path === "/projects" && typeof showSection === "function") {
-    showSection("projects", false, { transition: false });
-  }
-}
+    if (isProject(path)) {
+      loadProject(path, { push: false });
+      return;
+    }
+    hideFrame();
+    // main.js also listens to popstate. Explicitly restore the visible
+    // Projects section, rather than assuming that removing iframe is enough.
+    if (path === "/projects" && typeof showSection === "function") {
+      showSection("projects", false, { transition: false });
+      document.documentElement.classList.remove("spa-project-open", "spa-project-loading");
+    }
   });
   window.HomepageProjectRouter = { loadProject, hideFrame };
   if (isProject(location.pathname)) loadProject(location.pathname);
