@@ -285,6 +285,14 @@
       if (dest.origin !== location.origin || !isProject(dest.pathname)) return;
       event.preventDefault();
       event.stopImmediatePropagation();
+      // PROJECT_BACK_TO_LIST_20261022
+      // When entering a detail from the visible Projects grid, make the previous
+      // history entry /projects. Back must restore the grid, not an earlier route.
+      const projectList = document.getElementById("projects");
+      if (projectList && !projectList.classList.contains("hidden") &&
+          location.pathname !== "/projects" && !isProject(location.pathname)) {
+        history.replaceState({ page: "projects" }, "", "/projects");
+      }
       loadProject(dest.pathname, { push: true });
     },
     true,
@@ -386,7 +394,12 @@
   window.addEventListener("popstate", () => {
     const path = location.pathname;
     if (isProject(path)) loadProject(path);
-    else hideFrame(); // main.js popstate handles normal content.
+    else {
+  hideFrame();
+  if (path === "/projects" && typeof showSection === "function") {
+    showSection("projects", false, { transition: false });
+  }
+}
   });
   window.HomepageProjectRouter = { loadProject, hideFrame };
   if (isProject(location.pathname)) loadProject(location.pathname);

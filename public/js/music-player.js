@@ -231,6 +231,21 @@
     if (document.visibilityState === "hidden") save();
   });
   window.addEventListener("pagehide", save);
-  window.addEventListener("resize", () => pin(pos.x, pos.y));
+  // MUSIC_RESIZE_VIEWPORT_RATIO_20261022
+// Scale position using the draggable area (not the old clamped pixels).
+let previousMusicViewport = { width: innerWidth, height: innerHeight };
+window.addEventListener("resize", () => {
+  const oldSize = previousMusicViewport.width <= 520 ? 46 : B;
+  const newSize = innerWidth <= 520 ? 46 : B;
+  const oldRangeX = Math.max(1, previousMusicViewport.width - oldSize - 12);
+  const oldRangeY = Math.max(1, previousMusicViewport.height - oldSize - 12);
+  const newRangeX = Math.max(0, innerWidth - newSize - 12);
+  const newRangeY = Math.max(0, innerHeight - newSize - 12);
+  const fractionX = clamp((pos.x - 6) / oldRangeX, 0, 1);
+  const fractionY = clamp((pos.y - 6) / oldRangeY, 0, 1);
+  previousMusicViewport = { width: innerWidth, height: innerHeight };
+  pin(6 + fractionX * newRangeX, 6 + fractionY * newRangeY);
+  save();
+});
   refresh();
 })();
