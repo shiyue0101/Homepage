@@ -20,7 +20,7 @@
   )
     return;
   document.querySelectorAll("#spa-project-frame").forEach((el) => el.remove());
-  const frame = document.createElement("iframe");
+  let frame = document.createElement("iframe");
   frame.id = "spa-project-frame";
   frame.title = "Project details";
   frame.hidden = true;
@@ -40,7 +40,7 @@
     // Hide the previous document *before* fetching the next one.
     frame.hidden = true;
     // Clear stale A now, so a delayed paint can never expose it while B loads.
-    frame.removeAttribute("srcdoc");
+    // Do not navigate the old iframe to about:blank; that can add a joint-history entry.
     loadingFrame = false;
     projectRevealFallback = setTimeout(() => {
       if (generation !== token || pendingProjectToken !== token) return;
@@ -100,7 +100,7 @@
     pendingProjectToken = 0;
     clearTimeout(projectRevealFallback);
     document.documentElement.classList.remove("spa-project-loading");
-    frame.removeAttribute("srcdoc");
+    frame.remove(); // Remove the browsing context instead of navigating it.
     document.documentElement.classList.remove("spa-project-open");
     document.title = homeTitle;
   }
@@ -217,6 +217,14 @@
   }
   async function loadProject(path, { push = false } = {}) {
     if (!isProject(path)) return false;
+    // PROJECT_IFRAME_HISTORY_FIX_V7
+    // Exactly one top-level history entry per user-initiated project navigation.
+    if (push && location.pathname !== path) {
+      if (isProject(location.pathname) && !activePath) {
+        history.replaceState({ page: "projects" }, "", "/projects");
+      }
+      history.pushState({ project: path }, "", path);
+    }
     const current = ++generation;
     activePath = path;
     beginProjectReveal(current);
@@ -230,7 +238,6 @@
         );
       }
       if (generation !== current) return true;
-      if (push) history.pushState({ project: path }, "", path);
       activePath = path;
       document.documentElement.classList.add("spa-project-open");
       document.querySelectorAll("[data-nav-page]").forEach((a) => {
@@ -238,7 +245,12 @@
           a.setAttribute("aria-current", "page");
         else a.removeAttribute("aria-current");
       });
-      frame.hidden = false;
+      frame.remove();
+      frame = document.createElement("iframe");
+      frame.id = "spa-project-frame";
+      frame.title = "Project details";
+      frame.hidden = true;
+      frame.addEventListener("load", onFrameLoad);
       loadingFrame = true;
       frame.srcdoc = cache
         .get(path)
@@ -248,6 +260,8 @@
             current +
             '"></head>',
         );
+      document.body.appendChild(frame);
+      frame.hidden = false;
       document.title =
         path.split("/").pop().replace(".html", "").replaceAll("-", " ") +
         " — Yue Shi";
@@ -369,7 +383,8 @@
     }
   }
 
-  frame.addEventListener("load", () => {
+  function onFrameLoad() {
+    if (this !== frame) return;
     bindFrameNavigation();
     if (!loadingFrame || !activePath) return;
     const loadedToken = Number(
@@ -390,7 +405,7 @@
       console.warn("[Project SPA] iframe navigation check", err);
     }
     revealProject(loadedToken);
-  });
+  }
   // HOMEPAGE_HISTORY_RESTORE_V3
   window.addEventListener("popstate", () => {
     const path = location.pathname;
