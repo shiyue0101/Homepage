@@ -1,623 +1,1443 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yue Shi</title>
-  <style>
-    :root{
-      --bg:#efd9d5;
-      --bg-soft:#f4e5e2;
-      --text:#5f454b;
-      --accent:#8a5566;
-      --accent-soft:#b78492;
-      --line:#b97b88;
-      --white:#fbf7f5;
-      --shadow:0 16px 40px rgba(124,88,98,.10);
-      --header-h:76px;
-    }
-    *{box-sizing:border-box}
-    html,body{height:100%}
-    body{
-      margin:0;
-      font-family: Georgia, "Times New Roman", serif;
-      background:var(--bg);
-      color:var(--text);
-      overflow:hidden;
-    }
-    button,input,select,textarea{font:inherit}
-    .app{position:relative;width:100%;height:100%;overflow:hidden}
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Yue Shi</title>
+    <style>
+      :root {
+        --bg: #efd9d5;
+        --bg-soft: #f4e5e2;
+        --text: #5f454b;
+        --accent: #8a5566;
+        --accent-soft: #b78492;
+        --line: #b97b88;
+        --white: #fbf7f5;
+        --shadow: 0 16px 40px rgba(124, 88, 98, 0.1);
+        --header-h: 76px;
+      }
+      * {
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        height: 100%;
+      }
+      body {
+        margin: 0;
+        font-family: Georgia, "Times New Roman", serif;
+        background: var(--bg);
+        color: var(--text);
+        overflow: hidden;
+      }
+      button,
+      input,
+      select,
+      textarea {
+        font: inherit;
+      }
+      .app {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+      }
 
-    .view{
-      position:absolute;inset:0;
-      opacity:0;pointer-events:none;
-      transition:opacity .45s ease;
-    }
-    .view.active{opacity:1;pointer-events:auto}
+      .view {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.45s ease;
+      }
+      .view.active {
+        opacity: 1;
+        pointer-events: auto;
+      }
 
-    /* HOME */
-    .home{
-      display:flex;flex-direction:column;min-height:100%;
-      padding:28px 34px 26px;
-      position:relative;
-      isolation:isolate;
-    }
-    .home-top{
-      display:flex;align-items:flex-start;justify-content:space-between;
-      font-family: Arial, Helvetica, sans-serif;
-      letter-spacing:.24em;text-transform:uppercase;
-      color:rgba(95,69,75,.82);
-      font-size:12px;
-      margin-bottom:16px;
-      flex:0 0 auto;
-    }
-    .mini-brand{
-      font-family: Georgia, "Times New Roman", serif;
-      letter-spacing:0;
-      text-transform:none;
-      font-size:18px;
-      font-weight:600;
-      color:var(--accent);
-    }
+      /* HOME */
+      .home {
+        display: flex;
+        flex-direction: column;
+        min-height: 100%;
+        padding: 28px 34px 26px;
+        position: relative;
+        isolation: isolate;
+      }
+      .home-top {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: rgba(95, 69, 75, 0.82);
+        font-size: 12px;
+        margin-bottom: 16px;
+        flex: 0 0 auto;
+      }
+      .mini-brand {
+        font-family: Georgia, "Times New Roman", serif;
+        letter-spacing: 0;
+        text-transform: none;
+        font-size: 18px;
+        font-weight: 600;
+        color: var(--accent);
+      }
 
-    .home-center{
-      flex:1 1 auto;
-      display:flex;flex-direction:column;justify-content:center;align-items:center;
-      transform:translateY(-22px);
-      min-height:0;
-    }
-    .hero-name{
-      font-size:clamp(78px,11vw,164px);
-      line-height:.95;
-      margin:0 0 24px;
-      color:var(--accent);
-      letter-spacing:-.04em;
-      font-weight:700;
-      text-align:center;
-    }
+      .home-center {
+        flex: 1 1 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        transform: translateY(-22px);
+        min-height: 0;
+      }
+      .hero-name {
+        font-size: clamp(78px, 11vw, 164px);
+        line-height: 0.95;
+        margin: 0 0 24px;
+        color: var(--accent);
+        letter-spacing: -0.04em;
+        font-weight: 700;
+        text-align: center;
+      }
 
-    /* One musical staff: five lines, four spaces, four pieces of information. */
-    .staves-wrap{
-      width:min(72vw,760px);
-      max-width:760px;
-      min-width:470px;
-    }
-    .music-staff{
-      position:relative;
-      width:100%;height:118px;
-      display:grid;
-      grid-template-rows:repeat(4,1fr);
-      padding:0;
-      background:repeating-linear-gradient(to bottom,
-        transparent 0,
-        transparent calc(25% - 1.1px),
-        rgba(167,103,121,.78) calc(25% - 1.1px),
-        rgba(167,103,121,.78) 25%);
-      border-top:1.4px solid rgba(167,103,121,.86);
-      border-bottom:0;
-    }
-    .music-staff::after{
-      content:"";position:absolute;left:0;right:0;bottom:0;
-      height:1.4px;background:rgba(167,103,121,.86);
-      pointer-events:none;
-    }
-    .staff-space{
-      position:relative;
-      display:flex;justify-content:flex-end;align-items:center;
-      padding:0 13px;min-height:0;
-    }
-    .staff-label{
-      position:relative;z-index:1;
-      font:12px Arial,Helvetica,sans-serif;
-      letter-spacing:.15em;text-transform:uppercase;
-      color:var(--accent);
-      background:var(--bg);
-      padding:3px 6px 3px 15px;
-      white-space:nowrap;
-    }
+      /* One musical staff: five lines, four spaces, four pieces of information. */
+      .staves-wrap {
+        width: min(72vw, 760px);
+        max-width: 760px;
+        min-width: 470px;
+      }
+      .music-staff {
+        position: relative;
+        width: 100%;
+        height: 118px;
+        display: grid;
+        grid-template-rows: repeat(4, 1fr);
+        padding: 0;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent calc(25% - 1.1px),
+          rgba(167, 103, 121, 0.78) calc(25% - 1.1px),
+          rgba(167, 103, 121, 0.78) 25%
+        );
+        border-top: 1.4px solid rgba(167, 103, 121, 0.86);
+        border-bottom: 0;
+      }
+      .music-staff::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: 1.4px;
+        background: rgba(167, 103, 121, 0.86);
+        pointer-events: none;
+      }
+      .staff-space {
+        position: relative;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 0 13px;
+        min-height: 0;
+      }
+      .staff-label {
+        position: relative;
+        z-index: 1;
+        font:
+          12px Arial,
+          Helvetica,
+          sans-serif;
+        letter-spacing: 0.15em;
+        text-transform: uppercase;
+        color: var(--accent);
+        background: var(--bg);
+        padding: 3px 6px 3px 15px;
+        white-space: nowrap;
+      }
 
-    .home-sub{
-      margin-top:24px;
-      font-size:15px;
-      color:rgba(95,69,75,.84);
-      text-align:center;
-      letter-spacing:.02em;
-    }
+      .home-sub {
+        margin-top: 24px;
+        font-size: 15px;
+        color: rgba(95, 69, 75, 0.84);
+        text-align: center;
+        letter-spacing: 0.02em;
+      }
 
-    .piano-shell{
-      margin-top:auto;
-      flex:0 0 auto;
-      position:relative;
-      z-index:2;
-    }
-    .nav-hint{
-      text-align:center;
-      font-size:12px;
-      letter-spacing:.12em;
-      text-transform:uppercase;
-      color:rgba(95,69,75,.66);
-      font-family: Arial, Helvetica, sans-serif;
-      margin-bottom:12px;
-    }
-    .piano{
-      width:min(1240px, 94vw);
-      height:182px;
-      margin:0 auto;
-      position:relative;
-      border:1.6px solid rgba(138,85,102,.55);
-      border-radius:16px 16px 0 0;
-      background:rgba(251,247,245,.34);
-      box-shadow:var(--shadow);
-      padding:0 10px 12px;
-      overflow:visible;
-      backdrop-filter: blur(2px);
-    }
-    .white-keys{
-      position:absolute;left:10px;right:10px;top:10px;bottom:12px;
-      display:grid;
-      grid-template-columns:repeat(14, 1fr);
-      gap:2px;
-    }
-    .white-key{
-      position:relative;
-      border:none;cursor:pointer;
-      background:linear-gradient(180deg, #fffaf8 0%, #f9f0ee 100%);
-      border-radius:0 0 10px 10px;
-      box-shadow:inset 0 0 0 1px rgba(138,85,102,.22);
-      transition:transform .08s ease, background .16s ease, box-shadow .16s ease;
-      color:var(--text);
-    }
-    .white-key:hover{background:linear-gradient(180deg,#fffdfc 0%,#fbf5f3 100%)}
-    .white-key:active,.white-key.active{
-      transform:translateY(4px);
-      background:linear-gradient(180deg,#f0d8dd 0%, #f7ecea 100%);
-      box-shadow:inset 0 0 0 1px rgba(138,85,102,.30);
-    }
-    .white-key .note-name{
-      position:absolute;bottom:14px;left:50%;transform:translateX(-50%);
-      font-size:11px;font-family: Arial, Helvetica, sans-serif;
-      letter-spacing:.08em;text-transform:uppercase;color:rgba(95,69,75,.52);
-    }
-    /* Navigation markers stay discreet until hovered/focused. */
-    .white-key .nav-tag{display:none}
-    .white-key.nav{background:linear-gradient(180deg,#fffaf8 0%,#f9efef 100%)}
-    .white-key.nav::after{
-      content:"";position:absolute;bottom:36px;left:50%;transform:translateX(-50%);
-      width:7px;height:7px;border-radius:50%;background:#a16b7d;
-      transition:transform .2s,opacity .2s;opacity:.72;
-    }
-    .white-key.nav:hover::after,.white-key.nav:focus-visible::after{transform:translateX(-50%) scale(1.3);opacity:1}
-    .white-key .note-name{bottom:12px}
-    .white-key.nav .note-name{color:rgba(95,69,75,.42)}
-    .key-tooltip{
-      position:absolute;left:50%;top:-43px;transform:translate(-50%,8px);opacity:0;
-      pointer-events:none;white-space:nowrap;background:#805767;color:#fff9f7;
-      padding:7px 12px;border-radius:8px;font:12px Arial,sans-serif;z-index:10;
-      box-shadow:0 6px 16px #7b53622a;transition:opacity .2s,transform .2s;
-    }
-    .white-key.nav:hover .key-tooltip,.white-key.nav:focus-visible .key-tooltip{opacity:1;transform:translate(-50%,0)}
-    .piano-controls{display:flex;justify-content:flex-end;align-items:center;gap:12px;width:min(1240px,94vw);margin:0 auto 15px;font:12px Arial,sans-serif;color:#8b6976}
-    .mode-label{color:#8b6976;letter-spacing:.02em}
-    .mode-toggle{border:1px solid #c59da8;border-radius:999px;background:#fff7f5;color:#805767;cursor:pointer;padding:9px 14px;transition:background .25s,box-shadow .25s}
-    .mode-toggle[aria-pressed="true"]{background:#805767;color:#fff8f5}
-    .mode-toggle:focus-visible{outline:2px solid #8e5166;outline-offset:3px}
-    .piano-shell.is-free .white-key.nav{background:linear-gradient(180deg,#fffaf8 0%,#f9f0ee 100%)}
-    .piano-shell.is-free .white-key.nav::after,.piano-shell.is-free .key-tooltip{display:none}
+      .piano-shell {
+        margin-top: auto;
+        flex: 0 0 auto;
+        position: relative;
+        z-index: 2;
+      }
+      .nav-hint {
+        text-align: center;
+        font-size: 12px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: rgba(95, 69, 75, 0.66);
+        font-family: Arial, Helvetica, sans-serif;
+        margin-bottom: 12px;
+      }
+      .piano {
+        width: min(1240px, 94vw);
+        height: 182px;
+        margin: 0 auto;
+        position: relative;
+        border: 1.6px solid rgba(138, 85, 102, 0.55);
+        border-radius: 16px 16px 0 0;
+        background: rgba(251, 247, 245, 0.34);
+        box-shadow: var(--shadow);
+        padding: 0 10px 12px;
+        overflow: visible;
+        backdrop-filter: blur(2px);
+      }
+      .white-keys {
+        position: absolute;
+        left: 10px;
+        right: 10px;
+        top: 10px;
+        bottom: 12px;
+        display: grid;
+        grid-template-columns: repeat(14, 1fr);
+        gap: 2px;
+      }
+      .white-key {
+        position: relative;
+        border: none;
+        cursor: pointer;
+        background: linear-gradient(180deg, #fffaf8 0%, #f9f0ee 100%);
+        border-radius: 0 0 10px 10px;
+        box-shadow: inset 0 0 0 1px rgba(138, 85, 102, 0.22);
+        transition:
+          transform 0.08s ease,
+          background 0.16s ease,
+          box-shadow 0.16s ease;
+        color: var(--text);
+      }
+      .white-key:hover {
+        background: linear-gradient(180deg, #fffdfc 0%, #fbf5f3 100%);
+      }
+      .white-key:active,
+      .white-key.active {
+        transform: translateY(4px);
+        background: linear-gradient(180deg, #f0d8dd 0%, #f7ecea 100%);
+        box-shadow: inset 0 0 0 1px rgba(138, 85, 102, 0.3);
+      }
+      .white-key .note-name {
+        position: absolute;
+        bottom: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 11px;
+        font-family: Arial, Helvetica, sans-serif;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: rgba(95, 69, 75, 0.52);
+      }
+      /* Navigation markers stay discreet until hovered/focused. */
+      .white-key .nav-tag {
+        display: none;
+      }
+      .white-key.nav {
+        background: linear-gradient(180deg, #fffaf8 0%, #f9efef 100%);
+      }
+      .white-key.nav::after {
+        content: "";
+        position: absolute;
+        bottom: 36px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: #a16b7d;
+        transition:
+          transform 0.2s,
+          opacity 0.2s;
+        opacity: 0.72;
+      }
+      .white-key.nav:hover::after,
+      .white-key.nav:focus-visible::after {
+        transform: translateX(-50%) scale(1.3);
+        opacity: 1;
+      }
+      .white-key .note-name {
+        bottom: 12px;
+      }
+      .white-key.nav .note-name {
+        color: rgba(95, 69, 75, 0.42);
+      }
+      .key-tooltip {
+        position: absolute;
+        left: 50%;
+        top: -43px;
+        transform: translate(-50%, 8px);
+        opacity: 0;
+        pointer-events: none;
+        white-space: nowrap;
+        background: #805767;
+        color: #fff9f7;
+        padding: 7px 12px;
+        border-radius: 8px;
+        font:
+          12px Arial,
+          sans-serif;
+        z-index: 10;
+        box-shadow: 0 6px 16px #7b53622a;
+        transition:
+          opacity 0.2s,
+          transform 0.2s;
+      }
+      .white-key.nav:hover .key-tooltip,
+      .white-key.nav:focus-visible .key-tooltip {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      .piano-controls {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        gap: 12px;
+        width: min(1240px, 94vw);
+        margin: 0 auto 15px;
+        font:
+          12px Arial,
+          sans-serif;
+        color: #8b6976;
+      }
+      .mode-label {
+        color: #8b6976;
+        letter-spacing: 0.02em;
+      }
+      .mode-toggle {
+        border: 1px solid #c59da8;
+        border-radius: 999px;
+        background: #fff7f5;
+        color: #805767;
+        cursor: pointer;
+        padding: 9px 14px;
+        transition:
+          background 0.25s,
+          box-shadow 0.25s;
+      }
+      .mode-toggle[aria-pressed="true"] {
+        background: #805767;
+        color: #fff8f5;
+      }
+      .mode-toggle:focus-visible {
+        outline: 2px solid #8e5166;
+        outline-offset: 3px;
+      }
+      .piano-shell.is-free .white-key.nav {
+        background: linear-gradient(180deg, #fffaf8 0%, #f9f0ee 100%);
+      }
+      .piano-shell.is-free .white-key.nav::after,
+      .piano-shell.is-free .key-tooltip {
+        display: none;
+      }
 
-    .black-key{
-      position:absolute;
-      top:10px;
-      width:5.3%;
-      height:58%;
-      border:none;cursor:pointer;
-      background:linear-gradient(180deg, #6f4b56 0%, #4d3741 100%);
-      border-radius:0 0 8px 8px;
-      box-shadow:0 4px 10px rgba(63,45,51,.22);
-      transition:transform .08s ease, filter .16s ease;
-    }
-    .black-key:active,.black-key.active{transform:translateY(4px);filter:brightness(1.08)}
+      .black-key {
+        position: absolute;
+        top: 10px;
+        width: 5.3%;
+        height: 58%;
+        border: none;
+        cursor: pointer;
+        background: linear-gradient(180deg, #6f4b56 0%, #4d3741 100%);
+        border-radius: 0 0 8px 8px;
+        box-shadow: 0 4px 10px rgba(63, 45, 51, 0.22);
+        transition:
+          transform 0.08s ease,
+          filter 0.16s ease;
+      }
+      .black-key:active,
+      .black-key.active {
+        transform: translateY(4px);
+        filter: brightness(1.08);
+      }
 
-    .home-footer{
-      margin-top:10px;
-      text-align:center;
-      font-size:13px;
-      color:rgba(95,69,75,.68);
-    }
+      .home-footer {
+        margin-top: 10px;
+        text-align: center;
+        font-size: 13px;
+        color: rgba(95, 69, 75, 0.68);
+      }
 
-    /* FLOATING NOTES: randomly chosen whole, half, quarter or sixteenth notes */
-    .notes-layer{
-      position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;
-    }
-    .float-note{
-      position:absolute;
-      bottom:120px;
-      font-size:28px;
-      line-height:1;
-      color:rgba(183,132,146,.74);
-      animation:riseNote var(--rise-duration, 3.7s) cubic-bezier(.24,.56,.35,1) forwards;
-      filter:blur(.1px);
-    }
-    .float-note.small{font-size:20px;color:rgba(183,132,146,.66)}
-    .float-note.tiny{font-size:15px;color:rgba(183,132,146,.56)}
-    @keyframes riseNote{
-      0%{opacity:0;transform:translate(0,0) scale(.8)}
-      12%{opacity:.95}
-      82%{opacity:.82}
-      100%{opacity:0;transform:translate(var(--dx), calc(-1 * var(--rise-distance, 450px))) scale(1.04)}
-    }
+      /* FLOATING NOTES: randomly chosen whole, half, quarter or sixteenth notes */
+      .notes-layer {
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        z-index: 1;
+        overflow: hidden;
+      }
+      .float-note {
+        position: absolute;
+        bottom: 120px;
+        font-size: 28px;
+        line-height: 1;
+        color: rgba(183, 132, 146, 0.74);
+        animation: riseNote var(--rise-duration, 3.7s)
+          cubic-bezier(0.24, 0.56, 0.35, 1) forwards;
+        filter: blur(0.1px);
+      }
+      .float-note.small {
+        font-size: 20px;
+        color: rgba(183, 132, 146, 0.66);
+      }
+      .float-note.tiny {
+        font-size: 15px;
+        color: rgba(183, 132, 146, 0.56);
+      }
+      @keyframes riseNote {
+        0% {
+          opacity: 0;
+          transform: translate(0, 0) scale(0.8);
+        }
+        12% {
+          opacity: 0.95;
+        }
+        82% {
+          opacity: 0.82;
+        }
+        100% {
+          opacity: 0;
+          transform: translate(
+              var(--dx),
+              calc(-1 * var(--rise-distance, 450px))
+            )
+            scale(1.04);
+        }
+      }
 
-    /* SECTION PAGES */
-    .page{
-      min-height:100%;display:flex;flex-direction:column;
-      background:var(--bg);
-    }
-    .page-header{
-      height:var(--header-h);
-      display:flex;align-items:center;justify-content:space-between;
-      padding:0 36px;
-      border-bottom:2px solid rgba(185,123,136,.4);
-      color:var(--text);
-      flex:0 0 auto;
-    }
-    .page-brand{
-      font-size:18px;color:var(--accent);font-weight:600;
-    }
-    .page-nav{display:flex;gap:30px;font-family:Arial, Helvetica, sans-serif;font-size:13px;letter-spacing:.08em;text-transform:uppercase}
-    .page-nav a{color:inherit;text-decoration:none;opacity:.76}
-    .page-nav a.active{opacity:1;color:var(--accent)}
-    .page-main{
-      flex:1 1 auto;display:grid;place-items:center;padding:50px 24px 80px;
-    }
-    .panel{
-      width:min(980px, 92vw);
-      background:rgba(251,247,245,.38);
-      border:1px solid rgba(138,85,102,.18);
-      border-radius:28px;
-      padding:42px 48px;
-      box-shadow:var(--shadow);
-    }
-    .panel h2{
-      margin:0 0 18px;font-size:56px;line-height:1;color:var(--accent);font-weight:700;
-    }
-    .panel p{font-size:19px;line-height:1.65;max-width:40em;margin:0 0 18px}
-    .panel .back-home{
-      margin-top:10px;
-      display:inline-flex;align-items:center;gap:8px;
-      padding:10px 16px;border-radius:999px;
-      border:1px solid rgba(138,85,102,.3);
-      background:transparent;color:var(--accent);
-      cursor:pointer;
-    }
+      /* SECTION PAGES */
+      .page {
+        min-height: 100%;
+        display: flex;
+        flex-direction: column;
+        background: var(--bg);
+      }
+      .page-header {
+        height: var(--header-h);
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 36px;
+        border-bottom: 2px solid rgba(185, 123, 136, 0.4);
+        color: var(--text);
+        flex: 0 0 auto;
+      }
+      .page-brand {
+        font-size: 18px;
+        color: var(--accent);
+        font-weight: 600;
+      }
+      .page-nav {
+        display: flex;
+        gap: 30px;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 13px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+      .page-nav a {
+        color: inherit;
+        text-decoration: none;
+        opacity: 0.76;
+      }
+      .page-nav a.active {
+        opacity: 1;
+        color: var(--accent);
+      }
+      .page-main {
+        flex: 1 1 auto;
+        display: grid;
+        place-items: center;
+        padding: 50px 24px 80px;
+      }
+      .panel {
+        width: min(980px, 92vw);
+        background: rgba(251, 247, 245, 0.38);
+        border: 1px solid rgba(138, 85, 102, 0.18);
+        border-radius: 28px;
+        padding: 42px 48px;
+        box-shadow: var(--shadow);
+      }
+      .panel h2 {
+        margin: 0 0 18px;
+        font-size: 56px;
+        line-height: 1;
+        color: var(--accent);
+        font-weight: 700;
+      }
+      .panel p {
+        font-size: 19px;
+        line-height: 1.65;
+        max-width: 40em;
+        margin: 0 0 18px;
+      }
+      .panel .back-home {
+        margin-top: 10px;
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 10px 16px;
+        border-radius: 999px;
+        border: 1px solid rgba(138, 85, 102, 0.3);
+        background: transparent;
+        color: var(--accent);
+        cursor: pointer;
+      }
 
-    .legend{
-      position:absolute;right:30px;bottom:28px;
-      font-size:12px;font-family:Arial, Helvetica, sans-serif;
-      color:rgba(95,69,75,.62);letter-spacing:.06em;
-      background:rgba(251,247,245,.6);
-      padding:10px 14px;border-radius:999px;border:1px solid rgba(138,85,102,.16);
-      z-index:3;
-    }
+      .legend {
+        position: absolute;
+        right: 30px;
+        bottom: 28px;
+        font-size: 12px;
+        font-family: Arial, Helvetica, sans-serif;
+        color: rgba(95, 69, 75, 0.62);
+        letter-spacing: 0.06em;
+        background: rgba(251, 247, 245, 0.6);
+        padding: 10px 14px;
+        border-radius: 999px;
+        border: 1px solid rgba(138, 85, 102, 0.16);
+        z-index: 3;
+      }
 
-    @media (max-width: 960px){
-      body{overflow:auto}
-      .app{height:auto;min-height:100dvh;overflow:visible}
-      .view,.view.active{position:relative;inset:auto;display:none;opacity:1;pointer-events:auto}
-      .view.active{display:block}
-      .home{min-height:100dvh;padding:20px 18px 18px}
-      .home-center{transform:none;justify-content:flex-start;padding-top:44px}
-      .hero-name{font-size:66px;margin-bottom:18px}
-      .staves-wrap{min-width:0;width:100%}
-      .music-staff{height:112px}
-      .staff-label{font-size:10px;letter-spacing:.09em;white-space:normal;text-align:right}
-      .staff-space{padding-right:7px}
-      .home-sub{margin-top:20px;font-size:14px;padding:0 8px}
-      .piano-shell{margin-top:28px}
-      .nav-hint{margin-bottom:10px}
-      .piano{width:100%;height:160px}
-      .white-key .nav-tag{font-size:8px;bottom:31px;left:1px;right:1px}
-      .page-header{height:auto;min-height:var(--header-h);padding:16px 18px;flex-direction:column;align-items:flex-start;gap:10px}
-      .page-nav{gap:18px;flex-wrap:wrap}
-      .page-main{padding:30px 16px 40px}
-      .panel{padding:28px 22px;border-radius:20px}
-      .panel h2{font-size:42px}
-      .panel p{font-size:18px}
-    }
-  
-/* V7: full 88-key A0–C8 scrollable piano and explicit navigation map */
-.piano-shell{width:min(1240px,94vw);margin-left:auto;margin-right:auto}
-.piano-controls{width:100%;margin-bottom:10px;gap:12px;flex-wrap:wrap}
-.keyboard-nav{display:flex;align-items:center;justify-content:center;gap:clamp(7px,1.8vw,22px);margin:0 auto 12px;flex-wrap:wrap;font:12px Arial,sans-serif}
-.keyboard-nav button{border:0;background:transparent;color:#805767;cursor:pointer;padding:5px 3px;display:flex;align-items:center;gap:5px;transition:opacity .2s}
-.keyboard-nav button:hover,.keyboard-nav button:focus-visible{color:#583748;text-decoration:underline;text-underline-offset:5px}
-.keyboard-nav .music-symbol{font-size:16px;color:#a16b7d}
-.piano-shell.is-free .keyboard-nav{opacity:1;pointer-events:auto}
-.piano{width:100%;height:184px;overflow:hidden;padding:0;position:relative;border-radius:13px 13px 6px 6px}
-.keyboard-viewport{position:absolute;inset:10px 10px 10px;overflow-x:auto;overflow-y:hidden;scrollbar-width:thin;scrollbar-color:#ac8591 #f3e8e5;touch-action:pan-y;cursor:grab;overscroll-behavior-x:contain;user-select:none}
-.keyboard-viewport.dragging{cursor:grabbing}
-.keyboard-track{position:relative;width:2600px;height:153px;min-width:2600px}
-.white-keys{position:absolute;inset:0;display:flex;gap:1px}
-.white-key{height:150px;flex:1 0 0;border-radius:0 0 6px 6px;touch-action:pan-y}
-.white-key.nav::after{content:'♪';position:absolute;bottom:34px;left:50%;transform:translateX(-50%);width:auto;height:auto;background:transparent;color:#a16b7d;font-size:19px;opacity:.9;border-radius:0}
-.white-key.nav:hover::after,.white-key.nav:focus-visible::after{transform:translateX(-50%) scale(1.13)}
-.piano-shell.is-free .white-key.nav::after{display:none}
-.white-key .note-name{bottom:12px;font-size:10px}
-.black-key{top:0;height:92px;width:28px;z-index:3;border-radius:0 0 5px 5px;touch-action:pan-y}
-.key-tooltip{top:-1px;bottom:auto;z-index:5}
-.keyboard-note{font:11px Arial,sans-serif;color:#9a7682;text-align:center;margin-top:8px;letter-spacing:.02em}
-@media(max-width:780px){.keyboard-nav{justify-content:center;gap:6px 11px}.keyboard-nav button{font-size:11px}.piano-shell{width:94vw}.piano{height:165px}.keyboard-viewport{inset:8px 8px 8px}.keyboard-track{height:136px}.white-key{height:133px}.black-key{height:78px}}
+      @media (max-width: 960px) {
+        body {
+          overflow: auto;
+        }
+        .app {
+          height: auto;
+          min-height: 100dvh;
+          overflow: visible;
+        }
+        .view,
+        .view.active {
+          position: relative;
+          inset: auto;
+          display: none;
+          opacity: 1;
+          pointer-events: auto;
+        }
+        .view.active {
+          display: block;
+        }
+        .home {
+          min-height: 100dvh;
+          padding: 20px 18px 18px;
+        }
+        .home-center {
+          transform: none;
+          justify-content: flex-start;
+          padding-top: 44px;
+        }
+        .hero-name {
+          font-size: 66px;
+          margin-bottom: 18px;
+        }
+        .staves-wrap {
+          min-width: 0;
+          width: 100%;
+        }
+        .music-staff {
+          height: 112px;
+        }
+        .staff-label {
+          font-size: 10px;
+          letter-spacing: 0.09em;
+          white-space: normal;
+          text-align: right;
+        }
+        .staff-space {
+          padding-right: 7px;
+        }
+        .home-sub {
+          margin-top: 20px;
+          font-size: 14px;
+          padding: 0 8px;
+        }
+        .piano-shell {
+          margin-top: 28px;
+        }
+        .nav-hint {
+          margin-bottom: 10px;
+        }
+        .piano {
+          width: 100%;
+          height: 160px;
+        }
+        .white-key .nav-tag {
+          font-size: 8px;
+          bottom: 31px;
+          left: 1px;
+          right: 1px;
+        }
+        .page-header {
+          height: auto;
+          min-height: var(--header-h);
+          padding: 16px 18px;
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 10px;
+        }
+        .page-nav {
+          gap: 18px;
+          flex-wrap: wrap;
+        }
+        .page-main {
+          padding: 30px 16px 40px;
+        }
+        .panel {
+          padding: 28px 22px;
+          border-radius: 20px;
+        }
+        .panel h2 {
+          font-size: 42px;
+        }
+        .panel p {
+          font-size: 18px;
+        }
+      }
 
-  
-/* V8: quiet aligned navigation toggle, 88-key piano unchanged. */
-.piano-toolbar{display:flex;align-items:center;justify-content:space-between;gap:18px;width:100%;margin:0 auto 14px;min-height:37px}
-.piano-toolbar .keyboard-nav{justify-content:flex-start;flex:1;min-width:0;margin:0;gap:clamp(8px,1.6vw,22px)}
-.piano-toolbar .piano-controls{width:auto;flex:none;margin:0}
-.piano-toolbar .mode-toggle{display:inline-flex;align-items:center;justify-content:center;gap:8px;white-space:nowrap;padding:7px 12px;font:11px Arial,sans-serif;letter-spacing:.025em;background:transparent;color:#805767;border:1px solid #c9a3ae;box-shadow:none}
-.piano-toolbar .mode-toggle[aria-pressed="true"]{background:rgba(128,87,103,.08);color:#805767}
-.piano-toolbar .mode-toggle:hover{background:rgba(128,87,103,.14)}
-.toggle-dot{width:7px;height:7px;flex:none;border:1px solid currentColor;border-radius:50%;background:currentColor;opacity:.9}
-.piano-shell.is-free .toggle-dot{background:transparent}
-.sr-only{position:absolute!important;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
-@media(max-width:780px){
- .piano-toolbar{align-items:flex-start;gap:8px;flex-wrap:wrap}
- .piano-toolbar .keyboard-nav{flex:1 1 100%;justify-content:center;order:2;gap:5px 10px}
- .piano-toolbar .piano-controls{order:1;margin-left:auto}
- .piano-toolbar .mode-toggle{padding:6px 11px}
- .keyboard-track{width:2080px;min-width:2080px}
-}
+      /* V7: full 88-key A0–C8 scrollable piano and explicit navigation map */
+      .piano-shell {
+        width: min(1240px, 94vw);
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .piano-controls {
+        width: 100%;
+        margin-bottom: 10px;
+        gap: 12px;
+        flex-wrap: wrap;
+      }
+      .keyboard-nav {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: clamp(7px, 1.8vw, 22px);
+        margin: 0 auto 12px;
+        flex-wrap: wrap;
+        font:
+          12px Arial,
+          sans-serif;
+      }
+      .keyboard-nav button {
+        border: 0;
+        background: transparent;
+        color: #805767;
+        cursor: pointer;
+        padding: 5px 3px;
+        display: flex;
+        align-items: center;
+        gap: 5px;
+        transition: opacity 0.2s;
+      }
+      .keyboard-nav button:hover,
+      .keyboard-nav button:focus-visible {
+        color: #583748;
+        text-decoration: underline;
+        text-underline-offset: 5px;
+      }
+      .keyboard-nav .music-symbol {
+        font-size: 16px;
+        color: #a16b7d;
+      }
+      .piano-shell.is-free .keyboard-nav {
+        opacity: 1;
+        pointer-events: auto;
+      }
+      .piano {
+        width: 100%;
+        height: 184px;
+        overflow: hidden;
+        padding: 0;
+        position: relative;
+        border-radius: 13px 13px 6px 6px;
+      }
+      .keyboard-viewport {
+        position: absolute;
+        inset: 10px 10px 10px;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: thin;
+        scrollbar-color: #ac8591 #f3e8e5;
+        touch-action: pan-y;
+        cursor: grab;
+        overscroll-behavior-x: contain;
+        user-select: none;
+      }
+      .keyboard-viewport.dragging {
+        cursor: grabbing;
+      }
+      .keyboard-track {
+        position: relative;
+        width: 2600px;
+        height: 153px;
+        min-width: 2600px;
+      }
+      .white-keys {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        gap: 1px;
+      }
+      .white-key {
+        height: 150px;
+        flex: 1 0 0;
+        border-radius: 0 0 6px 6px;
+        touch-action: pan-y;
+      }
+      .white-key.nav::after {
+        content: "♪";
+        position: absolute;
+        bottom: 34px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: auto;
+        height: auto;
+        background: transparent;
+        color: #a16b7d;
+        font-size: 19px;
+        opacity: 0.9;
+        border-radius: 0;
+      }
+      .white-key.nav:hover::after,
+      .white-key.nav:focus-visible::after {
+        transform: translateX(-50%) scale(1.13);
+      }
+      .piano-shell.is-free .white-key.nav::after {
+        display: none;
+      }
+      .white-key .note-name {
+        bottom: 12px;
+        font-size: 10px;
+      }
+      .black-key {
+        top: 0;
+        height: 92px;
+        width: 28px;
+        z-index: 3;
+        border-radius: 0 0 5px 5px;
+        touch-action: pan-y;
+      }
+      .key-tooltip {
+        top: -1px;
+        bottom: auto;
+        z-index: 5;
+      }
+      .keyboard-note {
+        font:
+          11px Arial,
+          sans-serif;
+        color: #9a7682;
+        text-align: center;
+        margin-top: 8px;
+        letter-spacing: 0.02em;
+      }
+      @media (max-width: 780px) {
+        .keyboard-nav {
+          justify-content: center;
+          gap: 6px 11px;
+        }
+        .keyboard-nav button {
+          font-size: 11px;
+        }
+        .piano-shell {
+          width: 94vw;
+        }
+        .piano {
+          height: 165px;
+        }
+        .keyboard-viewport {
+          inset: 8px 8px 8px;
+        }
+        .keyboard-track {
+          height: 136px;
+        }
+        .white-key {
+          height: 133px;
+        }
+        .black-key {
+          height: 78px;
+        }
+      }
 
+      /* V8: quiet aligned navigation toggle, 88-key piano unchanged. */
+      .piano-toolbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 18px;
+        width: 100%;
+        margin: 0 auto 14px;
+        min-height: 37px;
+      }
+      .piano-toolbar .keyboard-nav {
+        justify-content: flex-start;
+        flex: 1;
+        min-width: 0;
+        margin: 0;
+        gap: clamp(8px, 1.6vw, 22px);
+      }
+      .piano-toolbar .piano-controls {
+        width: auto;
+        flex: none;
+        margin: 0;
+      }
+      .piano-toolbar .mode-toggle {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 8px;
+        white-space: nowrap;
+        padding: 7px 12px;
+        font:
+          11px Arial,
+          sans-serif;
+        letter-spacing: 0.025em;
+        background: transparent;
+        color: #805767;
+        border: 1px solid #c9a3ae;
+        box-shadow: none;
+      }
+      .piano-toolbar .mode-toggle[aria-pressed="true"] {
+        background: rgba(128, 87, 103, 0.08);
+        color: #805767;
+      }
+      .piano-toolbar .mode-toggle:hover {
+        background: rgba(128, 87, 103, 0.14);
+      }
+      .toggle-dot {
+        width: 7px;
+        height: 7px;
+        flex: none;
+        border: 1px solid currentColor;
+        border-radius: 50%;
+        background: currentColor;
+        opacity: 0.9;
+      }
+      .piano-shell.is-free .toggle-dot {
+        background: transparent;
+      }
+      .sr-only {
+        position: absolute !important;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+      }
+      @media (max-width: 780px) {
+        .piano-toolbar {
+          align-items: flex-start;
+          gap: 8px;
+          flex-wrap: wrap;
+        }
+        .piano-toolbar .keyboard-nav {
+          flex: 1 1 100%;
+          justify-content: center;
+          order: 2;
+          gap: 5px 10px;
+        }
+        .piano-toolbar .piano-controls {
+          order: 1;
+          margin-left: auto;
+        }
+        .piano-toolbar .mode-toggle {
+          padding: 6px 11px;
+        }
+        .keyboard-track {
+          width: 2080px;
+          min-width: 2080px;
+        }
+      }
 
-/* V9: centered, always-visible section links; switch stays out of their alignment. */
-.piano-toolbar{position:relative;display:flex;justify-content:center;align-items:center;min-height:43px;padding-right:0}
-.piano-toolbar .keyboard-nav{flex:none;justify-content:center;gap:clamp(10px,1.6vw,24px);margin-inline:auto}
-.piano-toolbar .piano-controls{position:absolute;right:0;top:50%;transform:translateY(-50%);margin:0}
-.piano-shell.is-free .keyboard-nav{opacity:1!important;pointer-events:auto!important}
-@media(max-width:1080px){
- .piano-toolbar{flex-direction:column;gap:9px;min-height:0}
- .piano-toolbar .keyboard-nav{order:1;flex:none;justify-content:center;width:100%;gap:7px 15px}
- .piano-toolbar .piano-controls{order:2;position:static;transform:none;margin:0 auto}
-}
-@media(max-width:780px){
- .piano-toolbar .keyboard-nav{order:1;flex:none;justify-content:center;width:100%}
- .piano-toolbar .piano-controls{order:2;position:static;transform:none;margin:0 auto}
-}
+      /* V9: centered, always-visible section links; switch stays out of their alignment. */
+      .piano-toolbar {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 43px;
+        padding-right: 0;
+      }
+      .piano-toolbar .keyboard-nav {
+        flex: none;
+        justify-content: center;
+        gap: clamp(10px, 1.6vw, 24px);
+        margin-inline: auto;
+      }
+      .piano-toolbar .piano-controls {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-50%);
+        margin: 0;
+      }
+      .piano-shell.is-free .keyboard-nav {
+        opacity: 1 !important;
+        pointer-events: auto !important;
+      }
+      @media (max-width: 1080px) {
+        .piano-toolbar {
+          flex-direction: column;
+          gap: 9px;
+          min-height: 0;
+        }
+        .piano-toolbar .keyboard-nav {
+          order: 1;
+          flex: none;
+          justify-content: center;
+          width: 100%;
+          gap: 7px 15px;
+        }
+        .piano-toolbar .piano-controls {
+          order: 2;
+          position: static;
+          transform: none;
+          margin: 0 auto;
+        }
+      }
+      @media (max-width: 780px) {
+        .piano-toolbar .keyboard-nav {
+          order: 1;
+          flex: none;
+          justify-content: center;
+          width: 100%;
+        }
+        .piano-toolbar .piano-controls {
+          order: 2;
+          position: static;
+          transform: none;
+          margin: 0 auto;
+        }
+      }
 
-/* V10: put play mode below the keyboard, leaving the section links perfectly centered. */
-.piano-toolbar{min-height:35px;margin-bottom:11px}
-.piano-bottom-bar{position:relative;min-height:36px;display:flex;align-items:center;justify-content:center;padding:6px 125px 0;margin-top:5px}
-.piano-bottom-bar .keyboard-note{margin:0;text-align:center;line-height:1.5}
-.piano-bottom-bar .piano-controls{position:absolute;right:0;top:50%;transform:translateY(-42%);width:auto;margin:0;display:flex;flex-wrap:nowrap}
-.piano-bottom-bar .mode-toggle{display:inline-flex;align-items:center;gap:7px;white-space:nowrap;padding:5px 10px;background:transparent;color:#957380;border:1px solid #d7b9c1;border-radius:999px;font:10px Arial,sans-serif;letter-spacing:.02em;box-shadow:none}
-.piano-bottom-bar .mode-toggle[aria-pressed="true"]{background:rgba(128,87,103,.055);color:#805767}
-.piano-bottom-bar .mode-toggle:hover{background:rgba(128,87,103,.10)}
-.piano-bottom-bar .toggle-dot{width:6px;height:6px}
-@media(max-width:780px){
- .piano-bottom-bar{padding:5px 0 0;flex-direction:column;gap:9px}
- .piano-bottom-bar .piano-controls{position:static;transform:none;margin:0 auto}
- .piano-bottom-bar .keyboard-note{order:1}
- .piano-bottom-bar .piano-controls{order:2}
-}
+      /* V10: put play mode below the keyboard, leaving the section links perfectly centered. */
+      .piano-toolbar {
+        min-height: 35px;
+        margin-bottom: 11px;
+      }
+      .piano-bottom-bar {
+        position: relative;
+        min-height: 36px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 6px 125px 0;
+        margin-top: 5px;
+      }
+      .piano-bottom-bar .keyboard-note {
+        margin: 0;
+        text-align: center;
+        line-height: 1.5;
+      }
+      .piano-bottom-bar .piano-controls {
+        position: absolute;
+        right: 0;
+        top: 50%;
+        transform: translateY(-42%);
+        width: auto;
+        margin: 0;
+        display: flex;
+        flex-wrap: nowrap;
+      }
+      .piano-bottom-bar .mode-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 7px;
+        white-space: nowrap;
+        padding: 5px 10px;
+        background: transparent;
+        color: #957380;
+        border: 1px solid #d7b9c1;
+        border-radius: 999px;
+        font:
+          10px Arial,
+          sans-serif;
+        letter-spacing: 0.02em;
+        box-shadow: none;
+      }
+      .piano-bottom-bar .mode-toggle[aria-pressed="true"] {
+        background: rgba(128, 87, 103, 0.055);
+        color: #805767;
+      }
+      .piano-bottom-bar .mode-toggle:hover {
+        background: rgba(128, 87, 103, 0.1);
+      }
+      .piano-bottom-bar .toggle-dot {
+        width: 6px;
+        height: 6px;
+      }
+      @media (max-width: 780px) {
+        .piano-bottom-bar {
+          padding: 5px 0 0;
+          flex-direction: column;
+          gap: 9px;
+        }
+        .piano-bottom-bar .piano-controls {
+          position: static;
+          transform: none;
+          margin: 0 auto;
+        }
+        .piano-bottom-bar .keyboard-note {
+          order: 1;
+        }
+        .piano-bottom-bar .piano-controls {
+          order: 2;
+        }
+      }
 
-/* V11: crisp navigation links and a tooltip above neighbouring black keys. */
-.keyboard-nav button,
-.keyboard-nav button:hover,
-.keyboard-nav button:focus-visible { text-decoration:none; }
-.keyboard-nav button .music-symbol { text-decoration:none; display:inline-block; }
-.keyboard-nav button .nav-link-label { text-decoration:none; text-underline-offset:5px; }
-.keyboard-nav button:hover .nav-link-label,
-.keyboard-nav button:focus-visible .nav-link-label { text-decoration:underline; }
-/* Keep all white keys BELOW black keys, even on hover/focus.
+      /* V11: crisp navigation links and a tooltip above neighbouring black keys. */
+      .keyboard-nav button,
+      .keyboard-nav button:hover,
+      .keyboard-nav button:focus-visible {
+        text-decoration: none;
+      }
+      .keyboard-nav button .music-symbol {
+        text-decoration: none;
+        display: inline-block;
+      }
+      .keyboard-nav button .nav-link-label {
+        text-decoration: none;
+        text-underline-offset: 5px;
+      }
+      .keyboard-nav button:hover .nav-link-label,
+      .keyboard-nav button:focus-visible .nav-link-label {
+        text-decoration: underline;
+      }
+      /* Keep all white keys BELOW black keys, even on hover/focus.
    Only the independent tooltip floats over the keyboard. */
-.white-key.nav:hover,
-.white-key.nav:focus-visible { z-index:auto; }
-.white-key .key-tooltip { display:none; }
-.keyboard-track > .piano-floating-tooltip {
-  position:absolute;top:2px;left:0;z-index:10;
-  pointer-events:none;white-space:nowrap;
-  background:#805767;color:#fff9f7;padding:7px 12px;
-  border-radius:8px;font:12px Arial,sans-serif;
-  box-shadow:0 6px 16px #7b53622a;
-  transform:translate(-50%,0);opacity:0;
-  transition:opacity .15s ease;
-}
-.keyboard-track > .piano-floating-tooltip.visible { opacity:1; }
+      .white-key.nav:hover,
+      .white-key.nav:focus-visible {
+        z-index: auto;
+      }
+      .white-key .key-tooltip {
+        display: none;
+      }
+      .keyboard-track > .piano-floating-tooltip {
+        position: absolute;
+        top: 2px;
+        left: 0;
+        z-index: 10;
+        pointer-events: none;
+        white-space: nowrap;
+        background: #805767;
+        color: #fff9f7;
+        padding: 7px 12px;
+        border-radius: 8px;
+        font:
+          12px Arial,
+          sans-serif;
+        box-shadow: 0 6px 16px #7b53622a;
+        transform: translate(-50%, 0);
+        opacity: 0;
+        transition: opacity 0.15s ease;
+      }
+      .keyboard-track > .piano-floating-tooltip.visible {
+        opacity: 1;
+      }
 
-/* V13: Free play navigation keys behave exactly like ordinary white keys. */
-.piano-shell.is-free .white-key.nav:active,
-.piano-shell.is-free .white-key.nav.active {
-  transform:translateY(4px);
-  background:linear-gradient(180deg,#f0d8dd 0%,#f7ecea 100%);
-  box-shadow:inset 0 0 0 1px rgba(138,85,102,.30);
-}
+      /* V13: Free play navigation keys behave exactly like ordinary white keys. */
+      .piano-shell.is-free .white-key.nav:active,
+      .piano-shell.is-free .white-key.nav.active {
+        transform: translateY(4px);
+        background: linear-gradient(180deg, #f0d8dd 0%, #f7ecea 100%);
+        box-shadow: inset 0 0 0 1px rgba(138, 85, 102, 0.3);
+      }
 
-/* V14: marked navigation white keys use the same pressed state in both modes. */
-.white-key.nav:active,
-.white-key.nav.active,
-.piano-shell.is-free .white-key.nav:active,
-.piano-shell.is-free .white-key.nav.active {
-  transform:translateY(4px);
-  background:linear-gradient(180deg,#f0d8dd 0%,#f7ecea 100%);
-  box-shadow:inset 0 0 0 1px rgba(138,85,102,.30);
-}
+      /* V14: marked navigation white keys use the same pressed state in both modes. */
+      .white-key.nav:active,
+      .white-key.nav.active,
+      .piano-shell.is-free .white-key.nav:active,
+      .piano-shell.is-free .white-key.nav.active {
+        transform: translateY(4px);
+        background: linear-gradient(180deg, #f0d8dd 0%, #f7ecea 100%);
+        box-shadow: inset 0 0 0 1px rgba(138, 85, 102, 0.3);
+      }
 
-/* V18: on mobile, the piano stays at the bottom of the Home viewport. */
-@media (max-width: 960px) {
-  .home { min-height:100vh; min-height:100dvh; display:flex; flex-direction:column; }
-  .home-center { flex:1 1 auto; min-height:0; }
-  .piano-shell { margin-top:auto; flex-shrink:0; }
-}
-/* V19: ensure mobile Home actually remains flex. The earlier .view.active
+      /* V18: on mobile, the piano stays at the bottom of the Home viewport. */
+      @media (max-width: 960px) {
+        .home {
+          min-height: 100vh;
+          min-height: 100dvh;
+          display: flex;
+          flex-direction: column;
+        }
+        .home-center {
+          flex: 1 1 auto;
+          min-height: 0;
+        }
+        .piano-shell {
+          margin-top: auto;
+          flex-shrink: 0;
+        }
+      }
+      /* V19: ensure mobile Home actually remains flex. The earlier .view.active
    display:block overrode .home display:flex and stranded the piano in mid-page. */
-@media (max-width: 960px) {
-  /* Only the active view is visible. The Home flex layout must never
+      @media (max-width: 960px) {
+        /* Only the active view is visible. The Home flex layout must never
      override the inactive view's display:none on mobile. */
-  .app > .view:not(.active) { display:none; }
-  .app > .view.home.active { display:flex; flex-direction:column; }
-  .home { box-sizing:border-box; min-height:100vh; min-height:100svh; }
-  .home-center { flex:1 1 auto; min-height:0; justify-content:flex-start; }
-  .piano-shell { margin-top:auto; flex:0 0 auto; }
-  .home-footer { flex:0 0 auto; }
-}
+        .app > .view:not(.active) {
+          display: none;
+        }
+        .app > .view.home.active {
+          display: flex;
+          flex-direction: column;
+        }
+        .home {
+          box-sizing: border-box;
+          min-height: 100vh;
+          min-height: 100svh;
+        }
+        .home-center {
+          flex: 1 1 auto;
+          min-height: 0;
+          justify-content: flex-start;
+        }
+        .piano-shell {
+          margin-top: auto;
+          flex: 0 0 auto;
+        }
+        .home-footer {
+          flex: 0 0 auto;
+        }
+      }
 
-/* V23: on mobile, overlap the outgoing and incoming views during fading.
+      /* V23: on mobile, overlap the outgoing and incoming views during fading.
    Never expose the bare background between display:none and display:block. */
-@media (max-width: 960px) {
-  @keyframes mobilePageFadeIn {
-    from { opacity: 0; }
-    to   { opacity: 1; }
-  }
-  @keyframes mobilePageFadeOut {
-    from { opacity: 1; }
-    to   { opacity: 0; }
-  }
-  .app > .view.active {
-    position:relative;
-    animation: mobilePageFadeIn .40s ease-out both;
-  }
-  .app > .view.leaving:not(.active) {
-    display:block;
-    position:absolute;
-    top:0;
-    left:0;
-    width:100%;
-    z-index:4;
-    pointer-events:none;
-    opacity:1;
-    animation: mobilePageFadeOut .40s ease-out both;
-  }
-  .app > .view.home.leaving:not(.active) {
-    display:flex;
-    flex-direction:column;
-    min-height:100svh;
-  }
-}
-@media (prefers-reduced-motion: reduce) {
-  .app > .view.active,
-  .app > .view.leaving:not(.active) { animation:none; }
-  .app > .view.leaving:not(.active) { display:none; }
-}
+      @media (max-width: 960px) {
+        @keyframes mobilePageFadeIn {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+        @keyframes mobilePageFadeOut {
+          from {
+            opacity: 1;
+          }
+          to {
+            opacity: 0;
+          }
+        }
+        .app > .view.active {
+          position: relative;
+          animation: mobilePageFadeIn 0.4s ease-out both;
+        }
+        .app > .view.leaving:not(.active) {
+          display: block;
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          z-index: 4;
+          pointer-events: none;
+          opacity: 1;
+          animation: mobilePageFadeOut 0.4s ease-out both;
+        }
+        .app > .view.home.leaving:not(.active) {
+          display: flex;
+          flex-direction: column;
+          min-height: 100svh;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .app > .view.active,
+        .app > .view.leaving:not(.active) {
+          animation: none;
+        }
+        .app > .view.leaving:not(.active) {
+          display: none;
+        }
+      }
 
-/* YUE_RESEARCH_NOTES_A_V4: compact identity / interactive research score */
-#view-home .hero-name{font-size:clamp(48px,6vw,88px);margin-bottom:16px;letter-spacing:-.036em}
-#view-home .staves-wrap{width:min(82vw,410px);min-width:0;max-width:410px}
-#view-home .music-staff{height:68px;background:repeating-linear-gradient(to bottom,transparent 0,transparent calc(25% - .9px),rgba(167,103,121,.67) calc(25% - .9px),rgba(167,103,121,.67) 25%);border-top:1px solid rgba(167,103,121,.67)}
-#view-home .music-staff::after{height:1px;background:rgba(167,103,121,.67)}
-@media(max-width:960px){#view-home .hero-name{font-size:42px;margin-bottom:18px}#view-home .staves-wrap{width:min(88vw,370px)}#view-home .music-staff{height:65px}}
-@media(max-width:400px){#view-home .hero-name{font-size:38px}#view-home .staves-wrap{width:88vw}}
-#view-home .research-score{display:block;overflow:visible}
-#view-home .identity-note{position:absolute;top:0;left:calc(12% + var(--i) * 24%);transform:translateX(-50%);height:100%;min-width:62px;border:0;background:none;color:#865569;cursor:pointer;z-index:3;padding:0;font-family:Arial,Helvetica,sans-serif}
-#view-home .identity-note svg{width:24px;height:42px;position:absolute;top:7px;left:50%;transform:translateX(-50%)}
-#view-home .identity-note:nth-child(2) svg{top:0}#view-home .identity-note:nth-child(3) svg{top:16px}#view-home .identity-note:nth-child(4) svg{top:8px}
-#view-home .short-label{position:absolute;top:73px;left:50%;transform:translateX(-50%);font-size:10px;letter-spacing:.08em;white-space:nowrap;color:#835e6c}
-#view-home .full-label{position:absolute;bottom:calc(100% + 10px);left:50%;transform:translate(-50%,5px);font-size:11px;letter-spacing:.015em;white-space:nowrap;background:#fcf4f1;border:1px solid #dac0c8;color:#754d5e;border-radius:6px;padding:7px 10px;opacity:0;pointer-events:none;transition:opacity .22s ease,transform .22s ease;box-shadow:0 5px 20px #80556812}
-#view-home .identity-note:is(:hover,:focus-visible) .full-label,#view-home .identity-note.is-open .full-label{opacity:1;transform:translate(-50%,0)}
-#view-home .identity-note:is(:hover,:focus-visible) svg{color:#ad7289}
-@media(max-width:550px){#view-home .identity-note{min-width:52px}#view-home .short-label{font-size:9px}#view-home .full-label{font-size:10px;max-width:88vw;white-space:normal;width:max-content}}
-/* Keep bottom piano in the home flex layout; its original styles are unchanged. */
+      /* YUE_RESEARCH_NOTES_A_V4: compact identity / interactive research score */
+      #view-home .hero-name {
+        font-size: clamp(48px, 6vw, 88px);
+        margin-bottom: 16px;
+        letter-spacing: -0.036em;
+      }
+      #view-home .staves-wrap {
+        width: min(82vw, 410px);
+        min-width: 0;
+        max-width: 410px;
+      }
+      #view-home .music-staff {
+        height: 68px;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0,
+          transparent calc(25% - 0.9px),
+          rgba(167, 103, 121, 0.67) calc(25% - 0.9px),
+          rgba(167, 103, 121, 0.67) 25%
+        );
+        border-top: 1px solid rgba(167, 103, 121, 0.67);
+      }
+      #view-home .music-staff::after {
+        height: 1px;
+        background: rgba(167, 103, 121, 0.67);
+      }
+      @media (max-width: 960px) {
+        #view-home .hero-name {
+          font-size: 42px;
+          margin-bottom: 18px;
+        }
+        #view-home .staves-wrap {
+          width: min(88vw, 370px);
+        }
+        #view-home .music-staff {
+          height: 65px;
+        }
+      }
+      @media (max-width: 400px) {
+        #view-home .hero-name {
+          font-size: 38px;
+        }
+        #view-home .staves-wrap {
+          width: 88vw;
+        }
+      }
+      #view-home .research-score {
+        display: block;
+        overflow: visible;
+      }
+      #view-home .identity-note {
+        position: absolute;
+        top: 0;
+        left: calc(12% + var(--i) * 24%);
+        transform: translateX(-50%);
+        height: 100%;
+        min-width: 62px;
+        border: 0;
+        background: none;
+        color: #865569;
+        cursor: pointer;
+        z-index: 3;
+        padding: 0;
+        font-family: Arial, Helvetica, sans-serif;
+      }
+      #view-home .identity-note svg {
+        width: 24px;
+        height: 42px;
+        position: absolute;
+        top: 7px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      #view-home .identity-note:nth-child(2) svg {
+        top: 0;
+      }
+      #view-home .identity-note:nth-child(3) svg {
+        top: 16px;
+      }
+      #view-home .identity-note:nth-child(4) svg {
+        top: 8px;
+      }
+      #view-home .short-label {
+        position: absolute;
+        top: 73px;
+        left: 50%;
+        transform: translateX(-50%);
+        font-size: 10px;
+        letter-spacing: 0.08em;
+        white-space: nowrap;
+        color: #835e6c;
+      }
+      #view-home .full-label {
+        position: absolute;
+        bottom: calc(100% + 10px);
+        left: 50%;
+        transform: translate(-50%, 5px);
+        font-size: 11px;
+        letter-spacing: 0.015em;
+        white-space: nowrap;
+        background: #fcf4f1;
+        border: 1px solid #dac0c8;
+        color: #754d5e;
+        border-radius: 6px;
+        padding: 7px 10px;
+        opacity: 0;
+        pointer-events: none;
+        transition:
+          opacity 0.22s ease,
+          transform 0.22s ease;
+        box-shadow: 0 5px 20px #80556812;
+      }
+      #view-home .identity-note:is(:hover, :focus-visible) .full-label,
+      #view-home .identity-note.is-open .full-label {
+        opacity: 1;
+        transform: translate(-50%, 0);
+      }
+      #view-home .identity-note:is(:hover, :focus-visible) svg {
+        color: #ad7289;
+      }
+      @media (max-width: 550px) {
+        #view-home .identity-note {
+          min-width: 52px;
+        }
+        #view-home .short-label {
+          font-size: 9px;
+        }
+        #view-home .full-label {
+          font-size: 10px;
+          max-width: 88vw;
+          white-space: normal;
+          width: max-content;
+        }
+      }
+      /* Keep bottom piano in the home flex layout; its original styles are unchanged. */
 
+      /* YUE_PIANO_VIEWPORT_REPAIR_V1 — keep the complete piano in the visible home viewport. */
+      #view-home.home {
+        box-sizing: border-box;
+        height: 100%;
+        min-height: 0;
+        display: flex;
+        flex-direction: column;
+        overflow: hidden;
+      }
+      #view-home .home-center {
+        flex: 1 1 auto;
+        min-height: 0;
+      }
+      #view-home #piano-shell {
+        flex: 0 0 auto;
+        margin-top: auto;
+        margin-bottom: 0;
+      }
+      @media (max-width: 960px) {
+        /* Override legacy 100svh/min-height rules that enlarge the inner document. */
+        .app:has(> #view-home.active) {
+          height: 100dvh;
+          min-height: 0;
+          overflow: hidden;
+        }
+        .app > #view-home.home.active {
+          height: 100dvh;
+          min-height: 0;
+          display: flex;
+          flex-direction: column;
+          overflow: hidden;
+        }
+        .app > #view-home.home:not(.active):not(.leaving) {
+          display: none;
+        }
+        .app > #view-home.home.leaving:not(.active) {
+          display: flex;
+        }
+        #view-home .home-center {
+          flex: 1 1 auto;
+          min-height: 0;
+          padding-top: clamp(8px, 3dvh, 36px);
+          transform: none;
+          justify-content: center;
+        }
+        #view-home #piano-shell {
+          flex: 0 0 auto;
+          margin-top: auto;
+        }
+        #view-home .piano {
+          max-height: min(165px, 25dvh);
+        }
+      }
+      @media (max-width: 960px) and (max-height: 680px) {
+        #view-home.home {
+          padding-top: 8px;
+          padding-bottom: 10px;
+        }
+        #view-home .home-top {
+          margin-bottom: 0;
+        }
+        #view-home .home-center {
+          padding-top: 0;
+          justify-content: center;
+        }
+        #view-home .hero-name {
+          margin-bottom: 10px;
+        }
+        #view-home .piano-toolbar {
+          margin-bottom: 4px;
+        }
+        #view-home .piano {
+          max-height: 138px;
+        }
+      }
 
-/* YUE_PIANO_VIEWPORT_REPAIR_V1 — keep the complete piano in the visible home viewport. */
-#view-home.home {
-  box-sizing: border-box;
-  height: 100%;
-  min-height: 0;
-  display: flex;
-  flex-direction: column;
-  overflow: hidden;
-}
-#view-home .home-center { flex: 1 1 auto; min-height: 0; }
-#view-home #piano-shell { flex: 0 0 auto; margin-top: auto; margin-bottom: 0; }
-@media (max-width:960px) {
-  /* Override legacy 100svh/min-height rules that enlarge the inner document. */
-  .app:has(> #view-home.active) { height: 100dvh; min-height: 0; overflow: hidden; }
-  .app > #view-home.home.active {
-    height: 100dvh;
-    min-height: 0;
-    display: flex;
-    flex-direction: column;
-    overflow: hidden;
-  }
-  .app > #view-home.home:not(.active):not(.leaving) { display:none; }
-  .app > #view-home.home.leaving:not(.active) { display:flex; }
-  #view-home .home-center {
-    flex: 1 1 auto;
-    min-height: 0;
-    padding-top: clamp(8px, 3dvh, 36px);
-    transform: none;
-    justify-content: center;
-  }
-  #view-home #piano-shell { flex: 0 0 auto; margin-top: auto; }
-  #view-home .piano { max-height: min(165px, 25dvh); }
-}
-@media (max-width:960px) and (max-height:680px) {
-  #view-home.home { padding-top: 8px; padding-bottom: 10px; }
-  #view-home .home-top { margin-bottom:0; }
-  #view-home .home-center { padding-top:0; justify-content:center; }
-  #view-home .hero-name { margin-bottom: 10px; }
-  #view-home .piano-toolbar { margin-bottom:4px; }
-  #view-home .piano { max-height: 138px; }
-}
+      /* YUE_RESEARCH_STAFF_AUDIO_V1 */
 
-
-/* YUE_RESEARCH_STAFF_AUDIO_V1 */
-
-/* Five equally spaced staff lines.
+      /* Five equally spaced staff lines.
    Four spaces between five lines. */
-#view-home .music-staff.research-score {
-    position: relative;
-    height: 34px;
+      #view-home .music-staff.research-score {
+        position: relative;
+        height: 34px;
 
-    background:
-        linear-gradient(
-            to bottom,
-            rgba(167,103,121,.67),
-            rgba(167,103,121,.67)
-        ) top / 100% 1px no-repeat,
+        background:
+          linear-gradient(
+              to bottom,
+              rgba(167, 103, 121, 0.67),
+              rgba(167, 103, 121, 0.67)
+            )
+            top / 100% 1px no-repeat,
+          linear-gradient(
+              to bottom,
+              rgba(167, 103, 121, 0.67),
+              rgba(167, 103, 121, 0.67)
+            )
+            0 25% / 100% 1px no-repeat,
+          linear-gradient(
+              to bottom,
+              rgba(167, 103, 121, 0.67),
+              rgba(167, 103, 121, 0.67)
+            )
+            0 50% / 100% 1px no-repeat,
+          linear-gradient(
+              to bottom,
+              rgba(167, 103, 121, 0.67),
+              rgba(167, 103, 121, 0.67)
+            )
+            0 75% / 100% 1px no-repeat,
+          linear-gradient(
+              to bottom,
+              rgba(167, 103, 121, 0.67),
+              rgba(167, 103, 121, 0.67)
+            )
+            bottom / 100% 1px no-repeat;
 
-        linear-gradient(
-            to bottom,
-            rgba(167,103,121,.67),
-            rgba(167,103,121,.67)
-        ) 0 25% / 100% 1px no-repeat,
+        border: 0;
+      }
 
-        linear-gradient(
-            to bottom,
-            rgba(167,103,121,.67),
-            rgba(167,103,121,.67)
-        ) 0 50% / 100% 1px no-repeat,
+      /* Avoid the old extra bottom line. */
+      #view-home .music-staff.research-score::after {
+        display: none;
+      }
 
-        linear-gradient(
-            to bottom,
-            rgba(167,103,121,.67),
-            rgba(167,103,121,.67)
-        ) 0 75% / 100% 1px no-repeat,
+      /* Each note is an interactive but visually minimal button. */
+      #view-home .identity-note {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        cursor: pointer;
+        background: transparent;
+        border: 0;
+        color: #865569;
+        transition: color 0.2s ease;
+      }
 
-        linear-gradient(
-            to bottom,
-            rgba(167,103,121,.67),
-            rgba(167,103,121,.67)
-        ) bottom / 100% 1px no-repeat;
-
-    border: 0;
-}
-
-/* Avoid the old extra bottom line. */
-#view-home .music-staff.research-score::after {
-    display: none;
-}
-
-/* Each note is an interactive but visually minimal button. */
-#view-home .identity-note {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    cursor: pointer;
-    background: transparent;
-    border: 0;
-    color: #865569;
-    transition: color .2s ease;
-}
-
-/* IMPORTANT:
+      /* IMPORTANT:
    SVG viewBox height is 44.
    Notehead center is at y=33.
    Rendered SVG height = 42px.
@@ -626,116 +1446,108 @@
 
    Use that same anchor for every note.
 */
-#view-home .identity-note svg {
-    position: absolute;
-    width: 24px;
-    height: 42px;
-    left: 50%;
-    transform: translateX(-50%);
-    top: calc(var(--staff-note-y) - 31.5px);
-    transition:
-        color .2s ease,
-        transform .2s ease,
-        filter .2s ease;
-}
+      #view-home .identity-note svg {
+        position: absolute;
+        width: 24px;
+        height: 42px;
+        left: 50%;
+        transform: translateX(-50%);
+        top: calc(var(--staff-note-y) - 31.5px);
+        transition:
+          color 0.2s ease,
+          transform 0.2s ease,
+          filter 0.2s ease;
+      }
 
-/* Four notes positioned on lines or spaces. */
-#view-home .identity-note:nth-child(1) {
-    --staff-note-y: 75%;
-}
+      /* Four notes positioned on lines or spaces. */
+      #view-home .identity-note:nth-child(1) {
+        --staff-note-y: 75%;
+      }
 
-#view-home .identity-note:nth-child(2) {
-    --staff-note-y: 50%;
-}
+      #view-home .identity-note:nth-child(2) {
+        --staff-note-y: 50%;
+      }
 
-#view-home .identity-note:nth-child(3) {
-    --staff-note-y: 62.5%;
-}
+      #view-home .identity-note:nth-child(3) {
+        --staff-note-y: 62.5%;
+      }
 
-#view-home .identity-note:nth-child(4) {
-    --staff-note-y: 37.5%;
-}
+      #view-home .identity-note:nth-child(4) {
+        --staff-note-y: 37.5%;
+      }
 
-/* No full-name popup, under any interaction state. */
-#view-home .identity-note .full-label {
-    display: none !important;
-}
+      /* No full-name popup, under any interaction state. */
+      #view-home .identity-note .full-label {
+        display: none !important;
+      }
 
-/* Gentle highlight only. */
-#view-home .identity-note:hover,
-#view-home .identity-note:focus-visible {
-    color: #ad7289;
-}
+      /* Gentle highlight only. */
+      #view-home .identity-note:hover,
+      #view-home .identity-note:focus-visible {
+        color: #ad7289;
+      }
 
-#view-home .identity-note:hover svg,
-#view-home .identity-note:focus-visible svg {
-    transform: translateX(-50%) scale(1.12);
-    filter: drop-shadow(
-        0 2px 3px rgba(138,85,102,.16)
-    );
-}
+      #view-home .identity-note:hover svg,
+      #view-home .identity-note:focus-visible svg {
+        transform: translateX(-50%) scale(1.12);
+        filter: drop-shadow(0 2px 3px rgba(138, 85, 102, 0.16));
+      }
 
-/* Very short visual response on click. */
-#view-home .identity-note.note-playing svg {
-    transform: translateX(-50%) scale(.94);
-    color: #754459;
-}
+      /* Very short visual response on click. */
+      #view-home .identity-note.note-playing svg {
+        transform: translateX(-50%) scale(0.94);
+        color: #754459;
+      }
 
-/* Preserve the four abbreviated research labels. */
-#view-home .short-label {
-    position: absolute;
-    top: calc(100% + 5px);
-    left: 50%;
-    transform: translateX(-50%);
-    white-space: nowrap;
-}
+      /* Preserve the four abbreviated research labels. */
+      #view-home .short-label {
+        position: absolute;
+        top: calc(100% + 5px);
+        left: 50%;
+        transform: translateX(-50%);
+        white-space: nowrap;
+      }
 
-@media (max-width: 960px) {
-    #view-home .music-staff.research-score {
-        height: 32px;
-    }
-}
+      @media (max-width: 960px) {
+        #view-home .music-staff.research-score {
+          height: 32px;
+        }
+      }
 
-@media (prefers-reduced-motion: reduce) {
-    #view-home .identity-note svg {
-        transition: none;
-    }
-}
+      @media (prefers-reduced-motion: reduce) {
+        #view-home .identity-note svg {
+          transition: none;
+        }
+      }
 
+      /* YUE_STAFF_PRECISE_ALIGNMENT_V2_START */
 
-/* YUE_STAFF_PRECISE_ALIGNMENT_V2_START */
+      /* One coordinate system for all five lines */
+      #view-home .music-staff.research-score {
+        position: relative;
+        height: 34px;
+        border: 0 !important;
+        background:
+          linear-gradient(#b78492, #b78492) center 0% / 100% 1px no-repeat,
+          linear-gradient(#b78492, #b78492) center 25% / 100% 1px no-repeat,
+          linear-gradient(#b78492, #b78492) center 50% / 100% 1px no-repeat,
+          linear-gradient(#b78492, #b78492) center 75% / 100% 1px no-repeat,
+          linear-gradient(#b78492, #b78492) center 100% / 100% 1px no-repeat !important;
+      }
 
-/* One coordinate system for all five lines */
-#view-home .music-staff.research-score {
-    position: relative;
-    height: 34px;
-    border: 0 !important;
-    background:
-        linear-gradient(#b78492, #b78492)
-            center 0% / 100% 1px no-repeat,
-        linear-gradient(#b78492, #b78492)
-            center 25% / 100% 1px no-repeat,
-        linear-gradient(#b78492, #b78492)
-            center 50% / 100% 1px no-repeat,
-        linear-gradient(#b78492, #b78492)
-            center 75% / 100% 1px no-repeat,
-        linear-gradient(#b78492, #b78492)
-            center 100% / 100% 1px no-repeat !important;
-}
+      #view-home .music-staff.research-score::after {
+        display: none !important;
+      }
 
-#view-home .music-staff.research-score::after {
-    display: none !important;
-}
+      /* Buttons occupy the same full-height staff area */
+      #view-home .research-score .identity-note {
+        position: absolute;
+        top: 0;
+        height: 100%;
+        padding: 0;
+      }
 
-/* Buttons occupy the same full-height staff area */
-#view-home .research-score .identity-note {
-    position: absolute;
-    top: 0;
-    height: 100%;
-    padding: 0;
-}
-
-/*
+      /*
 The existing SVG has viewBox="0 0 28 44".
 Its notehead center is cy="33".
 
@@ -744,474 +1556,808 @@ Its notehead center is cy="33".
 Thus translateY(-75%) places the actual
 notehead center at --staff-y.
 */
-#view-home .research-score .identity-note svg {
-    position: absolute;
-    top: var(--staff-y) !important;
-    left: 50%;
-    width: 24px;
-    height: 42px;
-    transform: translate(-50%, -75%) !important;
-    transform-origin: 50% 75%;
-    transition:
-        color .2s ease,
-        scale .2s ease;
-}
+      #view-home .research-score .identity-note svg {
+        position: absolute;
+        top: var(--staff-y) !important;
+        left: 50%;
+        width: 24px;
+        height: 42px;
+        transform: translate(-50%, -75%) !important;
+        transform-origin: 50% 75%;
+        transition:
+          color 0.2s ease,
+          scale 0.2s ease;
+      }
 
-/* Each notehead is precisely on a line or space */
-#view-home .research-score .identity-note:nth-child(1) {
-    --staff-y: 75%;
-}
+      /* Each notehead is precisely on a line or space */
+      #view-home .research-score .identity-note:nth-child(1) {
+        --staff-y: 75%;
+      }
 
-#view-home .research-score .identity-note:nth-child(2) {
-    --staff-y: 50%;
-}
+      #view-home .research-score .identity-note:nth-child(2) {
+        --staff-y: 50%;
+      }
 
-#view-home .research-score .identity-note:nth-child(3) {
-    --staff-y: 62.5%;
-}
+      #view-home .research-score .identity-note:nth-child(3) {
+        --staff-y: 62.5%;
+      }
 
-#view-home .research-score .identity-note:nth-child(4) {
-    --staff-y: 37.5%;
-}
+      #view-home .research-score .identity-note:nth-child(4) {
+        --staff-y: 37.5%;
+      }
 
-/* Hover changes appearance, never position */
-#view-home .research-score .identity-note:hover svg,
-#view-home .research-score .identity-note:focus-visible svg {
-    scale: 1.12;
-    color: #ad7289;
-}
+      /* Hover changes appearance, never position */
+      #view-home .research-score .identity-note:hover svg,
+      #view-home .research-score .identity-note:focus-visible svg {
+        scale: 1.12;
+        color: #ad7289;
+      }
 
-#view-home .research-score .identity-note.note-playing svg {
-    scale: .94;
-}
+      #view-home .research-score .identity-note.note-playing svg {
+        scale: 0.94;
+      }
 
-/* Keep labels below the score */
-#view-home .research-score .short-label {
-    top: calc(100% + 5px);
-}
+      /* Keep labels below the score */
+      #view-home .research-score .short-label {
+        top: calc(100% + 5px);
+      }
 
-/* Mobile: same system, only the total height changes */
-@media (max-width: 960px) {
-    #view-home .music-staff.research-score {
-        height: 32px;
-    }
-}
+      /* Mobile: same system, only the total height changes */
+      @media (max-width: 960px) {
+        #view-home .music-staff.research-score {
+          height: 32px;
+        }
+      }
 
-/* YUE_STAFF_PRECISE_ALIGNMENT_V2_END */
+      /* YUE_STAFF_PRECISE_ALIGNMENT_V2_END */
 
+      /* Research staff: subtle hover and refined spacing */
 
-/* Research staff: subtle hover and refined spacing */
-
-/* More breathing room below Yue Shi */
-#view-home .hero-name {
-    margin-bottom: 36px;
-}
-
-@media (max-width: 960px) {
-    #view-home .hero-name {
+      /* More breathing room below Yue Shi */
+      #view-home .hero-name {
         margin-bottom: 36px;
-    }
-}
+      }
 
-/* Only the color changes on hover */
-#view-home .research-score .identity-note svg {
-    scale: 1 !important;
-    filter: none !important;
-    transition: color .2s ease !important;
-}
-
-#view-home .research-score .identity-note:hover svg,
-#view-home .research-score .identity-note:focus-visible svg {
-    scale: 1 !important;
-    filter: none !important;
-    color: #ad7289 !important;
-}
-
-#view-home .research-score .identity-note.note-playing svg {
-    scale: 1 !important;
-    filter: none !important;
-}
-
-
-</style>
-</head>
-<body>
-  <div class="app">
-    <div class="notes-layer" id="notes-layer"></div>
-
-    <section class="view home active" id="view-home" data-view="home">
-      <div class="home-top">
-        <div>piano home</div>
-      </div>
-
-      <div class="home-center">
-        <h1 class="hero-name">Yue Shi</h1>
-
-        <div class="staves-wrap">
-          <div class="music-staff research-score" aria-label="Research interests: four annotated notes"><button class="identity-note" type="button" aria-label="Human–Computer Interaction" data-research="Human–Computer Interaction" style="--i:0"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">HCI</span></button><button class="identity-note" type="button" aria-label="Research Through Design" data-research="Research Through Design" style="--i:1"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">RtD</span></button><button class="identity-note" type="button" aria-label="Critical Making" data-research="Critical Making" style="--i:2"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">Making</span></button><button class="identity-note" type="button" aria-label="Animal–Computer Interaction" data-research="Animal–Computer Interaction" style="--i:3"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">ACI</span></button></div>
-        </div>
-
-        
-      </div>
-
-      <div class="piano-shell" id="piano-shell">
-        <div class="piano-toolbar">
-          <div class="keyboard-nav" id="keyboard-nav" aria-label="Choose a section">
-          <button type="button" data-go="about"><span class="music-symbol">♪</span><span class="nav-link-label">About Me</span></button>
-          <button type="button" data-go="projects"><span class="music-symbol">♪</span><span class="nav-link-label">Projects</span></button>
-          <button type="button" data-go="experience"><span class="music-symbol">♪</span><span class="nav-link-label">Experience</span></button>
-          <button type="button" data-go="life"><span class="music-symbol">♪</span><span class="nav-link-label">Life</span></button>
-          <button type="button" data-go="contact"><span class="music-symbol">♪</span><span class="nav-link-label">Contact</span></button>
-        </div>
-        </div>
-        <div class="piano" id="piano">
-          <div class="keyboard-viewport" id="keyboard-viewport" aria-label="Scrollable piano keyboard: drag horizontally to explore all 88 keys"><div class="keyboard-track" id="keyboard-track"><div class="white-keys" id="white-keys"></div></div></div>
-        </div>
-        <div class="piano-bottom-bar">
-        <div class="keyboard-note" id="keyboard-note">Play a melody and get to know me ♪ Navigation on: marked notes open pages</div>
-          <div class="piano-controls"><span class="mode-label sr-only" id="mode-status" aria-live="polite">Navigation mode enabled</span><button type="button" class="mode-toggle" id="mode-toggle" aria-pressed="true" aria-label="Switch to free play mode"><span class="toggle-dot" aria-hidden="true"></span><span class="toggle-text">Navigation on</span></button></div>
-        </div>
-      </div>
-
-      <div class="home-footer">© 2026 Yue Shi</div>
-      
-    </section>
-
-  </div>
-
-  <script>
-    const views = [...document.querySelectorAll('.view')];
-    const notesLayer = document.getElementById('notes-layer');
-    const whiteKeysEl = document.getElementById('white-keys');
-    const piano = document.getElementById('piano');
-    const modeToggle = document.getElementById('mode-toggle');
-    const pianoShell = document.getElementById('piano-shell');
-    const modeStatus = document.getElementById('mode-status');
-    let navigationEnabled = true;
-    modeToggle.addEventListener('click', () => {
-      navigationEnabled = !navigationEnabled;
-      document.querySelector('.piano-floating-tooltip')?.classList.remove('visible');
-      modeToggle.setAttribute('aria-pressed', String(navigationEnabled));
-      modeToggle.querySelector('.toggle-text').textContent = navigationEnabled ? 'Navigation on' : 'Free play';
-      modeToggle.setAttribute('aria-label', navigationEnabled ? 'Switch to free play mode' : 'Switch to navigation mode');
-      modeStatus.textContent = navigationEnabled ? '♪ Choose a section or play freely' : 'All keys play music';
-      pianoShell.classList.toggle('is-free', !navigationEnabled);
-      document.getElementById('keyboard-note').textContent = navigationEnabled
-        ? 'Play a melody and get to know me  ♪  Navigation on: marked notes open pages'
-        : 'Play a melody and get to know me  ♪  Free play: every piano key plays a note';
-    });
-
-    // Full-size 88-key piano: MIDI 21 (A0) through MIDI 108 (C8).
-    // Natural keys are the white keys. A4 = MIDI 69 = 440 Hz.
-    const whiteNames = ['C','D','E','F','G','A','B'];
-    const noteNames = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B'];
-    const whitePitchClasses = new Set([0,2,4,5,7,9,11]);
-    const whiteMidi = Array.from({length:88},(_,i)=>i+21)
-      .filter(midi => whitePitchClasses.has(midi % 12));
-    const formatNote = midi => noteNames[midi%12]+(Math.floor(midi/12)-1);
-    // Spread navigation across the full keyboard, leaving every other note free to play.
-    const navigationNotes = [
-      ['C4', 'about', 'About Me'],
-      ['D4', 'projects', 'Projects'],
-      ['F4', 'experience', 'Experience'],
-      ['A4', 'life', 'Life'],
-      ['C5', 'contact', 'Contact']
-    ];
-    const navMap = Object.fromEntries(navigationNotes.map(([note,view,label]) => {
-      const index = whiteMidi.findIndex(midi => formatNote(midi)===note);
-      if(index<0) throw new Error('Navigation note not found: '+note);
-      return [index,{view,label}];
-    }));
-    const keyboardViewport = document.getElementById('keyboard-viewport');
-    const keyboardTrack = document.getElementById('keyboard-track');
-    const freqFromMidi = m => 440 * Math.pow(2,(m-69)/12);
-    let suppressClickUntil = 0;
-
-    function showView(name){
-      const paths={about:'/about',projects:'/projects',experience:'/professional',life:'/life',contact:'/contact',home:'/'};
-      if (paths[name]) window.parent.postMessage({type:'yue-piano-navigation-v1',path:paths[name]},window.location.origin);
-    }
-
-    document.querySelectorAll('[data-nav]').forEach(link => {
-      link.addEventListener('click', e => {
-        e.preventDefault();
-        showView(link.dataset.nav);
-      });
-    });
-    document.querySelectorAll('[data-back-home]').forEach(btn => {
-      btn.addEventListener('click', () => showView('home'));
-    });
-
-    // Tooltip is a sibling of the keys, so it can float above black keys
-    // without raising the hovered white key itself.
-    const floatingTooltip = document.createElement('span');
-    floatingTooltip.className = 'piano-floating-tooltip';
-    floatingTooltip.setAttribute('aria-hidden', 'true');
-    keyboardTrack.appendChild(floatingTooltip);
-    function showKeyTooltip(key, label) {
-      if (!navigationEnabled) return;
-      floatingTooltip.textContent = label;
-      floatingTooltip.style.left = `${key.offsetLeft + key.offsetWidth/2}px`;
-      floatingTooltip.classList.add('visible');
-    }
-    function hideKeyTooltip() { floatingTooltip.classList.remove('visible'); }
-
-    function createWhiteKeys(){
-      whiteMidi.forEach((midi,i) => {
-        const btn=document.createElement('button');
-        const note=formatNote(midi);
-        btn.type='button'; btn.className='white-key'; btn.dataset.index=i;
-        if(navMap[i]){
-          btn.classList.add('nav');
-          const tag=document.createElement('span');tag.className='key-tooltip';
-          tag.textContent=navMap[i].label;btn.appendChild(tag);
-          btn.addEventListener('mouseenter', () => showKeyTooltip(btn, navMap[i].label));
-          btn.addEventListener('mouseleave', hideKeyTooltip);
-          btn.addEventListener('focus', () => showKeyTooltip(btn, navMap[i].label));
-          btn.addEventListener('blur', hideKeyTooltip);
+      @media (max-width: 960px) {
+        #view-home .hero-name {
+          margin-bottom: 36px;
         }
-        btn.setAttribute('aria-label',note+(navMap[i] ? ': '+navMap[i].label+' (navigation on)' : ''));
-        const name=document.createElement('span');name.className='note-name';name.textContent=note;
-        btn.appendChild(name);
-        btn.addEventListener('click',() => {
-          if(performance.now()<suppressClickUntil)return;
-          activateKey(btn);
-        });
-        whiteKeysEl.appendChild(btn);
+      }
+
+      /* Only the color changes on hover */
+      #view-home .research-score .identity-note svg {
+        scale: 1 !important;
+        filter: none !important;
+        transition: color 0.2s ease !important;
+      }
+
+      #view-home .research-score .identity-note:hover svg,
+      #view-home .research-score .identity-note:focus-visible svg {
+        scale: 1 !important;
+        filter: none !important;
+        color: #ad7289 !important;
+      }
+
+      #view-home .research-score .identity-note.note-playing svg {
+        scale: 1 !important;
+        filter: none !important;
+      }
+
+      /* Piano Home — discreet sound toggle */
+
+      #view-home .sound-toggle {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 4px 0;
+
+        border: none;
+        background: transparent;
+        color: #845064;
+
+        font-family: Georgia, "Times New Roman", serif;
+        font-size: 15px;
+        font-weight: 500;
+        letter-spacing: 0.025em;
+        text-transform: none;
+
+        cursor: pointer;
+        transition: color 0.2s ease;
+      }
+
+      #view-home .sound-icon {
+        font-size: 21px;
+        line-height: 1;
+      }
+
+      #view-home .sound-toggle:hover {
+        color: #b07b8d;
+      }
+
+      #view-home .sound-toggle[aria-pressed="false"] {
+        color: #a58a92;
+      }
+
+      #view-home .sound-toggle:focus-visible {
+        outline: 1px solid #845064;
+        outline-offset: 5px;
+        border-radius: 2px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="app">
+      <div class="notes-layer" id="notes-layer"></div>
+
+      <section class="view home active" id="view-home" data-view="home">
+        <div class="home-top">
+          <button
+            type="button"
+            id="piano-sound-toggle"
+            class="sound-toggle"
+            aria-pressed="false"
+            aria-label="Unmute piano sound"
+          >
+            <span class="sound-icon" aria-hidden="true">
+              <svg
+                viewBox="0 0 28 28"
+                width="24"
+                height="24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+              >
+                <path d="M12 20V6L21 4V17" />
+                <ellipse
+                  cx="8.5"
+                  cy="20.5"
+                  rx="3.5"
+                  ry="2.5"
+                  fill="currentColor"
+                  stroke="none"
+                />
+                <ellipse
+                  cx="17.5"
+                  cy="17.5"
+                  rx="3.5"
+                  ry="2.5"
+                  fill="currentColor"
+                  stroke="none"
+                />
+                <path class="mute-slash" d="M4 25L25 3" stroke-width="2.1" />
+              </svg>
+            </span>
+            <span class="sound-label">Sound off</span>
+          </button>
+        </div>
+
+        <div class="home-center">
+          <h1 class="hero-name">Yue Shi</h1>
+
+          <div class="staves-wrap">
+            <div
+              class="music-staff research-score"
+              aria-label="Research interests: four annotated notes"
+            >
+              <button
+                class="identity-note"
+                type="button"
+                aria-label="Human–Computer Interaction"
+                data-research="Human–Computer Interaction"
+                style="--i: 0"
+              >
+                <svg viewBox="0 0 28 44" aria-hidden="true" focusable="false">
+                  <ellipse
+                    cx="10"
+                    cy="33"
+                    rx="7.5"
+                    ry="5"
+                    transform="rotate(-20 10 33)"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M16 31 V3"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  /></svg
+                ><span class="short-label">HCI</span></button
+              ><button
+                class="identity-note"
+                type="button"
+                aria-label="Research Through Design"
+                data-research="Research Through Design"
+                style="--i: 1"
+              >
+                <svg viewBox="0 0 28 44" aria-hidden="true" focusable="false">
+                  <ellipse
+                    cx="10"
+                    cy="33"
+                    rx="7.5"
+                    ry="5"
+                    transform="rotate(-20 10 33)"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M16 31 V3"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  /></svg
+                ><span class="short-label">RtD</span></button
+              ><button
+                class="identity-note"
+                type="button"
+                aria-label="Critical Making"
+                data-research="Critical Making"
+                style="--i: 2"
+              >
+                <svg viewBox="0 0 28 44" aria-hidden="true" focusable="false">
+                  <ellipse
+                    cx="10"
+                    cy="33"
+                    rx="7.5"
+                    ry="5"
+                    transform="rotate(-20 10 33)"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M16 31 V3"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  /></svg
+                ><span class="short-label">Making</span></button
+              ><button
+                class="identity-note"
+                type="button"
+                aria-label="Animal–Computer Interaction"
+                data-research="Animal–Computer Interaction"
+                style="--i: 3"
+              >
+                <svg viewBox="0 0 28 44" aria-hidden="true" focusable="false">
+                  <ellipse
+                    cx="10"
+                    cy="33"
+                    rx="7.5"
+                    ry="5"
+                    transform="rotate(-20 10 33)"
+                    fill="currentColor"
+                  />
+                  <path
+                    d="M16 31 V3"
+                    stroke="currentColor"
+                    stroke-width="2"
+                  /></svg
+                ><span class="short-label">ACI</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="piano-shell" id="piano-shell">
+          <div class="piano-toolbar">
+            <div
+              class="keyboard-nav"
+              id="keyboard-nav"
+              aria-label="Choose a section"
+            >
+              <button type="button" data-go="about">
+                <span class="music-symbol">♪</span
+                ><span class="nav-link-label">About Me</span>
+              </button>
+              <button type="button" data-go="projects">
+                <span class="music-symbol">♪</span
+                ><span class="nav-link-label">Projects</span>
+              </button>
+              <button type="button" data-go="experience">
+                <span class="music-symbol">♪</span
+                ><span class="nav-link-label">Experience</span>
+              </button>
+              <button type="button" data-go="life">
+                <span class="music-symbol">♪</span
+                ><span class="nav-link-label">Life</span>
+              </button>
+              <button type="button" data-go="contact">
+                <span class="music-symbol">♪</span
+                ><span class="nav-link-label">Contact</span>
+              </button>
+            </div>
+          </div>
+          <div class="piano" id="piano">
+            <div
+              class="keyboard-viewport"
+              id="keyboard-viewport"
+              aria-label="Scrollable piano keyboard: drag horizontally to explore all 88 keys"
+            >
+              <div class="keyboard-track" id="keyboard-track">
+                <div class="white-keys" id="white-keys"></div>
+              </div>
+            </div>
+          </div>
+          <div class="piano-bottom-bar">
+            <div class="keyboard-note" id="keyboard-note">
+              Play a melody and get to know me ♪ Navigation on: marked notes
+              open pages
+            </div>
+            <div class="piano-controls">
+              <span
+                class="mode-label sr-only"
+                id="mode-status"
+                aria-live="polite"
+                >Navigation mode enabled</span
+              ><button
+                type="button"
+                class="mode-toggle"
+                id="mode-toggle"
+                aria-pressed="true"
+                aria-label="Switch to free play mode"
+              >
+                <span class="toggle-dot" aria-hidden="true"></span
+                ><span class="toggle-text">Navigation on</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="home-footer">© 2026 Yue Shi</div>
+      </section>
+    </div>
+
+    <script>
+      const views = [...document.querySelectorAll(".view")];
+      const notesLayer = document.getElementById("notes-layer");
+      const whiteKeysEl = document.getElementById("white-keys");
+      const piano = document.getElementById("piano");
+      const modeToggle = document.getElementById("mode-toggle");
+      const pianoShell = document.getElementById("piano-shell");
+      const modeStatus = document.getElementById("mode-status");
+      let navigationEnabled = true;
+      modeToggle.addEventListener("click", () => {
+        navigationEnabled = !navigationEnabled;
+        document
+          .querySelector(".piano-floating-tooltip")
+          ?.classList.remove("visible");
+        modeToggle.setAttribute("aria-pressed", String(navigationEnabled));
+        modeToggle.querySelector(".toggle-text").textContent = navigationEnabled
+          ? "Navigation on"
+          : "Free play";
+        modeToggle.setAttribute(
+          "aria-label",
+          navigationEnabled
+            ? "Switch to free play mode"
+            : "Switch to navigation mode",
+        );
+        modeStatus.textContent = navigationEnabled
+          ? "♪ Choose a section or play freely"
+          : "All keys play music";
+        pianoShell.classList.toggle("is-free", !navigationEnabled);
+        document.getElementById("keyboard-note").textContent = navigationEnabled
+          ? "Play a melody and get to know me  ♪  Navigation on: marked notes open pages"
+          : "Play a melody and get to know me  ♪  Free play: every piano key plays a note";
       });
-    }
-    function createBlackKeys(){
-      whiteMidi.forEach((midi,i)=>{
-        if(i>=whiteMidi.length-1)return;
-        if(whiteMidi[i+1]-midi!==2)return; // No black note between E–F or B–C.
-        const key=document.createElement('button');key.type='button';key.className='black-key';
-        const accidental=formatNote(midi+1);
-        key.style.left=`calc(${(i+1)/whiteMidi.length*100}% - 14px)`;
-        key.dataset.midi=String(midi+1);
-        key.setAttribute('aria-label',accidental);
-        key.addEventListener('click',()=>{
-          if(performance.now()<suppressClickUntil)return;
-          activateKey(key);
+
+      // Full-size 88-key piano: MIDI 21 (A0) through MIDI 108 (C8).
+      // Natural keys are the white keys. A4 = MIDI 69 = 440 Hz.
+      const whiteNames = ["C", "D", "E", "F", "G", "A", "B"];
+      const noteNames = [
+        "C",
+        "C#",
+        "D",
+        "D#",
+        "E",
+        "F",
+        "F#",
+        "G",
+        "G#",
+        "A",
+        "A#",
+        "B",
+      ];
+      const whitePitchClasses = new Set([0, 2, 4, 5, 7, 9, 11]);
+      const whiteMidi = Array.from({ length: 88 }, (_, i) => i + 21).filter(
+        (midi) => whitePitchClasses.has(midi % 12),
+      );
+      const formatNote = (midi) =>
+        noteNames[midi % 12] + (Math.floor(midi / 12) - 1);
+      // Spread navigation across the full keyboard, leaving every other note free to play.
+      const navigationNotes = [
+        ["C4", "about", "About Me"],
+        ["D4", "projects", "Projects"],
+        ["F4", "experience", "Experience"],
+        ["A4", "life", "Life"],
+        ["C5", "contact", "Contact"],
+      ];
+      const navMap = Object.fromEntries(
+        navigationNotes.map(([note, view, label]) => {
+          const index = whiteMidi.findIndex(
+            (midi) => formatNote(midi) === note,
+          );
+          if (index < 0) throw new Error("Navigation note not found: " + note);
+          return [index, { view, label }];
+        }),
+      );
+      const keyboardViewport = document.getElementById("keyboard-viewport");
+      const keyboardTrack = document.getElementById("keyboard-track");
+      const freqFromMidi = (m) => 440 * Math.pow(2, (m - 69) / 12);
+      let suppressClickUntil = 0;
+
+      function showView(name) {
+        const paths = {
+          about: "/about",
+          projects: "/projects",
+          experience: "/professional",
+          life: "/life",
+          contact: "/contact",
+          home: "/",
+        };
+        if (paths[name])
+          window.parent.postMessage(
+            { type: "yue-piano-navigation-v1", path: paths[name] },
+            window.location.origin,
+          );
+      }
+
+      document.querySelectorAll("[data-nav]").forEach((link) => {
+        link.addEventListener("click", (e) => {
+          e.preventDefault();
+          showView(link.dataset.nav);
         });
-        keyboardTrack.appendChild(key);
       });
-    }
-    // Clicking a section name sounds (and presses) the matching piano key
-    // before the existing gentle fade transitions to the destination.
-    document.querySelectorAll('[data-go]').forEach(btn=>btn.addEventListener('click',()=>{
-      const destination = btn.dataset.go;
-      const entry = navigationNotes.find(([,view]) => view === destination);
-      const midi = entry && whiteMidi.find(m => formatNote(m) === entry[0]);
-      const index = midi == null ? -1 : whiteMidi.indexOf(midi);
-      const key = index < 0 ? null : whiteKeysEl.children[index];
-      if (key) playNote(freqFromMidi(midi), key);
-      setTimeout(() => showView(destination), key ? 210 : 0);
-    }));
-    // A single activation path for mouse clicks and touch taps.
-    // On mobile, touch-action/scroll handling can suppress synthesized click.
-    function activateKey(key) {
-      if (!key) return;
-      if (key.classList.contains('white-key')) {
-        const index = Number(key.dataset.index);
-        const midi = whiteMidi[index];
-        playNote(freqFromMidi(midi), key);
-        if (navigationEnabled && navMap[index]) {
-          setTimeout(() => showView(navMap[index].view), 210);
+      document.querySelectorAll("[data-back-home]").forEach((btn) => {
+        btn.addEventListener("click", () => showView("home"));
+      });
+
+      // Tooltip is a sibling of the keys, so it can float above black keys
+      // without raising the hovered white key itself.
+      const floatingTooltip = document.createElement("span");
+      floatingTooltip.className = "piano-floating-tooltip";
+      floatingTooltip.setAttribute("aria-hidden", "true");
+      keyboardTrack.appendChild(floatingTooltip);
+      function showKeyTooltip(key, label) {
+        if (!navigationEnabled) return;
+        floatingTooltip.textContent = label;
+        floatingTooltip.style.left = `${key.offsetLeft + key.offsetWidth / 2}px`;
+        floatingTooltip.classList.add("visible");
+      }
+      function hideKeyTooltip() {
+        floatingTooltip.classList.remove("visible");
+      }
+
+      function createWhiteKeys() {
+        whiteMidi.forEach((midi, i) => {
+          const btn = document.createElement("button");
+          const note = formatNote(midi);
+          btn.type = "button";
+          btn.className = "white-key";
+          btn.dataset.index = i;
+          if (navMap[i]) {
+            btn.classList.add("nav");
+            const tag = document.createElement("span");
+            tag.className = "key-tooltip";
+            tag.textContent = navMap[i].label;
+            btn.appendChild(tag);
+            btn.addEventListener("mouseenter", () =>
+              showKeyTooltip(btn, navMap[i].label),
+            );
+            btn.addEventListener("mouseleave", hideKeyTooltip);
+            btn.addEventListener("focus", () =>
+              showKeyTooltip(btn, navMap[i].label),
+            );
+            btn.addEventListener("blur", hideKeyTooltip);
+          }
+          btn.setAttribute(
+            "aria-label",
+            note +
+              (navMap[i] ? ": " + navMap[i].label + " (navigation on)" : ""),
+          );
+          const name = document.createElement("span");
+          name.className = "note-name";
+          name.textContent = note;
+          btn.appendChild(name);
+          btn.addEventListener("click", () => {
+            if (performance.now() < suppressClickUntil) return;
+            activateKey(btn);
+          });
+          whiteKeysEl.appendChild(btn);
+        });
+      }
+      function createBlackKeys() {
+        whiteMidi.forEach((midi, i) => {
+          if (i >= whiteMidi.length - 1) return;
+          if (whiteMidi[i + 1] - midi !== 2) return; // No black note between E–F or B–C.
+          const key = document.createElement("button");
+          key.type = "button";
+          key.className = "black-key";
+          const accidental = formatNote(midi + 1);
+          key.style.left = `calc(${((i + 1) / whiteMidi.length) * 100}% - 14px)`;
+          key.dataset.midi = String(midi + 1);
+          key.setAttribute("aria-label", accidental);
+          key.addEventListener("click", () => {
+            if (performance.now() < suppressClickUntil) return;
+            activateKey(key);
+          });
+          keyboardTrack.appendChild(key);
+        });
+      }
+      // Clicking a section name sounds (and presses) the matching piano key
+      // before the existing gentle fade transitions to the destination.
+      document.querySelectorAll("[data-go]").forEach((btn) =>
+        btn.addEventListener("click", () => {
+          const destination = btn.dataset.go;
+          const entry = navigationNotes.find(
+            ([, view]) => view === destination,
+          );
+          const midi =
+            entry && whiteMidi.find((m) => formatNote(m) === entry[0]);
+          const index = midi == null ? -1 : whiteMidi.indexOf(midi);
+          const key = index < 0 ? null : whiteKeysEl.children[index];
+          if (key) playNote(freqFromMidi(midi), key);
+          setTimeout(() => showView(destination), key ? 210 : 0);
+        }),
+      );
+      // A single activation path for mouse clicks and touch taps.
+      // On mobile, touch-action/scroll handling can suppress synthesized click.
+      function activateKey(key) {
+        if (!key) return;
+        if (key.classList.contains("white-key")) {
+          const index = Number(key.dataset.index);
+          const midi = whiteMidi[index];
+          playNote(freqFromMidi(midi), key);
+          if (navigationEnabled && navMap[index]) {
+            setTimeout(() => showView(navMap[index].view), 210);
+          }
+        } else if (key.classList.contains("black-key")) {
+          const midi = Number(key.dataset.midi);
+          playNote(freqFromMidi(midi), key);
         }
-      } else if (key.classList.contains('black-key')) {
-        const midi = Number(key.dataset.midi);
-        playNote(freqFromMidi(midi), key);
       }
-    }
 
-    // Mobile taps activate on pointerup (independent of synthetic click).
-    // Scrolling gestures are never treated as navigation.
-    let touchKeyGesture = null;
-    keyboardViewport.addEventListener('pointerdown', e => {
-      if (e.pointerType !== 'touch') return;
-      const key = e.target.closest('.white-key, .black-key');
-      touchKeyGesture = { id:e.pointerId, key, x:e.clientX, y:e.clientY,
-        scroll:keyboardViewport.scrollLeft, moved:false };
-    });
-    keyboardViewport.addEventListener('pointermove', e => {
-      const gesture = touchKeyGesture;
-      if (!gesture || gesture.id !== e.pointerId) return;
-      const dx=e.clientX-gesture.x, dy=e.clientY-gesture.y;
-      if (Math.abs(dx)>10 || Math.abs(dy)>10) gesture.moved=true;
-      if (Math.abs(dx)>10 && Math.abs(dx)>Math.abs(dy)) {
-        keyboardViewport.scrollLeft=gesture.scroll-dx;
-      }
-    });
-    keyboardViewport.addEventListener('pointerup', e => {
-      const gesture=touchKeyGesture;
-      if (!gesture || gesture.id !== e.pointerId) return;
-      touchKeyGesture=null;
-      // Guard against the browser subsequently firing a duplicate click.
-      suppressClickUntil=performance.now()+450;
-      if (!gesture.moved && Math.hypot(e.clientX-gesture.x,e.clientY-gesture.y)<12) {
-        activateKey(gesture.key);
-      }
-    });
-    keyboardViewport.addEventListener('pointercancel', () => { touchKeyGesture=null; });
-    // Drag horizontally, but keep short taps available for actual note playing.
-    let drag=null;
-    keyboardViewport.addEventListener('pointerdown',e=>{
-      if(e.button!==0 || e.pointerType==='touch')return;
-      drag={id:e.pointerId,x:e.clientX,scroll:keyboardViewport.scrollLeft,moved:false};
-    });
-    keyboardViewport.addEventListener('pointermove',e=>{
-      if(!drag||e.pointerId!==drag.id)return;
-      const dx=e.clientX-drag.x;
-      if(Math.abs(dx)>6){
-        drag.moved=true;
-        keyboardViewport.classList.add('dragging');
-        keyboardViewport.scrollLeft=drag.scroll-dx;
-      }
-    });
-    const finishDrag=()=>{
-      if(drag?.moved)suppressClickUntil=performance.now()+250;
-      drag=null;keyboardViewport.classList.remove('dragging');
-    };
-    window.addEventListener('pointerup',finishDrag,true);
-    window.addEventListener('pointercancel',finishDrag,true);
-    window.addEventListener('blur',finishDrag);
-    keyboardViewport.addEventListener('click',e=>{
-      if(performance.now()<suppressClickUntil){e.preventDefault();e.stopImmediatePropagation();}
-    },true);
-
-    let audioCtx;
-    function getCtx(){
-      audioCtx ||= new (window.AudioContext || window.webkitAudioContext)();
-      return audioCtx;
-    }
-
-    function playNote(freq, el){
-      const ctx = getCtx();
-      if (ctx.state === 'suspended') ctx.resume();
-      const now = ctx.currentTime;
-      const osc = ctx.createOscillator();
-      const gain = ctx.createGain();
-      osc.type = 'triangle';
-      osc.frequency.setValueAtTime(freq, now);
-      gain.gain.setValueAtTime(0.0001, now);
-      gain.gain.exponentialRampToValueAtTime(0.23, now + 0.02);
-      gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.1);
-      osc.connect(gain).connect(ctx.destination);
-      osc.start(now);
-      osc.stop(now + 1.15);
-      el.classList.add('active');
-      setTimeout(() => el.classList.remove('active'), 120);
-      spawnNotes(el);
-    }
-
-    function spawnNotes(el){
-      const rect = el.getBoundingClientRect();
-      const layerRect = notesLayer.getBoundingClientRect();
-      const staffRect = document.querySelector('.music-staff').getBoundingClientRect();
-      // Each keystroke produces one of six note types (including single and paired eighth notes).
-      // SVG avoids missing music-font glyphs on some browsers.
-      const types = ['whole', 'half', 'quarter', 'eighth', 'pairedEighth', 'sixteenth'];
-      const type = types[Math.floor(Math.random() * types.length)];
-      const n = document.createElement('div');
-      n.className = 'float-note';
-      n.setAttribute('aria-hidden', 'true');
-      const openHead = `<ellipse cx="15" cy="29" rx="10" ry="7" transform="rotate(-19 15 29)" fill="none" stroke="currentColor" stroke-width="2.8"/>`;
-      const filledHead = `<ellipse cx="15" cy="29" rx="10" ry="7" transform="rotate(-19 15 29)" fill="currentColor"/>`;
-      const stem = `<path d="M24 27 V1" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" fill="none"/>`;
-      const flag = `<path d="M24 2 C42 9 33 19 29 23 C34 12 28 11 24 10 Z" fill="currentColor"/>`;
-      const drawing = type === 'pairedEighth'
-        ? `<ellipse cx="11" cy="32" rx="7.5" ry="5.3" transform="rotate(-19 11 32)" fill="currentColor"/>
-           <ellipse cx="37" cy="29" rx="7.5" ry="5.3" transform="rotate(-19 37 29)" fill="currentColor"/>
-           <path d="M18 30 V5 M44 27 V2 M18 5 L44 2" stroke="currentColor" stroke-width="3.5" fill="none"/>`
-        : type === 'whole'
-          ? `<ellipse cx="18" cy="24" rx="11" ry="7.5" transform="rotate(-18 18 24)" fill="none" stroke="currentColor" stroke-width="3"/>`
-          : (type === 'half' ? openHead : filledHead) + stem + ((type === 'eighth' || type === 'sixteenth') ? flag : '') + (type === 'sixteenth' ? `<path d="M24 11 C41 18 33 28 29 32 C34 22 28 20 24 19 Z" fill="currentColor"/>` : '');
-      n.innerHTML = `<svg viewBox="0 0 52 42" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${drawing}</svg>`;
-      const size = (type === 'pairedEighth' ? 35 : 23) + Math.floor(Math.random() * 9);
-      const startY = rect.top - 14;
-      // Rise to anywhere from just above the top staff line to its lower
-      // spaces, never into the title's region.
-      const targetY = staffRect.bottom + 35 + Math.random() * 45;
-      const distance = Math.max(70, startY - targetY);
-      const duration = Math.min(5.9, Math.max(3.7, distance / 145));
-      n.style.width = `${size}px`;
-      n.style.height = `${size * 1.15}px`;
-      n.style.left = `${rect.left - layerRect.left + rect.width * (.3 + Math.random()*.4)}px`;
-      n.style.top = `${startY - layerRect.top}px`;
-      n.style.bottom = 'auto';
-      n.style.setProperty('--dx', `${-38 + Math.random()*76}px`);
-      n.style.setProperty('--rise-distance', `${distance}px`);
-      n.style.setProperty('--rise-duration', `${duration}s`);
-      notesLayer.appendChild(n);
-      setTimeout(() => n.remove(), duration * 1000 + 100);
-    }
-
-
-    // YUE_RESEARCH_STAFF_AUDIO_V1
-    // Research notes play their matching piano keys.
-    // They never activate page navigation.
-
-    const researchNotePitches = [
-      'G4',
-      'B4',
-      'A4',
-      'C5'
-    ];
-
-    const researchNoteButtons =
-      document.querySelectorAll(
-        '#view-home .identity-note'
+      // Mobile taps activate on pointerup (independent of synthetic click).
+      // Scrolling gestures are never treated as navigation.
+      let touchKeyGesture = null;
+      keyboardViewport.addEventListener("pointerdown", (e) => {
+        if (e.pointerType !== "touch") return;
+        const key = e.target.closest(".white-key, .black-key");
+        touchKeyGesture = {
+          id: e.pointerId,
+          key,
+          x: e.clientX,
+          y: e.clientY,
+          scroll: keyboardViewport.scrollLeft,
+          moved: false,
+        };
+      });
+      keyboardViewport.addEventListener("pointermove", (e) => {
+        const gesture = touchKeyGesture;
+        if (!gesture || gesture.id !== e.pointerId) return;
+        const dx = e.clientX - gesture.x,
+          dy = e.clientY - gesture.y;
+        if (Math.abs(dx) > 10 || Math.abs(dy) > 10) gesture.moved = true;
+        if (Math.abs(dx) > 10 && Math.abs(dx) > Math.abs(dy)) {
+          keyboardViewport.scrollLeft = gesture.scroll - dx;
+        }
+      });
+      keyboardViewport.addEventListener("pointerup", (e) => {
+        const gesture = touchKeyGesture;
+        if (!gesture || gesture.id !== e.pointerId) return;
+        touchKeyGesture = null;
+        // Guard against the browser subsequently firing a duplicate click.
+        suppressClickUntil = performance.now() + 450;
+        if (
+          !gesture.moved &&
+          Math.hypot(e.clientX - gesture.x, e.clientY - gesture.y) < 12
+        ) {
+          activateKey(gesture.key);
+        }
+      });
+      keyboardViewport.addEventListener("pointercancel", () => {
+        touchKeyGesture = null;
+      });
+      // Drag horizontally, but keep short taps available for actual note playing.
+      let drag = null;
+      keyboardViewport.addEventListener("pointerdown", (e) => {
+        if (e.button !== 0 || e.pointerType === "touch") return;
+        drag = {
+          id: e.pointerId,
+          x: e.clientX,
+          scroll: keyboardViewport.scrollLeft,
+          moved: false,
+        };
+      });
+      keyboardViewport.addEventListener("pointermove", (e) => {
+        if (!drag || e.pointerId !== drag.id) return;
+        const dx = e.clientX - drag.x;
+        if (Math.abs(dx) > 6) {
+          drag.moved = true;
+          keyboardViewport.classList.add("dragging");
+          keyboardViewport.scrollLeft = drag.scroll - dx;
+        }
+      });
+      const finishDrag = () => {
+        if (drag?.moved) suppressClickUntil = performance.now() + 250;
+        drag = null;
+        keyboardViewport.classList.remove("dragging");
+      };
+      window.addEventListener("pointerup", finishDrag, true);
+      window.addEventListener("pointercancel", finishDrag, true);
+      window.addEventListener("blur", finishDrag);
+      keyboardViewport.addEventListener(
+        "click",
+        (e) => {
+          if (performance.now() < suppressClickUntil) {
+            e.preventDefault();
+            e.stopImmediatePropagation();
+          }
+        },
+        true,
       );
 
-    researchNoteButtons.forEach((button, noteIndex) => {
+      let soundEnabled = false;
 
-      button.addEventListener('click', () => {
+      const soundToggle = document.getElementById("piano-sound-toggle");
 
-        const pitch = researchNotePitches[noteIndex];
+      soundToggle?.addEventListener("click", () => {
+        soundEnabled = !soundEnabled;
 
-        const keyIndex = whiteMidi.findIndex(
-          midi => formatNote(midi) === pitch
+        soundToggle.setAttribute("aria-pressed", String(soundEnabled));
+
+        soundToggle.setAttribute(
+          "aria-label",
+          soundEnabled ? "Mute piano sound" : "Unmute piano sound",
         );
 
-        if (keyIndex < 0) return;
+        soundToggle.querySelector(".sound-label").textContent = soundEnabled
+          ? "Sound on"
+          : "Sound off";
 
-        const midi = whiteMidi[keyIndex];
-
-        // Select the actual white piano key.
-        const pianoKey = whiteKeysEl.children[keyIndex];
-
-        if (!pianoKey) return;
-
-        // Reuse existing audio, key-press animation,
-        // and floating-note animation.
-        //
-        // Do NOT call activateKey(), because that
-        // function may trigger page navigation.
-        playNote(freqFromMidi(midi), pianoKey);
-
-        // Short feedback on the research note itself.
-        button.classList.add('note-playing');
-
-        setTimeout(() => {
-          button.classList.remove('note-playing');
-        }, 150);
-
+        soundToggle.querySelector(".mute-slash").style.display = soundEnabled
+          ? "none"
+          : "";
       });
 
-    });
+      let audioCtx;
+      function getCtx() {
+        audioCtx ||= new (window.AudioContext || window.webkitAudioContext)();
+        return audioCtx;
+      }
 
+      function playNote(freq, el) {
+        if (soundEnabled) {
+          const ctx = getCtx();
+          if (ctx.state === "suspended") ctx.resume();
+          const now = ctx.currentTime;
+          const osc = ctx.createOscillator();
+          const gain = ctx.createGain();
+          osc.type = "triangle";
+          osc.frequency.setValueAtTime(freq, now);
+          gain.gain.setValueAtTime(0.0001, now);
+          gain.gain.exponentialRampToValueAtTime(0.23, now + 0.02);
+          gain.gain.exponentialRampToValueAtTime(0.0001, now + 1.1);
+          osc.connect(gain).connect(ctx.destination);
+          osc.start(now);
+          osc.stop(now + 1.15);
+        }
 
-    createWhiteKeys();
-    createBlackKeys();
-    requestAnimationFrame(()=>{
-      // Keep the five navigation keys in the initial visible range.
-      // Their white-key indices span C4..C5; center this range in the viewport.
-      const firstIndex=whiteMidi.findIndex(m=>m===60);
-      const lastIndex=whiteMidi.findIndex(m=>m===72);
-      const centerX=((firstIndex+lastIndex+1)/2)/whiteMidi.length*keyboardTrack.clientWidth;
-      keyboardViewport.scrollLeft=Math.max(0, centerX-keyboardViewport.clientWidth/2);
-    });
-  </script>
+        el.classList.add("active");
+        setTimeout(() => el.classList.remove("active"), 120);
+        spawnNotes(el);
+      }
 
-</body>
+      function spawnNotes(el) {
+        const rect = el.getBoundingClientRect();
+        const layerRect = notesLayer.getBoundingClientRect();
+        const staffRect = document
+          .querySelector(".music-staff")
+          .getBoundingClientRect();
+        // Each keystroke produces one of six note types (including single and paired eighth notes).
+        // SVG avoids missing music-font glyphs on some browsers.
+        const types = [
+          "whole",
+          "half",
+          "quarter",
+          "eighth",
+          "pairedEighth",
+          "sixteenth",
+        ];
+        const type = types[Math.floor(Math.random() * types.length)];
+        const n = document.createElement("div");
+        n.className = "float-note";
+        n.setAttribute("aria-hidden", "true");
+        const openHead = `<ellipse cx="15" cy="29" rx="10" ry="7" transform="rotate(-19 15 29)" fill="none" stroke="currentColor" stroke-width="2.8"/>`;
+        const filledHead = `<ellipse cx="15" cy="29" rx="10" ry="7" transform="rotate(-19 15 29)" fill="currentColor"/>`;
+        const stem = `<path d="M24 27 V1" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" fill="none"/>`;
+        const flag = `<path d="M24 2 C42 9 33 19 29 23 C34 12 28 11 24 10 Z" fill="currentColor"/>`;
+        const drawing =
+          type === "pairedEighth"
+            ? `<ellipse cx="11" cy="32" rx="7.5" ry="5.3" transform="rotate(-19 11 32)" fill="currentColor"/>
+           <ellipse cx="37" cy="29" rx="7.5" ry="5.3" transform="rotate(-19 37 29)" fill="currentColor"/>
+           <path d="M18 30 V5 M44 27 V2 M18 5 L44 2" stroke="currentColor" stroke-width="3.5" fill="none"/>`
+            : type === "whole"
+              ? `<ellipse cx="18" cy="24" rx="11" ry="7.5" transform="rotate(-18 18 24)" fill="none" stroke="currentColor" stroke-width="3"/>`
+              : (type === "half" ? openHead : filledHead) +
+                stem +
+                (type === "eighth" || type === "sixteenth" ? flag : "") +
+                (type === "sixteenth"
+                  ? `<path d="M24 11 C41 18 33 28 29 32 C34 22 28 20 24 19 Z" fill="currentColor"/>`
+                  : "");
+        n.innerHTML = `<svg viewBox="0 0 52 42" width="100%" height="100%" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">${drawing}</svg>`;
+        const size =
+          (type === "pairedEighth" ? 35 : 23) + Math.floor(Math.random() * 9);
+        const startY = rect.top - 14;
+        // Rise to anywhere from just above the top staff line to its lower
+        // spaces, never into the title's region.
+        const targetY = staffRect.bottom + 35 + Math.random() * 45;
+        const distance = Math.max(70, startY - targetY);
+        const duration = Math.min(5.9, Math.max(3.7, distance / 145));
+        n.style.width = `${size}px`;
+        n.style.height = `${size * 1.15}px`;
+        n.style.left = `${rect.left - layerRect.left + rect.width * (0.3 + Math.random() * 0.4)}px`;
+        n.style.top = `${startY - layerRect.top}px`;
+        n.style.bottom = "auto";
+        n.style.setProperty("--dx", `${-38 + Math.random() * 76}px`);
+        n.style.setProperty("--rise-distance", `${distance}px`);
+        n.style.setProperty("--rise-duration", `${duration}s`);
+        notesLayer.appendChild(n);
+        setTimeout(() => n.remove(), duration * 1000 + 100);
+      }
+
+      // YUE_RESEARCH_STAFF_AUDIO_V1
+      // Research notes play their matching piano keys.
+      // They never activate page navigation.
+
+      const researchNotePitches = ["G4", "B4", "A4", "C5"];
+
+      const researchNoteButtons = document.querySelectorAll(
+        "#view-home .identity-note",
+      );
+
+      researchNoteButtons.forEach((button, noteIndex) => {
+        button.addEventListener("click", () => {
+          const pitch = researchNotePitches[noteIndex];
+
+          const keyIndex = whiteMidi.findIndex(
+            (midi) => formatNote(midi) === pitch,
+          );
+
+          if (keyIndex < 0) return;
+
+          const midi = whiteMidi[keyIndex];
+
+          // Select the actual white piano key.
+          const pianoKey = whiteKeysEl.children[keyIndex];
+
+          if (!pianoKey) return;
+
+          // Reuse existing audio, key-press animation,
+          // and floating-note animation.
+          //
+          // Do NOT call activateKey(), because that
+          // function may trigger page navigation.
+          playNote(freqFromMidi(midi), pianoKey);
+
+          // Short feedback on the research note itself.
+          button.classList.add("note-playing");
+
+          setTimeout(() => {
+            button.classList.remove("note-playing");
+          }, 150);
+        });
+      });
+
+      createWhiteKeys();
+      createBlackKeys();
+      requestAnimationFrame(() => {
+        // Keep the five navigation keys in the initial visible range.
+        // Their white-key indices span C4..C5; center this range in the viewport.
+        const firstIndex = whiteMidi.findIndex((m) => m === 60);
+        const lastIndex = whiteMidi.findIndex((m) => m === 72);
+        const centerX =
+          ((firstIndex + lastIndex + 1) / 2 / whiteMidi.length) *
+          keyboardTrack.clientWidth;
+        keyboardViewport.scrollLeft = Math.max(
+          0,
+          centerX - keyboardViewport.clientWidth / 2,
+        );
+      });
+    </script>
+  </body>
 </html>
