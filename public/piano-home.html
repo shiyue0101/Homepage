@@ -557,6 +557,248 @@
   #view-home .piano { max-height: 138px; }
 }
 
+
+/* YUE_RESEARCH_STAFF_AUDIO_V1 */
+
+/* Five equally spaced staff lines.
+   Four spaces between five lines. */
+#view-home .music-staff.research-score {
+    position: relative;
+    height: 68px;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(167,103,121,.67),
+            rgba(167,103,121,.67)
+        ) top / 100% 1px no-repeat,
+
+        linear-gradient(
+            to bottom,
+            rgba(167,103,121,.67),
+            rgba(167,103,121,.67)
+        ) 0 25% / 100% 1px no-repeat,
+
+        linear-gradient(
+            to bottom,
+            rgba(167,103,121,.67),
+            rgba(167,103,121,.67)
+        ) 0 50% / 100% 1px no-repeat,
+
+        linear-gradient(
+            to bottom,
+            rgba(167,103,121,.67),
+            rgba(167,103,121,.67)
+        ) 0 75% / 100% 1px no-repeat,
+
+        linear-gradient(
+            to bottom,
+            rgba(167,103,121,.67),
+            rgba(167,103,121,.67)
+        ) bottom / 100% 1px no-repeat;
+
+    border: 0;
+}
+
+/* Avoid the old extra bottom line. */
+#view-home .music-staff.research-score::after {
+    display: none;
+}
+
+/* Each note is an interactive but visually minimal button. */
+#view-home .identity-note {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    cursor: pointer;
+    background: transparent;
+    border: 0;
+    color: #865569;
+    transition: color .2s ease;
+}
+
+/* IMPORTANT:
+   SVG viewBox height is 44.
+   Notehead center is at y=33.
+   Rendered SVG height = 42px.
+   Therefore rendered notehead center is
+   approximately 31.5px below SVG top.
+
+   Use that same anchor for every note.
+*/
+#view-home .identity-note svg {
+    position: absolute;
+    width: 24px;
+    height: 42px;
+    left: 50%;
+    transform: translateX(-50%);
+    top: calc(var(--staff-note-y) - 31.5px);
+    transition:
+        color .2s ease,
+        transform .2s ease,
+        filter .2s ease;
+}
+
+/* Four notes positioned on lines or spaces. */
+#view-home .identity-note:nth-child(1) {
+    --staff-note-y: 75%;
+}
+
+#view-home .identity-note:nth-child(2) {
+    --staff-note-y: 50%;
+}
+
+#view-home .identity-note:nth-child(3) {
+    --staff-note-y: 62.5%;
+}
+
+#view-home .identity-note:nth-child(4) {
+    --staff-note-y: 37.5%;
+}
+
+/* No full-name popup, under any interaction state. */
+#view-home .identity-note .full-label {
+    display: none !important;
+}
+
+/* Gentle highlight only. */
+#view-home .identity-note:hover,
+#view-home .identity-note:focus-visible {
+    color: #ad7289;
+}
+
+#view-home .identity-note:hover svg,
+#view-home .identity-note:focus-visible svg {
+    transform: translateX(-50%) scale(1.12);
+    filter: drop-shadow(
+        0 2px 3px rgba(138,85,102,.16)
+    );
+}
+
+/* Very short visual response on click. */
+#view-home .identity-note.note-playing svg {
+    transform: translateX(-50%) scale(.94);
+    color: #754459;
+}
+
+/* Preserve the four abbreviated research labels. */
+#view-home .short-label {
+    position: absolute;
+    top: calc(100% + 5px);
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+}
+
+@media (max-width: 960px) {
+    #view-home .music-staff.research-score {
+        height: 65px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    #view-home .identity-note svg {
+        transition: none;
+    }
+}
+
+
+/* YUE_STAFF_PRECISE_ALIGNMENT_V2_START */
+
+/* One coordinate system for all five lines */
+#view-home .music-staff.research-score {
+    position: relative;
+    height: 68px;
+    border: 0 !important;
+    background:
+        linear-gradient(#b78492, #b78492)
+            center 0% / 100% 1px no-repeat,
+        linear-gradient(#b78492, #b78492)
+            center 25% / 100% 1px no-repeat,
+        linear-gradient(#b78492, #b78492)
+            center 50% / 100% 1px no-repeat,
+        linear-gradient(#b78492, #b78492)
+            center 75% / 100% 1px no-repeat,
+        linear-gradient(#b78492, #b78492)
+            center 100% / 100% 1px no-repeat !important;
+}
+
+#view-home .music-staff.research-score::after {
+    display: none !important;
+}
+
+/* Buttons occupy the same full-height staff area */
+#view-home .research-score .identity-note {
+    position: absolute;
+    top: 0;
+    height: 100%;
+    padding: 0;
+}
+
+/*
+The existing SVG has viewBox="0 0 28 44".
+Its notehead center is cy="33".
+
+33 / 44 = 75%
+
+Thus translateY(-75%) places the actual
+notehead center at --staff-y.
+*/
+#view-home .research-score .identity-note svg {
+    position: absolute;
+    top: var(--staff-y) !important;
+    left: 50%;
+    width: 24px;
+    height: 42px;
+    transform: translate(-50%, -75%) !important;
+    transform-origin: 50% 75%;
+    transition:
+        color .2s ease,
+        scale .2s ease;
+}
+
+/* Each notehead is precisely on a line or space */
+#view-home .research-score .identity-note:nth-child(1) {
+    --staff-y: 75%;
+}
+
+#view-home .research-score .identity-note:nth-child(2) {
+    --staff-y: 50%;
+}
+
+#view-home .research-score .identity-note:nth-child(3) {
+    --staff-y: 62.5%;
+}
+
+#view-home .research-score .identity-note:nth-child(4) {
+    --staff-y: 37.5%;
+}
+
+/* Hover changes appearance, never position */
+#view-home .research-score .identity-note:hover svg,
+#view-home .research-score .identity-note:focus-visible svg {
+    scale: 1.12;
+    color: #ad7289;
+}
+
+#view-home .research-score .identity-note.note-playing svg {
+    scale: .94;
+}
+
+/* Keep labels below the score */
+#view-home .research-score .short-label {
+    top: calc(100% + 5px);
+}
+
+/* Mobile: same system, only the total height changes */
+@media (max-width: 960px) {
+    #view-home .music-staff.research-score {
+        height: 65px;
+    }
+}
+
+/* YUE_STAFF_PRECISE_ALIGNMENT_V2_END */
+
 </style>
 </head>
 <body>
@@ -572,7 +814,7 @@
         <h1 class="hero-name">Yue Shi</h1>
 
         <div class="staves-wrap">
-          <div class="music-staff research-score" aria-label="Research interests: four annotated notes"><button class="identity-note" type="button" aria-label="Human–Computer Interaction" aria-expanded="false" data-research="Human–Computer Interaction" style="--i:0"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">HCI</span><span class="full-label">Human–Computer Interaction</span></button><button class="identity-note" type="button" aria-label="Research Through Design" aria-expanded="false" data-research="Research Through Design" style="--i:1"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">RtD</span><span class="full-label">Research Through Design</span></button><button class="identity-note" type="button" aria-label="Critical Making" aria-expanded="false" data-research="Critical Making" style="--i:2"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">Making</span><span class="full-label">Critical Making</span></button><button class="identity-note" type="button" aria-label="Animal–Computer Interaction" aria-expanded="false" data-research="Animal–Computer Interaction" style="--i:3"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">ACI</span><span class="full-label">Animal–Computer Interaction</span></button></div>
+          <div class="music-staff research-score" aria-label="Research interests: four annotated notes"><button class="identity-note" type="button" aria-label="Human–Computer Interaction" data-research="Human–Computer Interaction" style="--i:0"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">HCI</span></button><button class="identity-note" type="button" aria-label="Research Through Design" data-research="Research Through Design" style="--i:1"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">RtD</span></button><button class="identity-note" type="button" aria-label="Critical Making" data-research="Critical Making" style="--i:2"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">Making</span></button><button class="identity-note" type="button" aria-label="Animal–Computer Interaction" data-research="Animal–Computer Interaction" style="--i:3"><svg viewBox="0 0 28 44" aria-hidden="true" focusable="false"><ellipse cx="10" cy="33" rx="7.5" ry="5" transform="rotate(-20 10 33)" fill="currentColor"/><path d="M16 31 V3" stroke="currentColor" stroke-width="2"/></svg><span class="short-label">ACI</span></button></div>
         </div>
 
         
@@ -870,6 +1112,61 @@
       setTimeout(() => n.remove(), duration * 1000 + 100);
     }
 
+
+    // YUE_RESEARCH_STAFF_AUDIO_V1
+    // Research notes play their matching piano keys.
+    // They never activate page navigation.
+
+    const researchNotePitches = [
+      'C4',
+      'E4',
+      'G4',
+      'C5'
+    ];
+
+    const researchNoteButtons =
+      document.querySelectorAll(
+        '#view-home .identity-note'
+      );
+
+    researchNoteButtons.forEach((button, noteIndex) => {
+
+      button.addEventListener('click', () => {
+
+        const pitch = researchNotePitches[noteIndex];
+
+        const keyIndex = whiteMidi.findIndex(
+          midi => formatNote(midi) === pitch
+        );
+
+        if (keyIndex < 0) return;
+
+        const midi = whiteMidi[keyIndex];
+
+        // Select the actual white piano key.
+        const pianoKey = whiteKeysEl.children[keyIndex];
+
+        if (!pianoKey) return;
+
+        // Reuse existing audio, key-press animation,
+        // and floating-note animation.
+        //
+        // Do NOT call activateKey(), because that
+        // function may trigger page navigation.
+        playNote(freqFromMidi(midi), pianoKey);
+
+        // Short feedback on the research note itself.
+        button.classList.add('note-playing');
+
+        setTimeout(() => {
+          button.classList.remove('note-playing');
+        }, 150);
+
+      });
+
+    });
+
+
     createWhiteKeys();
     createBlackKeys();
     requestAnimationFrame(()=>{
@@ -881,21 +1178,6 @@
       keyboardViewport.scrollLeft=Math.max(0, centerX-keyboardViewport.clientWidth/2);
     });
   </script>
-<script id="yue-research-notes-interaction">
-/* Research labels are available on hover, keyboard focus, and mobile tap. */
-(() => {
-  const notes = document.querySelectorAll('#view-home .identity-note');
-  notes.forEach(note => note.addEventListener('click', () => {
-    const open = !note.classList.contains('is-open');
-    notes.forEach(n => { n.classList.remove('is-open'); n.setAttribute('aria-expanded', 'false'); });
-    if (open) { note.classList.add('is-open'); note.setAttribute('aria-expanded', 'true'); }
-  }));
-  document.addEventListener('pointerdown', event => {
-    if (!event.target.closest('#view-home .identity-note')) {
-      notes.forEach(n => { n.classList.remove('is-open'); n.setAttribute('aria-expanded', 'false'); });
-    }
-  });
-})();
-</script>
+
 </body>
 </html>
