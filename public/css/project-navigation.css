@@ -318,3 +318,33 @@ body #contact.page-section.active {
   /* The opening transition is intentionally NOT changed. */
 }
 /* TOC_FINAL_SOFT_FADE_V2_END */
+
+
+/* PROJECT TOC — content-based height */
+
+@media (min-width: 1050px) and (hover: hover) and (pointer: fine) {
+
+  .project-floating-toc,
+  .project-floating-toc:not(.is-open),
+  .project-floating-toc.is-open {
+    /* Fit the panel to its contents */
+    height: auto !important;
+
+    /* Prevent excessively tall menus */
+    max-height: calc(
+      100dvh - var(--header-height, 76px) - 55px
+    ) !important;
+  }
+
+  .project-floating-toc .project-floating-toc-links {
+    /* Do not stretch to fill empty space */
+    flex: 0 1 auto !important;
+    min-height: 0;
+    overflow-y: auto;
+  }
+
+  /* Keep the collapsed decorative lines proportional */
+  .project-floating-toc::before {
+    height: min(205px, calc(100% - 36px));
+  }
+}
