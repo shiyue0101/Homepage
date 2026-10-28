@@ -799,6 +799,40 @@ notehead center at --staff-y.
 
 /* YUE_STAFF_PRECISE_ALIGNMENT_V2_END */
 
+
+/* Research staff: subtle hover and refined spacing */
+
+/* More breathing room below Yue Shi */
+#view-home .hero-name {
+    margin-bottom: 36px;
+}
+
+@media (max-width: 960px) {
+    #view-home .hero-name {
+        margin-bottom: 36px;
+    }
+}
+
+/* Only the color changes on hover */
+#view-home .research-score .identity-note svg {
+    scale: 1 !important;
+    filter: none !important;
+    transition: color .2s ease !important;
+}
+
+#view-home .research-score .identity-note:hover svg,
+#view-home .research-score .identity-note:focus-visible svg {
+    scale: 1 !important;
+    filter: none !important;
+    color: #ad7289 !important;
+}
+
+#view-home .research-score .identity-note.note-playing svg {
+    scale: 1 !important;
+    filter: none !important;
+}
+
+
 </style>
 </head>
 <body>
