@@ -1,0 +1,19 @@
+/* UNIFIED_COPYRIGHT_TYPOGRAPHY_V1
+   A quiet, consistent copyright signature throughout Yue Shi's site.
+   Typography only: does not change footer positioning, margins, or padding.
+   Applies in the main SPA, the piano-home iframe, and standalone project pages.
+*/
+.site-copyright-footer,
+.about-copyright-v3,
+.home-footer {
+  font-family: Arial, Helvetica, sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 400 !important;
+  font-style: normal !important;
+  line-height: 1.5 !important;
+  letter-spacing: 0.025em !important;
+  text-transform: none !important;
+  text-align: center !important;
+  color: #94727d !important;
+  -webkit-font-smoothing: antialiased;
+}
