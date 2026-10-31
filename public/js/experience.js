@@ -44,3 +44,85 @@ function updateProfessionalScrollbar() {
     section.style.overflowY =
       section.scrollHeight > section.clientHeight ? "auto" : "hidden";
 }
+
+
+/* EXPERIENCE_EQUAL_HEIGHT_INITIAL_V3
+   Sync right outer card to the LEFT list, including the first render. */
+(function () {
+  let scheduled = false;
+  let watchingList = null;
+  let listObserver = null;
+  let watchingPanel = null;
+  let panelObserver = null;
+
+  function sync() {
+    const list = document.querySelector('#professional .prof-list');
+    const panel = document.querySelector('#professional .prof-detail-panel');
+    if (!list || !panel) return;
+    if (!window.matchMedia('(min-width: 761px)').matches) {
+      panel.style.removeProperty('height');
+      panel.style.removeProperty('max-height');
+      return;
+    }
+    const height = Math.ceil(list.getBoundingClientRect().height);
+    if (height > 0) {
+      panel.style.setProperty('height', height + 'px', 'important');
+      panel.style.setProperty('max-height', height + 'px', 'important');
+    }
+  }
+
+  function schedule() {
+    if (scheduled) return;
+    scheduled = true;
+    requestAnimationFrame(function () {
+      scheduled = false;
+      sync();
+    });
+  }
+
+  function installObservers() {
+    const list = document.querySelector('#professional .prof-list');
+    const panel = document.querySelector('#professional .prof-detail-panel');
+    if (list && list !== watchingList) {
+      if (listObserver) listObserver.disconnect();
+      watchingList = list;
+      if ('ResizeObserver' in window) {
+        listObserver = new ResizeObserver(schedule);
+        listObserver.observe(list);
+      }
+    }
+    if (panel && panel !== watchingPanel) {
+      if (panelObserver) panelObserver.disconnect();
+      watchingPanel = panel;
+      panelObserver = new MutationObserver(schedule);
+      panelObserver.observe(panel, { childList: true });
+    }
+    schedule();
+  }
+
+  // Capture clicks before the site's selection handler, then sync after rendering.
+  document.addEventListener('click', function (event) {
+    if (event.target.closest('#professional .prof-list-item')) {
+      requestAnimationFrame(schedule);
+    }
+  }, true);
+  window.addEventListener('resize', schedule);
+  window.addEventListener('pageshow', installObservers);
+  document.addEventListener('visibilitychange', function () {
+    if (!document.hidden) installObservers();
+  });
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', installObservers);
+  } else {
+    installObservers();
+  }
+  // Rebind if SPA navigation rebuilds Experience nodes.
+  const rootObserver = new MutationObserver(function () {
+    const list = document.querySelector('#professional .prof-list');
+    const panel = document.querySelector('#professional .prof-detail-panel');
+    if (list !== watchingList || panel !== watchingPanel) installObservers();
+  });
+  if (document.documentElement) {
+    rootObserver.observe(document.documentElement, { childList: true, subtree: true });
+  }
+})();
