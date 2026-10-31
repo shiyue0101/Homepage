@@ -39,10 +39,52 @@
       #about .about-copyright-v3 { position: relative; text-align: center; margin: 48px auto 18px; color: #977a83; font-size: 12px; letter-spacing: .025em; }
     </style>
 
-<style id="athcc-story-style-v1">
-  #professional .athcc-story-v1 { margin-top: 0rem; }
-  #professional .athcc-story-v1 p { margin: 0 0 1rem; line-height: 1.75; }
-  #professional .athcc-story-v1 p:last-child { margin-bottom: 0; }
+<style id="athcc-story-style-v3">
+  /* Keep the ATHCC description within a fixed-height, independently scrollable area. */
+  #professional .athcc-story-v3 {
+    box-sizing: border-box;
+    max-height: 360px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    padding-right: 0.65rem;
+    scrollbar-width: thin;
+    scrollbar-gutter: stable;
+  }
+  #professional .athcc-story-v3::-webkit-scrollbar {
+    width: 6px;
+  }
+  #professional .athcc-story-v3::-webkit-scrollbar-thumb {
+    background: rgba(120, 100, 100, 0.45);
+    border-radius: 6px;
+  }
+  #professional .athcc-story-v3::-webkit-scrollbar-track {
+    background: rgba(120, 100, 100, 0.10);
+    border-radius: 6px;
+  }
+
+  /* Preserve the site's existing text/list line heights; only set spacing. */
+  #professional .athcc-story-v3 p {
+    margin: 0 0 1rem;
+  }
+  #professional .athcc-story-v3 .athcc-responsibilities-heading {
+    margin-bottom: 0.45rem;
+  }
+  #professional .athcc-story-v3 .athcc-responsibilities {
+    margin: 0 0 1.25rem;
+    padding-left: 1.35rem;
+  }
+  #professional .athcc-story-v3 .athcc-responsibilities li {
+    margin-bottom: 0.35rem;
+  }
+  #professional .athcc-story-v3 p:last-child {
+    margin-bottom: 0;
+  }
+
+  @media (max-width: 768px) {
+    #professional .athcc-story-v3 {
+      max-height: 320px;
+    }
+  }
 </style>
 </head>
   <body>
@@ -1015,10 +1057,16 @@
               >Advanced Topics in Human-Centered Computing</a
             >
           </div>
-          <div class="prof-detail-desc athcc-story-v1">
-            <p>I took Advanced Topics in Human-Centered Computing as a student before becoming a teaching assistant. The course introduced me to how HCI researchers read and discuss papers, ask research questions, and choose methods to study them. I wanted to try teaching, but I also saw the role as a chance to revisit the material and understand it better.</p>
-            <p>As a TA, I attended every class and joined students during their group discussions. I listened to their ideas, asked questions, and discussed possible research directions with them. I also held office hours to help students work through questions about the readings and assignments.</p>
-            <p>The course had four written assignments covering research tasks such as reviewing literature, planning evaluations, and analysing data. Together with another TA, I graded the work of 43 students and wrote detailed feedback to explain our assessments and suggest improvements. We also discussed grading and students’ work with the course instructor.</p>
+          <div class="prof-detail-desc athcc-story-v3">
+            <p class="athcc-responsibilities-heading"><strong>My responsibilities included</strong></p>
+            <ul class="athcc-responsibilities">
+              <li>Facilitated student discussions on HCI research topics and approaches during class.</li>
+              <li>Provided support through office hours, addressing questions about course materials and assignments.</li>
+              <li>Co-graded written assignments and provided detailed feedback to students.</li>
+            </ul>
+            <p>I took Advanced Topics in Human-Centered Computing as a student before becoming a teaching assistant. The course helped me understand how HCI researchers develop research questions and choose methods to study them. I wanted to try teaching and saw the TA role as a chance to revisit what I had learned.</p>
+            <p>As a TA, I attended every class and joined students during group discussions. I listened to their ideas and asked questions to help them think through possible research directions. I also held office hours to help students with the readings and assignments.</p>
+            <p>The course had four written assignments covering different research tasks, including literature reviews, experiment design, and data analysis. Together with another TA, I graded work from 43 students and wrote feedback explaining our assessments and suggesting improvements. We also discussed students' work and grading with the course instructor.</p>
           </div>
         </div>
       </div>
