@@ -561,7 +561,7 @@ body {
 .prof-detail-desc {
   color: var(--text);
   font-size: 0.98rem;
-  margin: 0 0 0 18px;
+  margin: 0 0 0 0px;
   padding: 0;
   list-style: disc;
 }
