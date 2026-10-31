@@ -43,3 +43,69 @@
     max-height: 320px;
   }
 }
+
+/* Distributed Systems: same independently scrollable story layout as ATHCC. */
+#professional .distributed-story-v3 {
+  box-sizing: border-box;
+  max-height: 360px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.65rem;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}
+#professional .distributed-story-v3::-webkit-scrollbar {
+  width: 6px;
+}
+#professional .distributed-story-v3::-webkit-scrollbar-thumb {
+  background: rgba(120, 100, 100, 0.45);
+  border-radius: 6px;
+}
+#professional .distributed-story-v3::-webkit-scrollbar-track {
+  background: rgba(120, 100, 100, 0.1);
+  border-radius: 6px;
+}
+/* Preserve inherited line-height; only adjust paragraph and list spacing. */
+#professional .distributed-story-v3 p {
+  margin: 0 0 1rem;
+}
+#professional .distributed-story-v3 .distributed-responsibilities-heading {
+  margin-bottom: 0.45rem;
+}
+#professional .distributed-story-v3 .distributed-responsibilities {
+  margin: 0 0 1.25rem;
+  padding-left: 1.35rem;
+}
+#professional .distributed-story-v3 .distributed-responsibilities li {
+  margin-bottom: 0.35rem;
+}
+#professional .distributed-story-v3 p:last-child {
+  margin-bottom: 0;
+}
+@media (max-width: 768px) {
+  #professional .distributed-story-v3 {
+    max-height: 320px;
+  }
+}
+
+/* PROFESSIONAL_EQUAL_OUTER_PANELS_V2
+   Keep the two outer Experience cards equal in height.
+   The flex row stretches both cards to the height of the taller left list.
+   Inner story blocks retain their own independent scroll behaviour. */
+@media (min-width: 1001px) {
+  #professional .prof-container {
+    align-items: stretch !important;
+  }
+
+  #professional .prof-list,
+  #professional .prof-detail-panel {
+    align-self: stretch !important;
+    height: auto;
+    box-sizing: border-box;
+  }
+
+  #professional .prof-detail-panel {
+    min-height: 390px;
+  }
+}
+
