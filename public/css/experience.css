@@ -109,3 +109,37 @@
   }
 }
 
+/* TONGJI_ART_CENTRE_STORY_V1: scroll the text, not the outer detail card. */
+#professional .tongji-story-v1 {
+  box-sizing: border-box;
+  max-height: 360px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.65rem;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}
+#professional .tongji-story-v1::-webkit-scrollbar { width: 6px; }
+#professional .tongji-story-v1::-webkit-scrollbar-thumb {
+  background: rgba(120, 100, 100, 0.45);
+  border-radius: 6px;
+}
+#professional .tongji-story-v1::-webkit-scrollbar-track {
+  background: rgba(120, 100, 100, 0.10);
+  border-radius: 6px;
+}
+#professional .tongji-story-v1 p { margin: 0 0 1rem; }
+#professional .tongji-story-v1 .tongji-responsibilities-heading {
+  margin-bottom: 0.45rem;
+}
+#professional .tongji-story-v1 .tongji-responsibilities {
+  margin: 0 0 1.25rem;
+  padding-left: 1.35rem;
+}
+#professional .tongji-story-v1 .tongji-responsibilities li {
+  margin-bottom: 0.35rem;
+}
+#professional .tongji-story-v1 p:last-child { margin-bottom: 0; }
+@media (max-width: 768px) {
+  #professional .tongji-story-v1 { max-height: 320px; }
+}
