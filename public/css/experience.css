@@ -1,0 +1,45 @@
+/* Keep the ATHCC description within a fixed-height, independently scrollable area. */
+#professional .athcc-story-v3 {
+  box-sizing: border-box;
+  max-height: 360px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding-right: 0.65rem;
+  scrollbar-width: thin;
+  scrollbar-gutter: stable;
+}
+#professional .athcc-story-v3::-webkit-scrollbar {
+  width: 6px;
+}
+#professional .athcc-story-v3::-webkit-scrollbar-thumb {
+  background: rgba(120, 100, 100, 0.45);
+  border-radius: 6px;
+}
+#professional .athcc-story-v3::-webkit-scrollbar-track {
+  background: rgba(120, 100, 100, 0.1);
+  border-radius: 6px;
+}
+
+/* Preserve the site's existing text/list line heights; only set spacing. */
+#professional .athcc-story-v3 p {
+  margin: 0 0 1rem;
+}
+#professional .athcc-story-v3 .athcc-responsibilities-heading {
+  margin-bottom: 0.45rem;
+}
+#professional .athcc-story-v3 .athcc-responsibilities {
+  margin: 0 0 1.25rem;
+  padding-left: 1.35rem;
+}
+#professional .athcc-story-v3 .athcc-responsibilities li {
+  margin-bottom: 0.35rem;
+}
+#professional .athcc-story-v3 p:last-child {
+  margin-bottom: 0;
+}
+
+@media (max-width: 768px) {
+  #professional .athcc-story-v3 {
+    max-height: 320px;
+  }
+}

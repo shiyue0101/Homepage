@@ -11,15 +11,6 @@ const backBtn = document.getElementById("back-btn");
 const loadingOverlay = document.getElementById("loading-overlay");
 let loadingHideTimer;
 
-const pathToPage = {
-  "/about": "about",
-  "/projects": "projects",
-  "/skills": "skills",
-  "/contact": "contact",
-  "/professional": "professional",
-  "/life": "life",
-};
-
 function hideLoading(delay = 0) {
   clearTimeout(loadingHideTimer);
   loadingHideTimer = setTimeout(() => {
@@ -79,6 +70,7 @@ function showHome({ push = false, transition = false, initial = false } = {}) {
     applyHomeState();
     crtFlash.classList.remove("active");
     if (push) history.pushState({}, "", "/");
+    HomepageRoutes.sync("/");
     if (initial) hideLoading(0);
   };
 
@@ -113,11 +105,9 @@ function showSection(
       updateProfessionalScrollbar();
     }
     crtFlash.classList.remove("active");
-    backBtn.classList.toggle(
-      "visible",
-      !["projects", "professional", "contact", "life"].includes(page),
-    );
+    backBtn.classList.toggle("visible", page === "skills");
     if (push) history.pushState({ page }, "", "/" + page);
+    HomepageRoutes.sync("/" + page);
     if (initial) hideLoading(0);
   };
   if (transition) setTimeout(finish, 200);
@@ -130,14 +120,14 @@ backBtn.addEventListener("click", () => {
 
 // 路由处理
 function handleRoute({ initial = false } = {}) {
-  const path = window.location.pathname.replace(/\/+$/, "") || "/";
+  const path = HomepageRoutes.normalize(location.pathname);
   // HOMEPAGE_PROJECT_ROUTE_GUARD_V3
   // Embedded project routes are controlled exclusively by project-router.js.
-  if (/^\/projects\/(?:purrpost|masking-ball|turn-taking-band|makiwara|video-conference)\.html$/.test(path)) {
+  if (HomepageRoutes.isProject(path)) {
     if (initial) hideLoading(0);
     return;
   }
-  const page = pathToPage[path] || "home";
+  const page = HomepageRoutes.pageForPath(path) || "home";
   if (page === "home") {
     showHome({ initial });
   } else {

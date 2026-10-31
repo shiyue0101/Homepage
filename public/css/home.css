@@ -66,47 +66,7 @@ body #main #right {
   display: none !important;
 }
 
-body #main #about-piano-frame {
-  display: block;
-  box-sizing: border-box;
-  border: 0;
-  flex: 1 1 auto;
-  width: 100%;
-  height: calc(100vh - 76px);
-  height: calc(100dvh - 76px);
-  min-width: 0;
-  min-height: 420px;
-  background: #f3deda;
-}
-
 @media (max-width: 780px) {
-  body #main #about-piano-frame {
-    height: calc(100dvh - 68px);
-    min-height: 340px;
-  }
-}
-
-body #main:has(> #about-piano-frame) {
-  height: 100vh !important;
-  height: 100dvh !important;
-  min-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  overflow: hidden !important;
-  align-items: stretch !important;
-}
-
-body #main > #about-piano-frame {
-  display: block !important;
-  width: 100% !important;
-  flex: 1 1 100% !important;
-  height: 100vh !important;
-  height: 100dvh !important;
-  min-height: 0 !important;
-  margin: 0 !important;
-  padding: 0 !important;
-  border: 0 !important;
-  background: #f3deda;
 }
 
 .site-copyright-footer {

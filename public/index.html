@@ -23,70 +23,19 @@
 
     <link rel="stylesheet" href="/css/home.css" />
     <link rel="stylesheet" href="/css/piano-home-integration.css" />
-  <link rel="icon" type="image/svg+xml" href="/assets/poet-quill.png?v=1" data-yue-tab-identity>
-  <script defer src="/js/yue-tab-identity.js" data-yue-tab-identity></script>
-    <link rel="stylesheet" href="/css/about-portrait.css" data-about-portrait>
-  
-<!-- ABOUT_HEADING_FIX_20261022 -->
-<style>
-  #about h1, #about .about-portrait-text h1, #about #about-page-title {
-    color: #845064 !important;
-  }
-</style>
-    <link rel="stylesheet" href="/css/about-footer-fix.css" />
-  
-    <style id="about-copyright-style-v3">
-      #about .about-copyright-v3 { position: relative; text-align: center; margin: 48px auto 18px; color: #977a83; font-size: 12px; letter-spacing: .025em; }
-    </style>
+    <link
+      rel="icon"
+      type="image/png"
+      href="/assets/poet-quill.png?v=1"
+      data-yue-tab-identity
+    />
+    <script defer src="/js/routes.js" data-yue-tab-identity></script>
+    <link rel="stylesheet" href="/css/about.css" data-about-portrait />
 
-<style id="athcc-story-style-v3">
-  /* Keep the ATHCC description within a fixed-height, independently scrollable area. */
-  #professional .athcc-story-v3 {
-    box-sizing: border-box;
-    max-height: 360px;
-    overflow-y: auto;
-    overflow-x: hidden;
-    padding-right: 0.65rem;
-    scrollbar-width: thin;
-    scrollbar-gutter: stable;
-  }
-  #professional .athcc-story-v3::-webkit-scrollbar {
-    width: 6px;
-  }
-  #professional .athcc-story-v3::-webkit-scrollbar-thumb {
-    background: rgba(120, 100, 100, 0.45);
-    border-radius: 6px;
-  }
-  #professional .athcc-story-v3::-webkit-scrollbar-track {
-    background: rgba(120, 100, 100, 0.10);
-    border-radius: 6px;
-  }
+    <!-- ABOUT_HEADING_FIX_20261022 -->
 
-  /* Preserve the site's existing text/list line heights; only set spacing. */
-  #professional .athcc-story-v3 p {
-    margin: 0 0 1rem;
-  }
-  #professional .athcc-story-v3 .athcc-responsibilities-heading {
-    margin-bottom: 0.45rem;
-  }
-  #professional .athcc-story-v3 .athcc-responsibilities {
-    margin: 0 0 1.25rem;
-    padding-left: 1.35rem;
-  }
-  #professional .athcc-story-v3 .athcc-responsibilities li {
-    margin-bottom: 0.35rem;
-  }
-  #professional .athcc-story-v3 p:last-child {
-    margin-bottom: 0;
-  }
-
-  @media (max-width: 768px) {
-    #professional .athcc-story-v3 {
-      max-height: 320px;
-    }
-  }
-</style>
-</head>
+    <link rel="stylesheet" href="/css/experience.css" />
+  </head>
   <body>
     <header class="site-header">
       <a class="site-brand" href="/" data-nav-page="home">Yue Shi</a>
@@ -354,30 +303,55 @@
     </div>
     <div id="main">
       <!-- PIANO_HOME_V23_INTEGRATION -->
-      <iframe id="piano-home-frame" title="Piano Home" src="/piano-home.html" loading="eager"></iframe>
+      <iframe
+        id="piano-home-frame"
+        title="Piano Home"
+        src="/piano-home.html"
+        loading="eager"
+      ></iframe>
       <!-- /PIANO_HOME_V23_INTEGRATION -->
-
     </div>
 
-    
     <!-- PIANO_HOME_V23_INTEGRATION: existing About Me moved intact -->
-    <section id="about" class="page-section hidden" aria-labelledby="about-page-title">
+    <section
+      id="about"
+      class="page-section hidden"
+      aria-labelledby="about-page-title"
+    >
       <!-- ABOUT_PORTRAIT_LAYOUT_V1 -->
       <div class="about-portrait-content">
         <div class="about-portrait-text">
           <h1 id="about-page-title">About Me</h1>
           <div class="about-portrait-intro">
-            <p>I am a master’s graduate in Computer Science from the University of Copenhagen, with a focus on Human-Computer Interaction.</p>
-            <p>My interests include critical making, social computing, physical prototyping, and animal-computer interaction.</p>
-            <p>I am particularly interested in how interactive systems shape people’s understanding, experiences, and relationships in everyday settings, and I enjoy combining empirical studies with design and prototyping.</p>
+            <p>
+              I am a master’s graduate in Computer Science from the University
+              of Copenhagen, with a focus on Human-Computer Interaction.
+            </p>
+            <p>
+              My interests include critical making, social computing, physical
+              prototyping, and animal-computer interaction.
+            </p>
+            <p>
+              I am particularly interested in how interactive systems shape
+              people’s understanding, experiences, and relationships in everyday
+              settings, and I enjoy combining empirical studies with design and
+              prototyping.
+            </p>
           </div>
         </div>
         <figure class="about-portrait-photo">
-          <img src="/assets/about/yue-portrait.jpg" alt="Portrait of Yue Shi" width="968" height="1291" decoding="async" />
+          <img
+            src="/assets/about/yue-portrait.jpg"
+            alt="Portrait of Yue Shi"
+            width="968"
+            height="1291"
+            decoding="async"
+          />
         </figure>
       </div>
-          <footer class="about-copyright-footer" aria-label="Copyright">© 2026 Yue Shi</footer>
-      <footer class="about-copyright-v3" data-about-copyright-v3>© 2026 Yue Shi</footer>
+      <footer class="about-copyright-v3" data-about-copyright-v3>
+        © 2026 Yue Shi
+      </footer>
     </section>
     <section id="projects" class="page-section hidden" aria-label="Projects">
       <div class="projects-grid">
@@ -1036,7 +1010,8 @@
             >
           </div>
         </div>
-        <div class="prof-detail-panel" id="prof-detail-panel">
+        <div class="prof-detail-panel" id="prof-detail-panel"></div>
+        <template id="experience-cph">
           <div class="prof-detail-title">
             University of Copenhagen, Department of Computer Science<br /><span
               class="prof-detail-date"
@@ -1058,17 +1033,123 @@
             >
           </div>
           <div class="prof-detail-desc athcc-story-v3">
-            <p class="athcc-responsibilities-heading"><strong>My responsibilities included</strong></p>
+            <p class="athcc-responsibilities-heading">
+              <strong>My responsibilities included</strong>
+            </p>
             <ul class="athcc-responsibilities">
-              <li>Facilitated student discussions on HCI research topics and approaches during class.</li>
-              <li>Provided support through office hours, addressing questions about course materials and assignments.</li>
-              <li>Co-graded written assignments and provided detailed feedback to students.</li>
+              <li>
+                Facilitated student discussions on HCI research topics and
+                approaches during class.
+              </li>
+              <li>
+                Provided support through office hours, addressing questions
+                about course materials and assignments.
+              </li>
+              <li>
+                Co-graded written assignments and provided detailed feedback to
+                students.
+              </li>
             </ul>
-            <p>I took Advanced Topics in Human-Centered Computing as a student before becoming a teaching assistant. The course helped me understand how HCI researchers develop research questions and choose methods to study them. I wanted to try teaching and saw the TA role as a chance to revisit what I had learned.</p>
-            <p>As a TA, I attended every class and joined students during group discussions. I listened to their ideas and asked questions to help them think through possible research directions. I also held office hours to help students with the readings and assignments.</p>
-            <p>The course had four written assignments covering different research tasks, including literature reviews, experiment design, and data analysis. Together with another TA, I graded work from 43 students and wrote feedback explaining our assessments and suggesting improvements. We also discussed students' work and grading with the course instructor.</p>
+            <p>
+              I took Advanced Topics in Human-Centered Computing as a student
+              before becoming a teaching assistant. The course helped me
+              understand how HCI researchers develop research questions and
+              choose methods to study them. I wanted to try teaching and saw the
+              TA role as a chance to revisit what I had learned.
+            </p>
+            <p>
+              As a TA, I attended every class and joined students during group
+              discussions. I listened to their ideas and asked questions to help
+              them think through possible research directions. I also held
+              office hours to help students with the readings and assignments.
+            </p>
+            <p>
+              The course had four written assignments covering different
+              research tasks, including literature reviews, experiment design,
+              and data analysis. Together with another TA, I graded work from 43
+              students and wrote feedback explaining our assessments and
+              suggesting improvements. We also discussed students' work and
+              grading with the course instructor.
+            </p>
           </div>
-        </div>
+        </template>
+        <template id="experience-itu"
+          ><div class="prof-detail-title">
+            IT University of Copenhagen<br /><span class="prof-detail-date"
+              >08/2025 – 12/2025</span
+            >
+          </div>
+          <div class="prof-detail-role">
+            Teaching Assistant for
+            <a
+              href="https://learnit.itu.dk/local/coursebase/view.php?s=ft&amp;view=public&amp;ciid=1785"
+              target="_blank"
+              rel="noopener noreferrer"
+              style="
+                color: inherit;
+                text-decoration: underline;
+                text-underline-offset: 3px;
+              "
+              >Distributed Systems</a
+            >
+          </div>
+          <ul class="prof-detail-desc">
+            <li>
+              Guided students through weekly exercises and live coding sessions,
+              helping them understand technical concepts and complete
+              programming assignments
+            </li>
+            <li>
+              Participated in weekly teaching team meetings to coordinate
+              teaching activities, share observations from grading, and adjust
+              support strategies for students
+            </li>
+          </ul></template
+        >
+        <template id="experience-bili"
+          ><div class="prof-detail-title">
+            Shanghai Bilibili Technology Ltd<br /><span class="prof-detail-date"
+              >09/2022 – 02/2023</span
+            >
+          </div>
+          <div class="prof-detail-role">
+            Intern, Internship in Front-end Development
+          </div>
+          <ul class="prof-detail-desc">
+            <li>
+              Developed a Chrome extension for the backend team to decode logs
+              and display results inline when users select encoded text on
+              specific URLs
+            </li>
+            <li>
+              Integrated an external script for targeted messaging, based on
+              discussions with product managers and insights from a user
+              questionnaire, improving the overall user experience
+            </li>
+          </ul></template
+        >
+        <template id="experience-tongji"
+          ><div class="prof-detail-title">
+            Tongji University Art Centre<br /><span class="prof-detail-date"
+              >03/2020 – 08/2022</span
+            >
+          </div>
+          <div class="prof-detail-role">
+            Student Job, Assistant of Art Centre & Student Leader of Art Troupe
+          </div>
+          <ul class="prof-detail-desc">
+            <li>
+              Wrote and typeset articles for the official account to promote
+              campus art activities, increasing followers from 6,295 to 15,754
+              within one year
+            </li>
+            <li>
+              Conducted an online survey on improving school art events and
+              analyzed 882 valid responses to identify preferences for activity
+              types and timing among students and teachers
+            </li>
+          </ul></template
+        >
       </div>
     </section>
     <section id="life" class="page-section hidden" aria-labelledby="life-title">

@@ -49,9 +49,14 @@
       const page = a.dataset.navPage;
       if (
         page !== "home" &&
-        !["projects", "skills", "professional", "life", "contact"].includes(
-          page,
-        )
+        ![
+          "about",
+          "projects",
+          "skills",
+          "professional",
+          "life",
+          "contact",
+        ].includes(page)
       )
         return;
       const target = page === "home" ? "/" : "/" + page;

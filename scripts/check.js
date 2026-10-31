@@ -10,14 +10,17 @@ function files(directory) {
   });
 }
 const all = files(root);
-const routes = new Set([
-  "/",
-  "/projects",
-  "/skills",
-  "/contact",
-  "/professional",
-  "/life",
-]);
+const routeConfig = require("../public/js/routes");
+const routes = new Set(routeConfig.pagePaths);
+const assert = require("node:assert/strict");
+for (const alias of ["/about", "/about/", "/about/index.html"]) {
+  assert.equal(routeConfig.pageForPath(alias), "about");
+  assert.equal(routeConfig.titleForPath(alias), "Yue | About Me");
+}
+assert.equal(routeConfig.pageForPath("/projects/"), "projects");
+assert.equal(routeConfig.isProject("/projects/makiwara.html"), true);
+assert.equal(routeConfig.isProject("/projects/missing.html"), false);
+assert.equal(routeConfig.isProject("/projects/constructor.html"), false);
 const errors = [];
 let references = 0;
 const ids = new Map();
@@ -50,7 +53,8 @@ for (const file of all) {
     let target = pathname.startsWith("/")
       ? path.join(root, pathname)
       : path.resolve(path.dirname(file), pathname || path.basename(file));
-    if (routes.has(pathname)) target = path.join(root, "index.html");
+    if (pathname && routes.has(routeConfig.normalize(pathname)))
+      target = path.join(root, "index.html");
     if (fs.existsSync(target) && fs.statSync(target).isDirectory())
       target = path.join(target, "index.html");
     if (!fs.existsSync(target))

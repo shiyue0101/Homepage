@@ -21,5 +21,6 @@
   syncHeaderHeight();
   window.addEventListener("resize", schedule, { passive: true });
   window.addEventListener("orientationchange", schedule, { passive: true });
+  window.addEventListener("site-route-change", schedule);
   document.fonts?.ready?.then(schedule);
 })();

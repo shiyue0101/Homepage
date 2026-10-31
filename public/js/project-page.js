@@ -112,7 +112,10 @@
       requestAnimationFrame(highlight);
     }
   }
-  window.addEventListener("scroll", schedule, { passive: true });
+  document.addEventListener("scroll", schedule, {
+    capture: true,
+    passive: true,
+  });
   window.addEventListener("resize", schedule, { passive: true });
   highlight();
 })();

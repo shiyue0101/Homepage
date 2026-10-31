@@ -1,17 +1,7 @@
 // Embed project details while keeping the parent navigation and audio mounted.
 (() => {
   "use strict";
-  const PROJECT_RE =
-    /^\/projects\/(purrpost|masking-ball|turn-taking-band|makiwara|video-conference)\.html$/;
-  const REGULAR = new Set([
-    "/about",
-    "/",
-    "/projects",
-    "/professional",
-    "/life",
-    "/contact",
-    "/skills",
-  ]);
+  const REGULAR = new Set(HomepageRoutes.pagePaths);
   const header = document.querySelector(".site-header");
   if (
     !header ||
@@ -26,7 +16,6 @@
   frame.hidden = true;
   document.body.appendChild(frame);
   const cache = new Map();
-  const homeTitle = document.title;
   let activePath = null;
   let generation = 0;
   let loadingFrame = false;
@@ -83,7 +72,7 @@
       }
     }
   }
-  const isProject = (p) => PROJECT_RE.test(p);
+  const isProject = HomepageRoutes.isProject;
   const plain = (e, a) =>
     e.button === 0 &&
     !e.metaKey &&
@@ -102,7 +91,7 @@
     document.documentElement.classList.remove("spa-project-loading");
     frame.remove(); // Remove the browsing context instead of navigating it.
     document.documentElement.classList.remove("spa-project-open");
-    document.title = homeTitle;
+    HomepageRoutes.sync();
   }
   function regularPath(path, push = true) {
     if (!REGULAR.has(path)) return;
@@ -262,9 +251,7 @@
         );
       document.body.appendChild(frame);
       frame.hidden = false;
-      document.title =
-        path.split("/").pop().replace(".html", "").replaceAll("-", " ") +
-        " — Yue Shi";
+      HomepageRoutes.sync(path);
       return true;
     } catch (err) {
       if (generation !== current) return false;
@@ -282,11 +269,14 @@
       const a = event.target.closest("a[data-nav-page]");
       if (!activePath || !a || !plain(event, a)) return;
       const dest = new URL(a.href, location.href);
-      if (dest.origin !== location.origin || !REGULAR.has(dest.pathname))
+      if (
+        dest.origin !== location.origin ||
+        !REGULAR.has(HomepageRoutes.normalize(dest.pathname))
+      )
         return;
       event.preventDefault();
       event.stopImmediatePropagation();
-      regularPath(dest.pathname);
+      regularPath(HomepageRoutes.normalize(dest.pathname));
     },
     true,
   );
@@ -303,8 +293,12 @@
       // When entering a detail from the visible Projects grid, make the previous
       // history entry /projects. Back must restore the grid, not an earlier route.
       const projectList = document.getElementById("projects");
-      if (projectList && !projectList.classList.contains("hidden") &&
-          location.pathname !== "/projects" && !isProject(location.pathname)) {
+      if (
+        projectList &&
+        !projectList.classList.contains("hidden") &&
+        location.pathname !== "/projects" &&
+        !isProject(location.pathname)
+      ) {
         history.replaceState({ page: "projects" }, "", "/projects");
       }
       loadProject(dest.pathname, { push: true });
@@ -408,7 +402,7 @@
   }
   // HOMEPAGE_HISTORY_RESTORE_V3
   window.addEventListener("popstate", () => {
-    const path = location.pathname;
+    const path = HomepageRoutes.normalize(location.pathname);
     if (isProject(path)) {
       loadProject(path, { push: false });
       return;
@@ -418,7 +412,10 @@
     // Projects section, rather than assuming that removing iframe is enough.
     if (path === "/projects" && typeof showSection === "function") {
       showSection("projects", false, { transition: false });
-      document.documentElement.classList.remove("spa-project-open", "spa-project-loading");
+      document.documentElement.classList.remove(
+        "spa-project-open",
+        "spa-project-loading",
+      );
     }
   });
   window.HomepageProjectRouter = { loadProject, hideFrame };
